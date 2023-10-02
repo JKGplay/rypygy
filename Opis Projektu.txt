@@ -1,0 +1,10 @@
+Kunczka's bizzare adventure
+
+Nazwa Projektu: Kunczka's bizzare adventure
+Typ Projektu: Gra typu RPG (role playing game) na telefony mobilne z systemem android
+Stan Projektu: W robocie
+Zamys³ Projektu: Gracz tworzy swoj¹ postaæ, ulepsza i rozwija j¹ poprzez walki z przeciwnikami koñcowym celem pokonania bossa.
+Wymagania sprzêtowe-
+Telefon z androidem (opcjonalne)
+
+
