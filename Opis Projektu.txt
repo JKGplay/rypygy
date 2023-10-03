@@ -1,10 +1,10 @@
-Kunczka's bizzare adventure
+Szybiniak's bizzare adventure
 
-Nazwa Projektu: Kunczka's bizzare adventure
+Nazwa Projektu: Szybiniak's bizzare adventure
 Typ Projektu: Gra typu RPG (role playing game) na telefony mobilne z systemem android
 Stan Projektu: W robocie
-Zamys� Projektu: Gracz tworzy swoj� posta�, ulepsza i rozwija j� poprzez walki z przeciwnikami ko�cowym celem pokonania bossa.
-Wymagania sprz�towe-
+Zamysł Projektu: Gra RPG, w której gracz tworzy postać, walczy w lasku z różnymi przeciwnikami, można również kupować różne przedmioty w sklepie (hadesie). Ostatecznym celem jest pokonanie finalnego bossa (Kunczki).
+Wymagania sprzętowe-
 Telefon z androidem (opcjonalne)
 
 
