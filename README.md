@@ -2,7 +2,7 @@
 
 ### Nazwa Projektu: 
 
-Szybiniak's bizzare adventure
+Szybiniak's bizarre adventure
 
 ### Typ Projektu: 
 
