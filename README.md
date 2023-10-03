@@ -4,7 +4,7 @@
 
 Szybiniak's bizzare adventure
 
-###Typ Projektu: 
+### Typ Projektu: 
 
 Gra typu RPG (role playing game) na telefony mobilne z systemem android
 
@@ -14,4 +14,4 @@ Gra RPG, w której gracz tworzy postać, walczy w lasku z różnymi przeciwnikam
 
 ### Wymagania sprzętowe:
 
-Telefon z androidem (opcjonalne)
+Telefon z androidem
