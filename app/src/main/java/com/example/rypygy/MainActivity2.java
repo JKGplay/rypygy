@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
     private Button btnForest, btnShop;
@@ -31,6 +31,9 @@ public class MainActivity2 extends AppCompatActivity {
         btnForest = findViewById(R.id.btnForest);
         btnShop = findViewById(R.id.btnShop);
 
+        btnForest.setOnClickListener(this);
+        btnShop.setOnClickListener(this);
+
         Character character = new Character();
 
         tvName.setText(character.getName());
@@ -40,27 +43,25 @@ public class MainActivity2 extends AppCompatActivity {
         tvAttack.setText("Attack: " + character.getAttack());
         tvDefense.setText("Defense: " + character.getDefense());
         tvMoney.setText("Money: " + character.getMoney());
-
-        btnForest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity2.this, ForestActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity2.this, "IN PROGRESS", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(MainActivity2.this, ShopActivity.class);
-//                startActivity(intent);
-            }
-        });
     }
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (getResources().getResourceEntryName(view.getId())) {
+            case "btnForest":
+                startActivity(new Intent(MainActivity2.this, ForestActivity.class));
+                break;
+            case "btnShop":
+                startActivity(new Intent(MainActivity2.this, ShopActivity.class));
+                break;
+            default:
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }
