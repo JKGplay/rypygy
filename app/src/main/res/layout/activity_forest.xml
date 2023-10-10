@@ -53,59 +53,91 @@
         android:layout_width="372dp"
         android:layout_height="338dp"
         android:background="#4CAF50"
-        android:padding="24dp"
+        android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayoutEnemy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHero">
 
         <TextView
-            android:id="@+id/tvInfo"
+            android:id="@+id/tvPlayerInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/lime_500"
             android:padding="12dp"
-            android:text="You attack and deal 3 damage!"
+            android:text="You attacked and dealt 3 damage!"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/vView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vView"
+            android:layout_width="wrap_content"
+            android:layout_height="91dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvMonsterInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPlayerInfo" />
 
         <Button
             android:id="@+id/btnAttack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="21dp"
             android:backgroundTint="@color/orange_500"
             android:text="Attack"
-            app:layout_constraintBottom_toTopOf="@+id/btnDefend"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvInfo"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintBottom_toBottomOf="@+id/vView"
+            app:layout_constraintEnd_toStartOf="@+id/btnDefend"
+            app:layout_constraintStart_toStartOf="@+id/vView"
+            app:layout_constraintTop_toTopOf="@+id/vView" />
 
         <Button
             android:id="@+id/btnDefend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="21dp"
             android:backgroundTint="@color/orange_500"
             android:text="Defend"
-            app:layout_constraintBottom_toTopOf="@+id/btnItem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAttack" />
+            app:layout_constraintBottom_toBottomOf="@+id/vView"
+            app:layout_constraintEnd_toStartOf="@+id/btnItem"
+            app:layout_constraintStart_toEndOf="@+id/btnAttack"
+            app:layout_constraintTop_toTopOf="@+id/vView" />
 
         <Button
             android:id="@+id/btnItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="21dp"
             android:backgroundTint="@color/orange_500"
             android:text="Use item"
+            app:layout_constraintBottom_toBottomOf="@+id/vView"
+            app:layout_constraintEnd_toEndOf="@+id/vView"
+            app:layout_constraintStart_toEndOf="@+id/btnDefend"
+            app:layout_constraintTop_toTopOf="@+id/vView" />
+
+
+        <TextView
+            android:id="@+id/tvMonsterInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/red_500"
+            android:padding="12dp"
+            android:text="Wolf attacked you and dealt 2 damage!"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnDefend" />
+            app:layout_constraintTop_toBottomOf="@+id/vView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

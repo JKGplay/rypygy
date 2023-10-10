@@ -6,23 +6,16 @@ import javax.security.auth.callback.CallbackHandler;
 
 public class Character implements Serializable {
     private static String name;
-    private static int maxhp;
-    private static int curhp;
-    private static int xp;
-    private static int level;
-    private static int attack;
-    private static int defense;
-    private static int money;
+    private static int level = 1;
+    private static int maxhp = level * 10;
+    private static int curhp = maxhp;
+    private static int xp = 0;
+    private static int attack = level * 2;
+    private static int defense = level * 2;
+    private static int money = 10;
 
     public Character(String name) {
         Character.name = name;
-        maxhp = 10;
-        curhp = maxhp;
-        xp = 0;
-        level = 1;
-        attack = level;
-        defense = level;
-        money = 10;
     }
 
     public int attack() {
@@ -44,8 +37,8 @@ public class Character implements Serializable {
     public int getCurhp() {
         return curhp;
     }
-    public int getXp() {
-        return xp;
+    public static int getXp() {
+        return Character.xp;
     }
     public int getLevel() {
         return level;

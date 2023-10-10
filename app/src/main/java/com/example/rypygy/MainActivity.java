@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     Character character = new Character(name);
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(MainActivity.this, "Enter a name for your character", Toast.LENGTH_SHORT).show();
                 }
