@@ -20,6 +20,7 @@ Gra RPG, w której gracz tworzy postać, walczy w lasku z różnymi przeciwnikam
 - mechanika sklepu, możliwość zakupu nowych przedmiotów
 - różne nawiązania do szybina
 - walka z bossem (Kunczka)
+- możliwość zapisu danych po zamknięciu aplikacji
 
 ### Wymagania sprzętowe:
 
