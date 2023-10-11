@@ -8,10 +8,6 @@ public class Wolf extends Monster {
         super("Wolf", level*10, level, level*2, level*2);
     }
 
-    public int attack() {
-        return (int) (getAttack() + (Math.random() * (getLevel()+1)));
-    }
-
     public int action() {
         if(getCurhp() < getMaxhp()/3) {
             return attack()+getLevel();
@@ -23,5 +19,15 @@ public class Wolf extends Monster {
                 return 0;
             }
         }
+    }
+
+    @Override
+    public int attack() {
+        return (int) (getAttack() + (Math.random() * (getLevel()+1)));
+    }
+
+    @Override
+    public void defend() {
+
     }
 }

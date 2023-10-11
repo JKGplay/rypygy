@@ -55,10 +55,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         switch (getResources().getResourceEntryName(view.getId())) {
             case "btnForest":
                 startActivity(new Intent(MainActivity2.this, ForestActivity.class));
+                finish();
                 break;
             case "btnShop":
 //                startActivity(new Intent(MainActivity2.this, ShopActivity.class));
-                Toast.makeText(this, "XP: " + String.valueOf(Character.getXp()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "IN PROGRESS", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();

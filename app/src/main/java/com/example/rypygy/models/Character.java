@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.security.auth.callback.CallbackHandler;
 
-public class Character implements Serializable {
+public class Character implements Serializable, Model {
     private static String name;
     private static int level = 1;
     private static int maxhp = level * 10;
@@ -29,28 +29,28 @@ public class Character implements Serializable {
     public Character() {}
 
     public String getName() {
-        return name;
+        return Character.name;
     }
     public int getMaxhp() {
-        return maxhp;
+        return Character.maxhp;
     }
     public int getCurhp() {
-        return curhp;
+        return Character.curhp;
     }
-    public static int getXp() {
+    public int getXp() {
         return Character.xp;
     }
     public int getLevel() {
-        return level;
+        return Character.level;
     }
     public int getAttack() {
-        return attack;
+        return Character.attack;
     }
     public int getDefense() {
-        return defense;
+        return Character.defense;
     }
     public int getMoney() {
-        return money;
+        return Character.money;
     }
 
     public void setCurhp(int curhp) {
