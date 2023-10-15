@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import com.example.rypygy.models.Item;
 
 public class Sword extends Item {
-    private enum Types {WOODEN, STONE, IRON}
-    public Sword(@NonNull Types t) {
+    public enum Type {WOODEN, STONE, IRON}
+    public Sword(@NonNull Type t) {
         super(Category.WEAPON);
         switch (t) {
             case WOODEN:

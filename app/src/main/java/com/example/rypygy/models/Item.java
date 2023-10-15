@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Contract;
 public abstract class Item {
     protected String name;
     protected int price;
-//    protected String category;
     protected enum Category {WEAPON, SHIELD, POTION}
     protected int damage;
     protected int defense;

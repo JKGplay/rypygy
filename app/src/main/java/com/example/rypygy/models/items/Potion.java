@@ -7,8 +7,8 @@ import com.example.rypygy.models.Item;
 import java.util.Random;
 
 public class Potion extends Item {
-    private enum Types {SMALL, MEDIUM, LARGE}
-    public Potion(@NonNull Types t) {
+    public enum Type {SMALL, MEDIUM, LARGE}
+    public Potion(@NonNull Type t) {
         super(Category.POTION);
         switch (t) {
             case SMALL:
