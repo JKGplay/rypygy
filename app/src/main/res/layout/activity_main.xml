@@ -7,19 +7,6 @@
     android:background="@color/green_500"
     tools:context=".MainActivity">
 
-    <!--    <EditText-->
-    <!--        android:id="@+id/etName"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:ems="12"-->
-    <!--        android:hint="Enter character's name"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/btnPlay"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.5"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_chainStyle="packed" />-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -46,7 +33,7 @@
 
         <Button
             android:id="@+id/btnPlay"
-            app:icon="@drawable/baseline_videogame_asset_24"
+            app:icon="@drawable/outline_videogame_asset_24"
             app:iconGravity="textStart"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"

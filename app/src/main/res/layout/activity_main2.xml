@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/orange_500"
             android:text="@string/btn_forest"
-            app:icon="@drawable/baseline_forest_24"
+            app:icon="@drawable/outline_forest_24"
             app:iconGravity="textStart" />
 
         <Button
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/orange_500"
             android:text="@string/btn_shop"
-            app:icon="@drawable/baseline_shopping_cart_24"
+            app:icon="@drawable/outline_shopping_cart_24"
             app:iconGravity="textStart" />
 
     </LinearLayout>
