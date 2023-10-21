@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">rypygy</string>
+    <string name="app_name">Szybiniak\'s bizarre adventure</string>
+    <string name="placeholder">Enter character\'s name</string>
+    <string name="btn_play">Play</string>
+    <string name="btn_forest">Forest</string>
+    <string name="btn_shop">Shop</string>
+    <string name="btn_attack">Attack</string>
+    <string name="btn_defend">Defend</string>
+    <string name="btn_use_item">Use item</string>
 </resources>
