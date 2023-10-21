@@ -50,10 +50,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="372dp"
-        android:layout_height="338dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#4CAF50"
-        android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayoutEnemy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +64,7 @@
             android:layout_height="wrap_content"
             android:background="@color/lime_500"
             android:padding="12dp"
+            android:layout_marginHorizontal="12dp"
             android:text="You attacked and dealt 3 damage!"
             android:textAlignment="center"
             android:textSize="24sp"
@@ -139,6 +139,7 @@
             android:layout_height="wrap_content"
             android:background="@color/red_500"
             android:padding="12dp"
+            android:layout_marginHorizontal="12dp"
             android:text="Wolf attacked you and dealt 2 damage!"
             android:textAlignment="center"
             android:textSize="24sp"
