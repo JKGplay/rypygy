@@ -1,5 +1,6 @@
 package com.example.rypygy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -40,9 +41,14 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         tvHp.setText("HP: " + character.getCurhp() + "/" + character.getMaxhp());
         tvXp.setText("XP: " + character.getXp());
         tvLevel.setText("Level: " + character.getLevel());
-        tvAttack.setText("Attack: " + character.getAttack());
-        tvDefense.setText("Defense: " + character.getDefense());
+        tvAttack.setText("Attack: " + character.getStrength());
+        tvDefense.setText("Defense: " + character.getDexterity());
         tvMoney.setText("Money: " + character.getMoney());
+
+        if(character.getXp() >= 100) {
+            startActivity(new Intent(MainActivity2.this, LevelUpActivity.class));
+            finish();
+        }
     }
 
     @Override
@@ -51,7 +57,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(@NonNull View view) {
         switch (getResources().getResourceEntryName(view.getId())) {
             case "btnForest":
                 startActivity(new Intent(MainActivity2.this, ForestActivity.class));

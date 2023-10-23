@@ -2,28 +2,29 @@ package com.example.rypygy.models;
 
 import java.io.Serializable;
 
-import javax.security.auth.callback.CallbackHandler;
-
 public class Character implements Serializable, Model {
     private static String name;
     private static int level = 1;
-    private static int maxhp = level * 10;
+    private static int strength = 30;
+    private static int dexterity = 20;
+    private static int vitality = 25;
+    private static int maxhp = (vitality * 2) + (level * 2) + 18;
     private static int curhp = maxhp;
     private static int xp = 0;
-    private static int attack = level * 2;
-    private static int defense = level * 2;
-    private static int money = 10;
+    private static int money = 0;
+
+    //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
 
     public Character(String name) {
         Character.name = name;
     }
 
     public int attack() {
-        return (int) (getAttack() + (Math.random() * (getLevel()+1)));
+        return (int) (getStrength() + (Math.random() * (getLevel()+1)));
     }
 
     public void defend() {
-        setDefense((int) ((getLevel()*2) + (Math.random() * (getLevel()+1))+1));
+        setDexterity((int) ((getLevel()*2) + (Math.random() * (getLevel()+1))+1));
     }
 
     public Character() {}
@@ -43,11 +44,11 @@ public class Character implements Serializable, Model {
     public int getLevel() {
         return Character.level;
     }
-    public int getAttack() {
-        return Character.attack;
+    public int getStrength() {
+        return Character.strength;
     }
-    public int getDefense() {
-        return Character.defense;
+    public int getDexterity() {
+        return Character.dexterity;
     }
     public int getMoney() {
         return Character.money;
@@ -65,7 +66,7 @@ public class Character implements Serializable, Model {
         Character.money = money;
     }
 
-    public static void setDefense(int defense) {
-        Character.defense = defense;
+    public static void setDexterity(int dexterity) {
+        Character.dexterity = dexterity;
     }
 }

@@ -73,8 +73,13 @@ public class ForestActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     character.setXp(character.getXp() + 10);
-                                    startActivity(new Intent(ForestActivity.this, MainActivity2.class));
-                                    finish();
+                                    if (character.getXp() >= 100) {
+                                        startActivity(new Intent(ForestActivity.this, LevelUpActivity.class));
+                                        finish();
+                                    } else {
+                                        startActivity(new Intent(ForestActivity.this, MainActivity2.class));
+                                        finish();
+                                    }
                                 }
                             })
                             .show();
