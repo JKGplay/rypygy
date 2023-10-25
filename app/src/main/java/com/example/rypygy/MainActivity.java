@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!String.valueOf(etName.getText()).trim().isEmpty()) {
                     String name = String.valueOf(etName.getText()).trim();
-                    Character character = new Character(name);
+                    Character c = new Character(name);
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     startActivity(intent);
                     finish();

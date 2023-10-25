@@ -1,13 +1,13 @@
 package com.example.rypygy.models;
 
-import java.io.Serializable;
-
-public class Character implements Serializable, Model {
+public class Character extends Model {
     private static String name;
     private static int level = 1;
     private static int strength = 30;
     private static int dexterity = 20;
     private static int vitality = 25;
+    private static int damage = (int)  Math.floor(strength * level / 100);
+    private static int ac = (int) Math.floor(dexterity / 5);
     private static int maxhp = (vitality * 2) + (level * 2) + 18;
     private static int curhp = maxhp;
     private static int xp = 0;
@@ -15,18 +15,14 @@ public class Character implements Serializable, Model {
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
 
+    public boolean toHit(int ACmonster) {
+        //min(max(toHit, 5), 95)
+        return rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
+    }
+
     public Character(String name) {
         Character.name = name;
     }
-
-    public int attack() {
-        return (int) (getStrength() + (Math.random() * (getLevel()+1)));
-    }
-
-    public void defend() {
-        setDexterity((int) ((getLevel()*2) + (Math.random() * (getLevel()+1))+1));
-    }
-
     public Character() {}
 
     public String getName() {

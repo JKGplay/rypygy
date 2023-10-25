@@ -1,59 +1,33 @@
 package com.example.rypygy.models;
 
-abstract public class Monster implements Model{
+abstract public class Monster extends Model {
     protected String name;
-    protected int maxhp;
-    protected int curhp;
+    protected int maxHP;
+    protected int curHP;
     protected int level;
-    protected int attack;
-    protected int defense;
+    protected int minDamage;
+    protected int maxDamage;
+    protected int ac;
+    protected int toHitBase;
+    protected int xp;
 
-    abstract public int attack();
-    abstract public void defend();
+    protected boolean toHit(int LVplayer, int ACplayer) {
+        return rnd(1, 100) <= Math.max(15, (int) Math.floor(30 + toHitBase + (double) (2 * (level - LVplayer)) - ACplayer));
+    }
 
-    public Monster(String name, int maxhp, int level, int attack, int defense) {
+    protected int damage() {
+        return rnd(minDamage, maxDamage);
+    }
+
+    public Monster(String name, int maxhp, int level, int minDamage, int maxDamage, int ac, int toHitBase, int xp) {
         this.name = name;
-        this.maxhp = maxhp;
-        this.curhp = maxhp;
+        this.maxHP = maxhp;
+        this.curHP = maxhp;
         this.level = level;
-        this.attack = attack;
-        this.defense = defense;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getMaxhp() {
-        return maxhp;
-    }
-    public void setMaxhp(int maxhp) {
-        this.maxhp = maxhp;
-    }
-    public int getCurhp() {
-        return curhp;
-    }
-    public void setCurhp(int curhp) {
-        this.curhp = curhp;
-    }
-    public int getLevel() {
-        return level;
-    }
-    public void setLevel(int level) {
-        this.level = level;
-    }
-    public int getAttack() {
-        return attack;
-    }
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-    public int getDefense() {
-        return defense;
-    }
-    public void setDefense(int defense) {
-        this.defense = defense;
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
+        this.ac = ac;
+        this.toHitBase = toHitBase;
+        this.xp = xp;
     }
 }
