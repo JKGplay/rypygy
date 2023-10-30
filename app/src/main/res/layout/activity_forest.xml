@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutHero"
-        android:layout_width="141dp"
-        android:layout_height="126dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/lime_500"
         android:padding="24dp"
@@ -78,7 +78,7 @@
             android:id="@+id/vView"
             android:layout_width="wrap_content"
             android:layout_height="91dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvMonsterInfo"
+            app:layout_constraintBottom_toTopOf="@+id/tvEnemyInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +134,7 @@
 
 
         <TextView
-            android:id="@+id/tvMonsterInfo"
+            android:id="@+id/tvEnemyInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/red_500"
@@ -153,8 +153,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutEnemy"
-        android:layout_width="141dp"
-        android:layout_height="126dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="@color/red_500"
         android:padding="24dp"
@@ -168,7 +168,7 @@
             android:id="@+id/tvEnemyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wilk"
+            android:text="First Year"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"

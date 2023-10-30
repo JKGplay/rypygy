@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
@@ -29,9 +28,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!String.valueOf(etName.getText()).trim().isEmpty()) {
-                    String name = String.valueOf(etName.getText()).trim();
-                    Character c = new Character(name);
-                    Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                    Character.setName(String.valueOf(etName.getText()).trim());
+                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

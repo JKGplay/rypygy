@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
 
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
+public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
     private Button btnForest, btnShop;
@@ -20,7 +20,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_second);
 
         tvName = findViewById(R.id.tvName);
         tvHp = findViewById(R.id.tvHp);
@@ -35,18 +35,16 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         btnForest.setOnClickListener(this);
         btnShop.setOnClickListener(this);
 
-        Character character = new Character();
+        tvName.setText(Character.getName());
+        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+        tvXp.setText("XP: " + Character.getXp());
+        tvLevel.setText("Level: " + Character.getLevel());
+        tvAttack.setText("Attack: " + Character.getStrength());
+        tvDefense.setText("Defense: " + Character.getDexterity());
+        tvMoney.setText("Money: " + Character.getMoney());
 
-        tvName.setText(character.getName());
-        tvHp.setText("HP: " + character.getCurhp() + "/" + character.getMaxhp());
-        tvXp.setText("XP: " + character.getXp());
-        tvLevel.setText("Level: " + character.getLevel());
-        tvAttack.setText("Attack: " + character.getStrength());
-        tvDefense.setText("Defense: " + character.getDexterity());
-        tvMoney.setText("Money: " + character.getMoney());
-
-        if(character.getXp() >= 100) {
-            startActivity(new Intent(MainActivity2.this, LevelUpActivity.class));
+        if(Character.getXp() >= 100) {
+            startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
             finish();
         }
     }
@@ -60,7 +58,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     public void onClick(@NonNull View view) {
         switch (getResources().getResourceEntryName(view.getId())) {
             case "btnForest":
-                startActivity(new Intent(MainActivity2.this, ForestActivity.class));
+                startActivity(new Intent(SecondActivity.this, ForestActivity.class));
                 finish();
                 break;
             case "btnShop":

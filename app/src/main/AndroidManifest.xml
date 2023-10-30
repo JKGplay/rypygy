@@ -22,7 +22,7 @@
             android:name=".ForestActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
+            android:name=".SecondActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

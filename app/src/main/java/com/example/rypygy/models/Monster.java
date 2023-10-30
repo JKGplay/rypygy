@@ -11,11 +11,11 @@ abstract public class Monster extends Model {
     protected int toHitBase;
     protected int xp;
 
-    protected boolean toHit(int LVplayer, int ACplayer) {
+    public boolean toHit(int LVplayer, int ACplayer) {
         return rnd(1, 100) <= Math.max(15, (int) Math.floor(30 + toHitBase + (double) (2 * (level - LVplayer)) - ACplayer));
     }
 
-    protected int damage() {
+    public int damage() {
         return rnd(minDamage, maxDamage);
     }
 
@@ -29,5 +29,30 @@ abstract public class Monster extends Model {
         this.ac = ac;
         this.toHitBase = toHitBase;
         this.xp = xp;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int getMaxHP() {
+        return maxHP;
+    }
+    public int getCurHP() {
+        return curHP;
+    }
+    public void setCurHP(int curHP) {
+        this.curHP = curHP;
+    }
+    public int getLevel() {
+        return level;
+    }
+    public int getAc() {
+        return ac;
+    }
+    public int getToHitBase() {
+        return toHitBase;
+    }
+    public int getXp() {
+        return xp;
     }
 }
