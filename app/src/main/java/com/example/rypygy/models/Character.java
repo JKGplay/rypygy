@@ -1,6 +1,6 @@
 package com.example.rypygy.models;
 
-public class Character extends Model {
+public class Character {
     private static String name;
     private static int level = 1;
     private static int strength = 30;
@@ -12,14 +12,43 @@ public class Character extends Model {
     private static int curhp = maxhp;
     private static int xp = 0;
     private static int money = 0;
-
-    private static Object[] inventory = {};
+    private static Item weapon = new Item("Short Sword", Item.Type.WEAPON, 50,
+            new Attribute[]{
+                    new Attribute(Attribute.Type.MinDMG, 2),
+                    new Attribute(Attribute.Type.MaxDMG, 6)
+            }
+    );
+    private static Item armor = new Item("Rags", Item.Type.ARMOR, 5,
+            new Attribute[]{
+                    new Attribute(Attribute.Type.MinAC, 2),
+                    new Attribute(Attribute.Type.MaxAC, 6)
+            }
+    );
+    private static Item[] inventory = {
+            weapon,
+            armor,
+            new Item("Small Potion", Item.Type.POTION, 25,
+                    new Attribute[]{
+                            new Attribute(Attribute.Type.Small)
+                    }
+            ),
+            new Item("Medium Potion", Item.Type.POTION, 25,
+                    new Attribute[]{
+                            new Attribute(Attribute.Type.Medium)
+                    }
+            ),
+            new Item("Big Potion", Item.Type.POTION, 25,
+                    new Attribute[]{
+                            new Attribute(Attribute.Type.Big)
+                    }
+            ),
+    };
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
 
     public static boolean toHit(int ACmonster) {
         //min(max(toHit, 5), 95)
-        return rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
+        return Rnd.rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
     }
 
     public static String getName() {
@@ -87,5 +116,23 @@ public class Character extends Model {
     }
     public static void setMoney(int money) {
         Character.money = money;
+    }
+    public static Item getWeapon() {
+        return weapon;
+    }
+    public static void setWeapon(Item weapon) {
+        Character.weapon = weapon;
+    }
+    public static Item getArmor() {
+        return armor;
+    }
+    public static void setArmor(Item armor) {
+        Character.armor = armor;
+    }
+    public static Item[] getInventory() {
+        return inventory;
+    }
+    public static void setInventory(Item[] inventory) {
+        Character.inventory = inventory;
     }
 }

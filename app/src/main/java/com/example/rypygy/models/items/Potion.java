@@ -3,9 +3,9 @@ package com.example.rypygy.models.items;
 import androidx.annotation.NonNull;
 
 import com.example.rypygy.models.Character;
-import com.example.rypygy.models.Item;
+import com.example.rypygy.models.ItemTemp2;
 
-public class Potion extends Item {
+public class Potion extends ItemTemp2 {
     protected enum Size {
         SMALL,
         MEDIUM,

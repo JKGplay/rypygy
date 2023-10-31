@@ -1,13 +1,14 @@
 package com.example.rypygy.models.items;
 
-import com.example.rypygy.models.Item;
+import com.example.rypygy.models.ItemTemp2;
+import com.example.rypygy.models.Rnd;
 
-abstract public class Armor extends Item {
+abstract public class Armor extends ItemTemp2 {
     protected int minAC;
     protected int maxAC;
 
     public int getAC() {
-        return rnd(minAC, maxAC);
+        return Rnd.rnd(minAC, maxAC);
     }
 
     public Armor(String name, int minAC, int maxAC, int price) {

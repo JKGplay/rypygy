@@ -1,6 +1,6 @@
 package com.example.rypygy.models;
 
-abstract public class Monster extends Model {
+abstract public class Monster {
     protected String name;
     protected int maxHP;
     protected int curHP;
@@ -12,11 +12,11 @@ abstract public class Monster extends Model {
     protected int xp;
 
     public boolean toHit(int LVplayer, int ACplayer) {
-        return rnd(1, 100) <= Math.max(15, (int) Math.floor(30 + toHitBase + (double) (2 * (level - LVplayer)) - ACplayer));
+        return Rnd.rnd(1, 100) <= Math.max(15, (int) Math.floor(30 + toHitBase + (double) (2 * (level - LVplayer)) - ACplayer));
     }
 
     public int damage() {
-        return rnd(minDamage, maxDamage);
+        return Rnd.rnd(minDamage, maxDamage);
     }
 
     public Monster(String name, int maxhp, int level, int minDamage, int maxDamage, int ac, int toHitBase, int xp) {

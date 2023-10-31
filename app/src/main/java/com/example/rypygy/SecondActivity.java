@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Item;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
