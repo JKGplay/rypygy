@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.rypygy.models.Attribute;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Item;
 import com.example.rypygy.models.Rnd;
@@ -19,6 +19,7 @@ import com.example.rypygy.models.enemies.FirstYear;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class ForestActivity extends AppCompatActivity {
 
@@ -32,17 +33,6 @@ public class ForestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forest);
 
-        ////////////////
-
-        Item woodenSword = new Item("Wooden Sword", Item.Type.WEAPON, 10,
-                new Attribute[]{
-                        new Attribute(Attribute.Type.MinDMG, 2),
-                        new Attribute(Attribute.Type.MaxDMG, 6)
-                }
-        );
-
-        ///////////////
-
         tvName = findViewById(R.id.tvName);
         tvHp = findViewById(R.id.tvHp);
         tvPlayerInfo = findViewById(R.id.tvPlayerInfo);
@@ -54,6 +44,18 @@ public class ForestActivity extends AppCompatActivity {
         btnItem = findViewById(R.id.btnItem);
 
         FirstYear monster = new FirstYear();
+
+        ///
+
+        Item potka = new Item("Small Potion", Item.Category.POTION, 25,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.25);
+                }}
+        );
+
+        Log.d("potka", String.valueOf(potka.heal()));
+
+        ///
 
         btnDefend.setVisibility(View.GONE);
 
@@ -75,7 +77,12 @@ public class ForestActivity extends AppCompatActivity {
                 mLastClickTime = SystemClock.elapsedRealtime();
 
                 if (Character.toHit(monster.getAc())) {
-                    int dmg = Character.getDamage() + Rnd.rnd(Character.getWeapon().getAttributes()[0].value, Character.getWeapon().getAttributes()[1].value);//dodac jeszcze dmg z broni
+                    /*
+                        Ternary operator checks if Character has a weapon and if weapon has MinDMG and MaxDMG attribute.
+                        If yes then dmg = Character.getDamage() + rnd(min, max);
+                        If not then dmg = Character.getDamage();
+                     */
+                    int dmg = (Character.getWeapon() != null && Character.getWeapon().getAttributes().containsKey(Item.Attribute.MinDMG) && Character.getWeapon().getAttributes().containsKey(Item.Attribute.MaxDMG)) ? Character.getDamage() + Rnd.rnd(Character.getWeapon().getAttributes().get(Item.Attribute.MinDMG).intValue(), Character.getWeapon().getAttributes().get(Item.Attribute.MaxDMG).intValue()) : Character.getDamage();
                     tvPlayerInfo.setText("You attacked and dealt " + dmg + " damage!");
                     monster.setCurHP(monster.getCurHP() - dmg);
                     if (monster.getCurHP() < 0) {
@@ -107,7 +114,13 @@ public class ForestActivity extends AppCompatActivity {
                             .show();
 
                 } else {
-                    if (monster.toHit(Character.getLevel(), Character.getAc() + Rnd.rnd(Character.getArmor().getAttributes()[0].value, Character.getArmor().getAttributes()[1].value))) {
+                    /*
+                        Character AC is set as given:
+                        Ternary operator checks if Character has a armor and if armor has MinAC and MaxAC attribute.
+                        If yes then ac = Character.getAc() + rnd(min, max);
+                        If not then ac = Character.getAc();
+                     */
+                    if (monster.toHit(Character.getLevel(), ((Character.getArmor() != null && Character.getArmor().getAttributes().containsKey(Item.Attribute.MinAC) && Character.getArmor().getAttributes().containsKey(Item.Attribute.MaxAC)) ? Character.getAc() + Rnd.rnd(Character.getArmor().getAttributes().get(Item.Attribute.MinAC).intValue(), Character.getArmor().getAttributes().get(Item.Attribute.MaxAC).intValue()) : Character.getAc()))) {
                         int dmg = monster.damage();
                         tvEnemyInfo.setText(monster.getName() + " attacked you and dealt " + dmg + " damage!");
                         Character.setCurhp(Character.getCurhp() - dmg);
@@ -122,17 +135,17 @@ public class ForestActivity extends AppCompatActivity {
         btnItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Item[] search = new Item[]{
-                        new Item("Small Potion")
-                };
-                for (Item item: Character.getInventory()) {
-                    if (item.equals(search)) {
-                        Character.setCurhp(Math.min(70, Character.getCurhp() + item.getAttributes()[0].value));
-                        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
-                        break;
-                    }
+                if (Character.getCurhp() == Character.getMaxhp()) {
+                    Toast.makeText(ForestActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                Log.d("test", "---");
+                if (Character.getIndexOf("Small Potion") < 0) {
+                    Toast.makeText(ForestActivity.this, "You don't have any potions", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory()[Character.getIndexOf("Small Potion")].heal()));
+                tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+                Character.removeItem(Character.getIndexOf("Small Potion"));
             }
         });
     }
