@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Character {
     private static String name;
@@ -20,37 +17,37 @@ public class Character {
     private static int curhp = maxhp;
     private static int xp = 0;
     private static int money = 0;
-    private static Item weapon = new Item("Short sword", Item.Category.WEAPON, 50,
+    private static Item weapon = new Item("Short sword", Item.Category.WEAPON, 1, 50,
             new HashMap<Item.Attribute, Double>() {{
                 put(Item.Attribute.MinDMG, 2.0);
                 put(Item.Attribute.MaxDMG, 6.0);
             }}
     );
-    private static Item armor = new Item("Rags", Item.Category.ARMOR, 5,
+    private static Item armor = new Item("Rags", Item.Category.ARMOR, 1, 5,
             new HashMap<Item.Attribute, Double>() {{
                 put(Item.Attribute.MinAC, 2.0);
                 put(Item.Attribute.MaxAC, 6.0);
             }}
     );
-    private static Item[] inventory = {
-            weapon,
-            armor,
-            new Item("Small Potion", Item.Category.POTION, 25,
-                    new HashMap<Item.Attribute, Double>() {{
-                        put(Item.Attribute.Size, 0.25);
-                    }}
-            ),
-            new Item("Medium Potion", Item.Category.POTION, 50,
-                    new HashMap<Item.Attribute, Double>() {{
-                        put(Item.Attribute.Size, 0.5);
-                    }}
-            ),
-            new Item("Big Potion", Item.Category.POTION, 75,
-                    new HashMap<Item.Attribute, Double>() {{
-                        put(Item.Attribute.Size, 0.75);
-                    }}
-            )
-    };
+    private static List<Item> inventory = new ArrayList<Item>() {{
+        add(weapon);
+        add(armor);
+        add(new Item("Small Potion", Item.Category.POTION, 2, 25,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.25);
+                }}
+        ));
+        add(new Item("Medium Potion", Item.Category.POTION, 1, 50,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.5);
+                }}
+        ));
+        add(new Item("Big Potion", Item.Category.POTION, 1, 75,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.75);
+                }}
+        ));
+    }};
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
 
@@ -59,24 +56,34 @@ public class Character {
         return Rnd.rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
     }
 
+    public static void addItem(Item item) {
+        inventory.add(item);
+    }
+
     public static int getIndexOf(String name) {
-        for (Item item: Character.getInventory()) {
+        for (Item item: inventory) {
             if (item.getName().equals(name)) {
-                return Arrays.asList(Character.getInventory()).indexOf(item);
+                return inventory.indexOf(item);
             }
         }
         return -1;
     }
 
-    public static void removeItem(int index) {
-        Item[] temp = new Item[Character.getInventory().length - 1];
-        for (int i = 0, k = 0; i < Character.getInventory().length; i++) {
-            if (i == index) {
-                continue;
+    public static boolean isItemInInventory(Item searched) {
+        for (Item item : inventory) {
+            if (item == searched) {
+                return true;
             }
-            temp[k++] = Character.getInventory()[i];
         }
-        Character.setInventory(temp);
+        return false;
+    }
+
+    public static void removeItem(int i) {
+        if (inventory.get(i).getAmount() > 1) {
+            inventory.get(i).setAmount(inventory.get(i).getAmount() - 1);
+        } else {
+            inventory.remove(i);
+        }
     }
 
     public static String getName() {
@@ -157,10 +164,10 @@ public class Character {
     public static void setArmor(Item armor) {
         Character.armor = armor;
     }
-    public static Item[] getInventory() {
+    public static List<Item> getInventory() {
         return inventory;
     }
-    public static void setInventory(Item[] inventory) {
+    public static void setInventory(List<Item> inventory) {
         Character.inventory = inventory;
     }
 }

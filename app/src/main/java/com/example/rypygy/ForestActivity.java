@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +18,11 @@ import com.example.rypygy.models.Item;
 import com.example.rypygy.models.Rnd;
 import com.example.rypygy.models.enemies.FirstYear;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ForestActivity extends AppCompatActivity {
 
@@ -27,6 +30,10 @@ public class ForestActivity extends AppCompatActivity {
     private Button btnAttack, btnDefend, btnItem;
 
     private long mLastClickTime = 0;
+
+    private List<String> itemNames = new ArrayList<>();
+    private int checkedItem;
+    private Item.Category checkedItemCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +51,6 @@ public class ForestActivity extends AppCompatActivity {
         btnItem = findViewById(R.id.btnItem);
 
         FirstYear monster = new FirstYear();
-
-        ///
-
-        Item potka = new Item("Small Potion", Item.Category.POTION, 25,
-                new HashMap<Item.Attribute, Double>() {{
-                    put(Item.Attribute.Size, 0.25);
-                }}
-        );
-
-        Log.d("potka", String.valueOf(potka.heal()));
-
-        ///
 
         btnDefend.setVisibility(View.GONE);
 
@@ -135,19 +130,87 @@ public class ForestActivity extends AppCompatActivity {
         btnItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Character.getCurhp() == Character.getMaxhp()) {
-                    Toast.makeText(ForestActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
                     return;
                 }
-                if (Character.getIndexOf("Small Potion") < 0) {
-                    Toast.makeText(ForestActivity.this, "You don't have any potions", Toast.LENGTH_SHORT).show();
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+                if (Character.getInventory().size() == 2) {
+//                    Toast.makeText(ForestActivity.this, "You don't have any items to use", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(view, "You don't have any items to use", Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory()[Character.getIndexOf("Small Potion")].heal()));
-                tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
-                Character.removeItem(Character.getIndexOf("Small Potion"));
+
+                checkedItem = -1;
+                checkedItemCategory = null;
+                itemNames.clear();
+                for (Item item: Character.getInventory()) {
+                    if (item.getCategory() == Item.Category.POTION || item.getCategory() == Item.Category.SCROLL) {
+                        itemNames.add(item.getName());
+                    }
+                }
+
+                new MaterialAlertDialogBuilder(ForestActivity.this)
+                        .setTitle("Inventory")
+                        .setSingleChoiceItems(itemNames.toArray(new String[0]), checkedItem, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                                checkedItem = which;
+                                checkedItemCategory = Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).getCategory();
+                            }
+                        })
+                        .setPositiveButton("Use", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if (checkedItem == -1) {
+                                    return;
+                                }
+
+                                if (checkedItemCategory == Item.Category.POTION) {
+                                    if (Character.getCurhp() == Character.getMaxhp()) {
+                                        Toast.makeText(ForestActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    } else {
+                                        Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()));
+                                        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+                                        Character.removeItem(Character.getIndexOf(itemNames.get(checkedItem)));
+                                        Log.d("uzyto potki", itemNames.get(checkedItem));
+                                    }
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+
+
+//                if (Character.getCurhp() == Character.getMaxhp()) {
+//                    Toast.makeText(ForestActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (Character.getIndexOf("Small Potion") == -1) {
+//
+//                }
+//                Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory().get(Character.getIndexOf("Small Potion")).heal()));
+//                tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+//                Character.removeItem(Character.getIndexOf("Small Potion"));
             }
         });
+    }
+
+    public static void characterAttack() {
+
+    }
+
+    public static void characterDefend() {
+
+    }
+
+    public static void characterUseItem() {
+
+    }
+
+    public static void enemyAttack() {
+
     }
 
     @Override
