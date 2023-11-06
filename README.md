@@ -10,7 +10,8 @@ Gra typu RPG (role playing game) na telefony mobilne z systemem android
 
 ### Zamysł Projektu: 
 
-Gra RPG, w której gracz tworzy postać, walczy w lasku z różnymi przeciwnikami, można również kupować różne przedmioty w sklepie (hadesie). Ostatecznym celem jest pokonanie finalnego bossa (Kunczki).
+Gra RPG, w której gracz tworzy postać, walczy w lasku z różnymi przeciwnikami, można również kupować różne przedmioty w sklepie (hadesie). Ostatecznym celem jest pokonanie finalnego bossa (Kunczki - ![image](https://github.com/JKGplay/rypygy/assets/74616786/634372b3-4f79-4239-bb6f-56c936c340f7)
+).
 
 ### Najważniejsze cechy:
 
