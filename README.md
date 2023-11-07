@@ -1,9 +1,9 @@
 ![image](https://github.com/JKGplay/rypygy/assets/74616786/da2b5f0b-9561-4c79-a5c0-5bc30dce7d08)
-# Szybiniak's bizzare adventure
+# Wrath of Kunczka
 
 ### Nazwa Projektu: 
 
-Szybiniak's bizarre adventure
+Wrath of Kunczka
 
 ### Typ Projektu: 
 
