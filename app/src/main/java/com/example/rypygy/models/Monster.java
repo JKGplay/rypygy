@@ -1,59 +1,58 @@
 package com.example.rypygy.models;
 
-abstract public class Monster implements Model{
+abstract public class Monster {
     protected String name;
-    protected int maxhp;
-    protected int curhp;
+    protected int maxHP;
+    protected int curHP;
     protected int level;
-    protected int attack;
-    protected int defense;
+    protected int minDamage;
+    protected int maxDamage;
+    protected int ac;
+    protected int toHitBase;
+    protected int xp;
 
-    abstract public int attack();
-    abstract public void defend();
+    public boolean toHit(int LVplayer, int ACplayer) {
+        return Rnd.rnd(1, 100) <= Math.max(15, (int) Math.floor(30 + toHitBase + (double) (2 * (level - LVplayer)) - ACplayer));
+    }
 
-    public Monster(String name, int maxhp, int level, int attack, int defense) {
+    public int damage() {
+        return Rnd.rnd(minDamage, maxDamage);
+    }
+
+    public Monster(String name, int maxhp, int level, int minDamage, int maxDamage, int ac, int toHitBase, int xp) {
         this.name = name;
-        this.maxhp = maxhp;
-        this.curhp = maxhp;
+        this.maxHP = maxhp;
+        this.curHP = maxhp;
         this.level = level;
-        this.attack = attack;
-        this.defense = defense;
+        this.minDamage = minDamage;
+        this.maxDamage = maxDamage;
+        this.ac = ac;
+        this.toHitBase = toHitBase;
+        this.xp = xp;
     }
 
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
+    public int getMaxHP() {
+        return maxHP;
     }
-    public int getMaxhp() {
-        return maxhp;
+    public int getCurHP() {
+        return curHP;
     }
-    public void setMaxhp(int maxhp) {
-        this.maxhp = maxhp;
-    }
-    public int getCurhp() {
-        return curhp;
-    }
-    public void setCurhp(int curhp) {
-        this.curhp = curhp;
+    public void setCurHP(int curHP) {
+        this.curHP = curHP;
     }
     public int getLevel() {
         return level;
     }
-    public void setLevel(int level) {
-        this.level = level;
+    public int getAc() {
+        return ac;
     }
-    public int getAttack() {
-        return attack;
+    public int getToHitBase() {
+        return toHitBase;
     }
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-    public int getDefense() {
-        return defense;
-    }
-    public void setDefense(int defense) {
-        this.defense = defense;
+    public int getXp() {
+        return xp;
     }
 }

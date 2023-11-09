@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_500"
-    tools:context=".ForestActivity">
+    tools:context=".FightActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutHero"
-        android:layout_width="141dp"
-        android:layout_height="126dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/lime_500"
         android:padding="24dp"
@@ -78,7 +78,7 @@
             android:id="@+id/vView"
             android:layout_width="wrap_content"
             android:layout_height="91dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvMonsterInfo"
+            app:layout_constraintBottom_toTopOf="@+id/tvEnemyInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,20 +96,20 @@
             app:icon="@drawable/sword_24"
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
-            app:layout_constraintEnd_toStartOf="@+id/btnDefend"
+            app:layout_constraintEnd_toStartOf="@+id/btnAbility"
             app:layout_constraintStart_toStartOf="@+id/vView"
             app:layout_constraintTop_toTopOf="@+id/vView" />
 
         <Button
-            android:id="@+id/btnDefend"
+            android:id="@+id/btnAbility"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="21dp"
             android:backgroundTint="@color/orange_500"
-            android:text="@string/btn_defend"
-            app:icon="@drawable/shield_24"
+            android:text="@string/btn_ability"
+            app:icon="@drawable/outline_ability_24"
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toStartOf="@+id/btnItem"
@@ -129,12 +129,12 @@
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toEndOf="@+id/vView"
-            app:layout_constraintStart_toEndOf="@+id/btnDefend"
+            app:layout_constraintStart_toEndOf="@+id/btnAbility"
             app:layout_constraintTop_toTopOf="@+id/vView" />
 
 
         <TextView
-            android:id="@+id/tvMonsterInfo"
+            android:id="@+id/tvEnemyInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/red_500"
@@ -153,8 +153,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutEnemy"
-        android:layout_width="141dp"
-        android:layout_height="126dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="@color/red_500"
         android:padding="24dp"
@@ -168,7 +168,7 @@
             android:id="@+id/tvEnemyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wilk"
+            android:text="First Year"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"

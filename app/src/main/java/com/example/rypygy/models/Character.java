@@ -1,71 +1,173 @@
 package com.example.rypygy.models;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
-import javax.security.auth.callback.CallbackHandler;
-
-public class Character implements Serializable, Model {
+public class Character {
     private static String name;
     private static int level = 1;
-    private static int maxhp = level * 10;
+    private static int strength = 30;
+    private static int dexterity = 20;
+    private static int vitality = 25;
+    private static int damage = Math.max(1, (int) Math.floor(strength * level / 100));
+    private static int ac = (int) Math.floor(dexterity / 5);
+    private static int maxhp = (vitality * 2) + (level * 2) + 18;
     private static int curhp = maxhp;
     private static int xp = 0;
-    private static int attack = level * 2;
-    private static int defense = level * 2;
-    private static int money = 10;
+    private static int money = 0;
+    private static Item weapon = new Item("Short sword", Item.Category.WEAPON, 1, 50,
+            new HashMap<Item.Attribute, Double>() {{
+                put(Item.Attribute.MinDMG, 2.0);
+                put(Item.Attribute.MaxDMG, 6.0);
+            }}
+    );
+    private static Item armor = new Item("Rags", Item.Category.ARMOR, 1, 5,
+            new HashMap<Item.Attribute, Double>() {{
+                put(Item.Attribute.MinAC, 2.0);
+                put(Item.Attribute.MaxAC, 6.0);
+            }}
+    );
+    private static List<Item> inventory = new ArrayList<Item>() {{
+        add(weapon);
+        add(armor);
+        add(new Item("Small Potion", Item.Category.POTION, 2, 25,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.25);
+                }}
+        ));
+        add(new Item("Medium Potion", Item.Category.POTION, 1, 50,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.5);
+                }}
+        ));
+        add(new Item("Big Potion", Item.Category.POTION, 1, 75,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.Size, 0.75);
+                }}
+        ));
+    }};
 
-    public Character(String name) {
+    //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
+
+    public static boolean toHit(int ACmonster) {
+        //min(max(toHit, 5), 95)
+        return Rnd.rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
+    }
+
+    public static void addItem(Item item) {
+        inventory.add(item);
+    }
+
+    public static int getIndexOf(String name) {
+        for (Item item: inventory) {
+            if (item.getName().equals(name)) {
+                return inventory.indexOf(item);
+            }
+        }
+        return -1;
+    }
+
+    public static boolean isItemInInventory(Item searched) {
+        for (Item item : inventory) {
+            if (item == searched) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void removeItem(int i) {
+        if (inventory.get(i).getAmount() > 1) {
+            inventory.get(i).setAmount(inventory.get(i).getAmount() - 1);
+        } else {
+            inventory.remove(i);
+        }
+    }
+
+    public static String getName() {
+        return name;
+    }
+    public static void setName(String name) {
         Character.name = name;
     }
-
-    public int attack() {
-        return (int) (getAttack() + (Math.random() * (getLevel()+1)));
+    public static int getLevel() {
+        return level;
     }
-
-    public void defend() {
-        setDefense((int) ((getLevel()*2) + (Math.random() * (getLevel()+1))+1));
+    public static void setLevel(int level) {
+        Character.level = level;
     }
-
-    public Character() {}
-
-    public String getName() {
-        return Character.name;
+    public static int getStrength() {
+        return strength;
     }
-    public int getMaxhp() {
-        return Character.maxhp;
+    public static void setStrength(int strength) {
+        Character.strength = strength;
     }
-    public int getCurhp() {
-        return Character.curhp;
+    public static int getDexterity() {
+        return dexterity;
     }
-    public int getXp() {
-        return Character.xp;
+    public static void setDexterity(int dexterity) {
+        Character.dexterity = dexterity;
     }
-    public int getLevel() {
-        return Character.level;
+    public static int getVitality() {
+        return vitality;
     }
-    public int getAttack() {
-        return Character.attack;
+    public static void setVitality(int vitality) {
+        Character.vitality = vitality;
     }
-    public int getDefense() {
-        return Character.defense;
+    public static int getDamage() {
+        return damage;
     }
-    public int getMoney() {
-        return Character.money;
+    public static void setDamage(int damage) {
+        Character.damage = damage;
     }
-
-    public void setCurhp(int curhp) {
+    public static int getAc() {
+        return ac;
+    }
+    public static void setAc(int ac) {
+        Character.ac = ac;
+    }
+    public static int getMaxhp() {
+        return maxhp;
+    }
+    public static void setMaxhp(int maxhp) {
+        Character.maxhp = maxhp;
+    }
+    public static int getCurhp() {
+        return curhp;
+    }
+    public static void setCurhp(int curhp) {
         Character.curhp = curhp;
     }
-
-    public void setXp(int xp) {
+    public static int getXp() {
+        return xp;
+    }
+    public static void setXp(int xp) {
         Character.xp = xp;
     }
-
-    public void setMoney(int money) {
+    public static int getMoney() {
+        return money;
+    }
+    public static void setMoney(int money) {
         Character.money = money;
     }
-
-    public static void setDefense(int defense) {
-        Character.defense = defense;
+    public static Item getWeapon() {
+        return weapon;
+    }
+    public static void setWeapon(Item weapon) {
+        Character.weapon = weapon;
+    }
+    public static Item getArmor() {
+        return armor;
+    }
+    public static void setArmor(Item armor) {
+        Character.armor = armor;
+    }
+    public static List<Item> getInventory() {
+        return inventory;
+    }
+    public static void setInventory(List<Item> inventory) {
+        Character.inventory = inventory;
     }
 }

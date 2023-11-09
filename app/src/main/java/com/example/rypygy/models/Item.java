@@ -1,47 +1,66 @@
 package com.example.rypygy.models;
 
-import androidx.annotation.NonNull;
+import java.util.HashMap;
 
-import org.jetbrains.annotations.Contract;
+public class Item {
 
-public abstract class Item {
-    protected String name;
-    protected int price;
-    protected enum Category {WEAPON, SHIELD, POTION}
-    protected int damage;
-    protected int defense;
-    protected int heal;
+    public enum Category {
+        ARMOR,
+        POTION,
+        SCROLL,
+        WEAPON
+    }
 
-    public Item(@NonNull Category c) {}
+    public enum Attribute {
+        MinAC,
+        MaxAC,
+        MinDMG,
+        MaxDMG,
+        Size
+    }
+
+    private final String name;
+    private final Category category;
+    private int amount;
+    private final int price;
+    private final HashMap<Attribute, Double> attributes;
+
+    public Item(String name, Category category, int amount, int price) {
+        this.name = name;
+        this.category = category;
+        this.amount = amount;
+        this.price = price;
+        this.attributes = null;
+    }
+
+    public Item(String name, Category category, int amount, int price, HashMap<Attribute, Double> attributes) {
+        this.name = name;
+        this.category = category;
+        this.amount = amount;
+        this.price = price;
+        this.attributes = attributes;
+    }
+
+    public int heal() {
+        return (this.getAttributes().containsKey(Attribute.Size)) ? (int) Math.floor(Character.getMaxhp() * this.getAttributes().get(Attribute.Size)) : 0;
+    }
 
     public String getName() {
         return name;
     }
+    public Category getCategory() {
+        return category;
+    }
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
     public int getPrice() {
         return price;
     }
-    public int getDamage() {
-        return damage;
-    }
-    public int getDefense() {
-        return defense;
-    }
-    public int getHeal() {
-        return heal;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-    public void setHeal(int heal) {
-        this.heal = heal;
+    public HashMap<Attribute, Double> getAttributes() {
+        return attributes;
     }
 }
