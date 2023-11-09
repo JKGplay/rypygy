@@ -6,12 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Item;
@@ -21,13 +18,12 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class ForestActivity extends AppCompatActivity {
+public class FightActivity extends AppCompatActivity {
 
     private TextView tvName, tvHp, tvPlayerInfo, tvEnemyInfo, tvEnemyName, tvEnemyHp;
-    private Button btnAttack, btnDefend, btnItem;
+    private Button btnAttack, btnAbility, btnItem;
 
     private long mLastClickTime = 0;
 
@@ -38,7 +34,7 @@ public class ForestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forest);
+        setContentView(R.layout.activity_fight);
 
         tvName = findViewById(R.id.tvName);
         tvHp = findViewById(R.id.tvHp);
@@ -47,12 +43,12 @@ public class ForestActivity extends AppCompatActivity {
         tvEnemyName = findViewById(R.id.tvEnemyName);
         tvEnemyHp = findViewById(R.id.tvEnemyHp);
         btnAttack = findViewById(R.id.btnAttack);
-        btnDefend = findViewById(R.id.btnDefend);
+        btnAbility = findViewById(R.id.btnAbility);
         btnItem = findViewById(R.id.btnItem);
 
         FirstYear monster = new FirstYear();
 
-        btnDefend.setVisibility(View.GONE);
+//        btnAbility.setVisibility(View.GONE);
 
         tvPlayerInfo.setText("You encounter a First-Year!");
         tvEnemyInfo.setText("Prepare to attack!");
@@ -90,7 +86,7 @@ public class ForestActivity extends AppCompatActivity {
 
                 if (monster.getCurHP() == 0) {
                     Character.setXp(Character.getXp() + 10);
-                    new MaterialAlertDialogBuilder(ForestActivity.this)
+                    new MaterialAlertDialogBuilder(FightActivity.this)
                             .setTitle("You won!")
                             .setMessage("You get 10 xp")
                             .setCancelable(false)
@@ -98,10 +94,10 @@ public class ForestActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     if (Character.getXp() >= 100) {
-                                        startActivity(new Intent(ForestActivity.this, LevelUpActivity.class));
+                                        startActivity(new Intent(FightActivity.this, LevelUpActivity.class));
                                         finish();
                                     } else {
-                                        startActivity(new Intent(ForestActivity.this, SecondActivity.class));
+                                        startActivity(new Intent(FightActivity.this, SecondActivity.class));
                                         finish();
                                     }
                                 }
@@ -150,7 +146,7 @@ public class ForestActivity extends AppCompatActivity {
                     }
                 }
 
-                new MaterialAlertDialogBuilder(ForestActivity.this)
+                new MaterialAlertDialogBuilder(FightActivity.this)
                         .setTitle("Inventory")
                         .setSingleChoiceItems(itemNames.toArray(new String[0]), checkedItem, new DialogInterface.OnClickListener() {
                             @Override
@@ -168,31 +164,21 @@ public class ForestActivity extends AppCompatActivity {
 
                                 if (checkedItemCategory == Item.Category.POTION) {
                                     if (Character.getCurhp() == Character.getMaxhp()) {
-                                        Toast.makeText(ForestActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
+                                        Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
+//                                        Toast.makeText(FightActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
                                         return;
                                     } else {
+                                        Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxhp() - Character.getCurhp(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()) + " HP", Snackbar.LENGTH_SHORT).show();
                                         Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()));
                                         tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
                                         Character.removeItem(Character.getIndexOf(itemNames.get(checkedItem)));
-                                        Log.d("uzyto potki", itemNames.get(checkedItem));
+//                                        Log.d("uzyto potki", itemNames.get(checkedItem));
                                     }
                                 }
                             }
                         })
                         .setNegativeButton("Cancel", null)
                         .show();
-
-
-//                if (Character.getCurhp() == Character.getMaxhp()) {
-//                    Toast.makeText(ForestActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                if (Character.getIndexOf("Small Potion") == -1) {
-//
-//                }
-//                Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory().get(Character.getIndexOf("Small Potion")).heal()));
-//                tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
-//                Character.removeItem(Character.getIndexOf("Small Potion"));
             }
         });
     }

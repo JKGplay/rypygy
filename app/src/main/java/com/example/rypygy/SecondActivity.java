@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
-import com.example.rypygy.models.Item;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -59,7 +58,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(@NonNull View view) {
         switch (getResources().getResourceEntryName(view.getId())) {
             case "btnForest":
-                startActivity(new Intent(SecondActivity.this, ForestActivity.class));
+                startActivity(new Intent(SecondActivity.this, FightActivity.class));
                 finish();
                 break;
             case "btnShop":

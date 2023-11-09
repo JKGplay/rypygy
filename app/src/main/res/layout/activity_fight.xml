@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green_500"
-    tools:context=".ForestActivity">
+    tools:context=".FightActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutHero"
@@ -96,20 +96,20 @@
             app:icon="@drawable/sword_24"
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
-            app:layout_constraintEnd_toStartOf="@+id/btnDefend"
+            app:layout_constraintEnd_toStartOf="@+id/btnAbility"
             app:layout_constraintStart_toStartOf="@+id/vView"
             app:layout_constraintTop_toTopOf="@+id/vView" />
 
         <Button
-            android:id="@+id/btnDefend"
+            android:id="@+id/btnAbility"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="21dp"
             android:backgroundTint="@color/orange_500"
-            android:text="@string/btn_defend"
-            app:icon="@drawable/shield_24"
+            android:text="@string/btn_ability"
+            app:icon="@drawable/outline_ability_24"
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toStartOf="@+id/btnItem"
@@ -129,7 +129,7 @@
             app:iconGravity="textStart"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toEndOf="@+id/vView"
-            app:layout_constraintStart_toEndOf="@+id/btnDefend"
+            app:layout_constraintStart_toEndOf="@+id/btnAbility"
             app:layout_constraintTop_toTopOf="@+id/vView" />
 
 
