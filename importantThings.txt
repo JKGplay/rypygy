@@ -6,3 +6,19 @@ Titles of Kunczka:
 
 Mechanika levelowania:
 -każdy level będzie odblokowywał nową lokację (nowy Button w Menu) i nowy typ przeciwników dla danej lokacji. 
+-wejście do danej lokacji nie jest równoznaczne z rozpoczęciem walki. Wejście do lokacji to losowa szansa napotkania różnych encounterów np. walka, znalezienie itemu lub złota, spotkanie npc
+
+Przykładowi przeciwnicy:
+-Pierwszaki
+-Palacze
+-Graficy
+-Stara Gwardia (Starszaki)
+-Wojskowi
+
+Przykładowe lokacje:
+-Lasek
+-Garaże
+-Kible
+-Sala Komputerowa
+-Internat
+-Plac przed Szkołą
