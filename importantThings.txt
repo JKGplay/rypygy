@@ -1,0 +1,8 @@
+Titles of Kunczka:
+  Kunczka, kaczycki Bruździciel
+  Kunczka, the Despoiler
+  Kunczka, the Dark Master
+  Emperor of Hell's Army
+
+Mechanika levelowania:
+-każdy level będzie odblokowywał nową lokację (nowy Button w Menu) i nowy typ przeciwników dla danej lokacji. 
