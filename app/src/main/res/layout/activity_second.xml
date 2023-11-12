@@ -4,15 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_500"
     tools:context=".SecondActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:src="@drawable/house"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="292dp"
         android:layout_height="182dp"
         android:layout_marginTop="32dp"
-        android:background="@color/lime_500"
+        android:background="@drawable/box"
+        android:backgroundTintMode="add"
         android:padding="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kunczka"
+            android:textColor="@color/white"
             android:textSize="24sp"
+
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="HP: 10/10"
+            android:textColor="@color/color5Variant1"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvMoney"
@@ -46,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="XP: 0"
+            android:textColor="@color/color5Variant1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvDefense"
             app:layout_constraintEnd_toEndOf="@+id/tvDefense"
@@ -56,6 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Level: 1"
+            android:textColor="@color/color5Variant1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvAttack"
             app:layout_constraintStart_toStartOf="@+id/tvAttack"
@@ -66,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Attack: 1"
+            android:textColor="@color/color5Variant1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvHp"
             app:layout_constraintStart_toStartOf="@+id/tvHp"
@@ -76,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Defense: 1"
+            android:textColor="@color/color5Variant1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvMoney"
             app:layout_constraintEnd_toEndOf="@+id/tvMoney"
@@ -86,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Money: 10"
+            android:textColor="@color/color5Variant1"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +114,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -106,27 +125,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <Button
-            android:id="@+id/btnForest"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
-            android:text="@string/btn_forest"
-            app:icon="@drawable/outline_forest_24"
-            app:iconGravity="textStart" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/button"
+            app:layout_constraintBottom_toBottomOf="@+id/btnForest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnForest" />
 
         <Button
             android:id="@+id/btnShop"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
+            android:background="#000000FF"
             android:text="@string/btn_shop"
+            android:textColor="@color/white"
             app:icon="@drawable/outline_shopping_cart_24"
-            app:iconGravity="textStart" />
+            app:iconGravity="textStart"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/button"
+            app:layout_constraintBottom_toBottomOf="@+id/btnShop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnShop" />
+
+        <Button
+            android:id="@+id/btnForest"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:text="@string/btn_forest"
+            android:textColor="@color/white"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart"
+            app:iconTint="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/btnShop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

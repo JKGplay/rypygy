@@ -11,4 +11,11 @@
     <color name="lime_500">#8BC34A</color>
     <color name="red_500">#FF2222</color>
     <color name="orange_500">#F44336</color>
+
+    <color name="color2">#2a2a2a</color>
+    <color name="color3">#414141</color>
+    <color name="color4">#525252</color>
+    <color name="color5">#9a0707</color>
+    <color name="color5Variant1">#C30B0B</color>
+    <color name="color5Variant2">#680606</color>
 </resources>

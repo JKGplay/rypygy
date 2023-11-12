@@ -4,15 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_500"
     tools:context=".FightActivity">
+
+    <ImageView
+        android:layout_width="1100dp"
+        android:layout_height="0dp"
+        android:src="@drawable/forest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutHero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="@color/lime_500"
+        android:background="@drawable/box"
         android:padding="24dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kunczka"
+            android:textColor="@color/green_500"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvHp"
@@ -39,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="HP: 100/100"
+            android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -52,21 +62,31 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4CAF50"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayoutEnemy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayoutHero">
 
+
+        <!--        infoBox-->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/InfoBox"
+            app:layout_constraintBottom_toTopOf="@+id/vView"
+            app:layout_constraintEnd_toEndOf="@+id/tvPlayerInfo"
+            app:layout_constraintStart_toStartOf="@+id/tvPlayerInfo"
+            app:layout_constraintTop_toTopOf="@+id/tvPlayerInfo" />
+
         <TextView
             android:id="@+id/tvPlayerInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lime_500"
-            android:padding="12dp"
             android:layout_marginHorizontal="12dp"
+            android:padding="12dp"
             android:text="You attacked and dealt 3 damage!"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/vView"
@@ -84,6 +104,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPlayerInfo" />
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAttack"
+            app:layout_constraintEnd_toEndOf="@+id/btnAttack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnAttack" />
+
         <Button
             android:id="@+id/btnAttack"
             style="@style/Widget.MaterialComponents.Button.Icon"
@@ -91,14 +121,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="21dp"
-            android:backgroundTint="@color/orange_500"
+            android:background="#00000000"
             android:text="@string/btn_attack"
+            android:textColor="#FFFFFF"
             app:icon="@drawable/sword_24"
             app:iconGravity="textStart"
+            app:iconTint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toStartOf="@+id/btnAbility"
             app:layout_constraintStart_toStartOf="@+id/vView"
             app:layout_constraintTop_toTopOf="@+id/vView" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAbility"
+            app:layout_constraintEnd_toEndOf="@+id/btnAbility"
+            app:layout_constraintStart_toStartOf="@+id/btnAbility"
+            app:layout_constraintTop_toTopOf="@+id/btnAbility" />
 
         <Button
             android:id="@+id/btnAbility"
@@ -107,14 +148,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="21dp"
-            android:backgroundTint="@color/orange_500"
+            android:backgroundTint="#00000000"
             android:text="@string/btn_ability"
+            android:textColor="@color/white"
             app:icon="@drawable/outline_ability_24"
             app:iconGravity="textStart"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toStartOf="@+id/btnItem"
             app:layout_constraintStart_toEndOf="@+id/btnAttack"
             app:layout_constraintTop_toTopOf="@+id/vView" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/button"
+            app:layout_constraintBottom_toBottomOf="@+id/btnItem"
+            app:layout_constraintEnd_toEndOf="@+id/btnItem"
+            app:layout_constraintStart_toStartOf="@+id/btnItem"
+            app:layout_constraintTop_toTopOf="@+id/btnItem" />
+
 
         <Button
             android:id="@+id/btnItem"
@@ -123,25 +176,35 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:layout_marginBottom="21dp"
-            android:backgroundTint="@color/orange_500"
+            android:backgroundTint="#00000000"
             android:text="@string/btn_use_item"
+            android:textColor="@color/white"
             app:icon="@drawable/backpack_24"
             app:iconGravity="textStart"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/vView"
             app:layout_constraintEnd_toEndOf="@+id/vView"
             app:layout_constraintStart_toEndOf="@+id/btnAbility"
             app:layout_constraintTop_toTopOf="@+id/vView" />
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/InfoBox"
+            app:layout_constraintBottom_toBottomOf="@+id/tvEnemyInfo"
+            app:layout_constraintEnd_toEndOf="@+id/tvEnemyInfo"
+            app:layout_constraintStart_toStartOf="@+id/tvEnemyInfo"
+            app:layout_constraintTop_toBottomOf="@+id/vView" />
 
         <TextView
             android:id="@+id/tvEnemyInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/red_500"
-            android:padding="12dp"
             android:layout_marginHorizontal="12dp"
+            android:padding="12dp"
             android:text="Wolf attacked you and dealt 2 damage!"
             android:textAlignment="center"
+            android:textColor="@color/color5Variant1"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -156,7 +219,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:background="@color/red_500"
+        android:background="@drawable/box"
         android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -169,7 +232,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="First Year"
-            android:textColor="@color/white"
+            android:textColor="@color/color5"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvEnemyHp"
