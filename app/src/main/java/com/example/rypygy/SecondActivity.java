@@ -17,7 +17,7 @@ import com.example.rypygy.models.Encounter;
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
-    private Button btnForest, btnShop;
+    private Button btnForest, btnShop, btnInventory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +33,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         tvMoney = findViewById(R.id.tvMoney);
         btnForest = findViewById(R.id.btnForest);
         btnShop = findViewById(R.id.btnShop);
+        btnInventory = findViewById(R.id.btnInventory);
 
         btnForest.setOnClickListener(this);
         btnShop.setOnClickListener(this);
+        btnInventory.setOnClickListener(this);
 
         tvName.setText(Character.getName());
         tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
@@ -67,6 +69,10 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 //                startActivity(new Intent(MainActivity2.this, ShopActivity.class));
 //                Toast.makeText(this, "IN PROGRESS", Toast.LENGTH_SHORT).show();
                 Log.d("test encounteru", String.valueOf(Encounter.outcome(Encounter.Location.FOREST)));
+                break;
+            case "btnInventory":
+                startActivity(new Intent(SecondActivity.this, InventoryActivity.class));
+                finish();
                 break;
             default:
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();

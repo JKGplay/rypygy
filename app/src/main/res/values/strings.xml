@@ -4,7 +4,9 @@
     <string name="btn_play">Play</string>
     <string name="btn_forest">Forest</string>
     <string name="btn_shop">Shop</string>
+    <string name="btn_inventory">Inventory</string>
     <string name="btn_attack">Attack</string>
     <string name="btn_ability">Ability</string>
     <string name="btn_use_item">Use item</string>
+    <string name="btn_delete">delete</string>
 </resources>

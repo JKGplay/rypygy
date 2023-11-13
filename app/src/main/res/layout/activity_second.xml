@@ -126,6 +126,16 @@
             app:icon="@drawable/outline_shopping_cart_24"
             app:iconGravity="textStart" />
 
+        <Button
+            android:id="@+id/btnInventory"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="@string/btn_inventory"
+            app:icon="@drawable/backpack_24"
+            app:iconGravity="textStart" />
+
     </LinearLayout>
 
 

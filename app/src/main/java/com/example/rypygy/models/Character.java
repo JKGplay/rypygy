@@ -32,17 +32,17 @@ public class Character {
     private static List<Item> inventory = new ArrayList<Item>() {{
         add(weapon);
         add(armor);
-        add(new Item("Small Potion", Item.Category.POTION, 2, 25,
+        add(new Item("Small Potion", Item.Category.POTION, 3, 25,
                 new HashMap<Item.Attribute, Double>() {{
                     put(Item.Attribute.Size, 0.25);
                 }}
         ));
-        add(new Item("Medium Potion", Item.Category.POTION, 1, 50,
+        add(new Item("Medium Potion", Item.Category.POTION, 2, 50,
                 new HashMap<Item.Attribute, Double>() {{
                     put(Item.Attribute.Size, 0.5);
                 }}
         ));
-        add(new Item("Big Potion", Item.Category.POTION, 1, 75,
+        add(new Item("Big Potion", Item.Category.POTION, 5, 75,
                 new HashMap<Item.Attribute, Double>() {{
                     put(Item.Attribute.Size, 0.75);
                 }}
