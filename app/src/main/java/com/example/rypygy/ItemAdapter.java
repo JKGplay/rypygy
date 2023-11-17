@@ -91,15 +91,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     List<Item> temp = new ArrayList<>(items);
-//                                    Log.d("index = ", "index = " + getAdapterPosition());
-//                                    Log.d("ilosc", "ilosc itemu: " + item.getAmount());
-//                                    Log.d("inv", "items: " + items);
-//                                    Log.d("inv", "temp: " + temp);
                                     Snackbar.make(view, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
                                     Character.removeItem(getAdapterPosition());
-//                                    Log.d("ilosc", "ilosc itemu: " + item.getAmount());
-//                                    Log.d("inv", "items: " + items);
-//                                    Log.d("inv", "temp: " + temp);
 
                                     if (temp.size() > items.size()) {
                                         notifyItemRemoved(getAdapterPosition());

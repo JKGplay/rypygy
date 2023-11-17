@@ -51,6 +51,9 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
             finish();
         }
+
+//        Log.d("vit", "vitality: " + Character.getVitality());
+//        Log.d("hp", "maxhp: " + Character.getMaxhp());
     }
 
     @Override
@@ -66,9 +69,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case "btnShop":
-//                startActivity(new Intent(MainActivity2.this, ShopActivity.class));
+                //tymczasowo przenosi do level upa
+                startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
+                finish();
 //                Toast.makeText(this, "IN PROGRESS", Toast.LENGTH_SHORT).show();
-                Log.d("test encounteru", String.valueOf(Encounter.outcome(Encounter.Location.FOREST)));
+//                Log.d("test encounteru", String.valueOf(Encounter.outcome(Encounter.Location.FOREST)));
                 break;
             case "btnInventory":
                 startActivity(new Intent(SecondActivity.this, InventoryActivity.class));
