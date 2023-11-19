@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
-import com.example.rypygy.models.Encounter;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,11 +39,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         btnInventory.setOnClickListener(this);
 
         tvName.setText(Character.getName());
-        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+        tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
         tvXp.setText("XP: " + Character.getXp());
         tvLevel.setText("Level: " + Character.getLevel());
-        tvAttack.setText("Attack: " + Character.getStrength());
-        tvDefense.setText("Defense: " + Character.getDexterity());
+        tvAttack.setText("Strength: " + Character.getStrength());
+        tvDefense.setText("Dexterity: " + Character.getDexterity());
         tvMoney.setText("Money: " + Character.getMoney());
 
         if(Character.getXp() >= 100) {
@@ -52,8 +51,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             finish();
         }
 
-//        Log.d("vit", "vitality: " + Character.getVitality());
-//        Log.d("hp", "maxhp: " + Character.getMaxhp());
+        Log.d("vit", "vitality: " + Character.getVitality());
+        Log.d("hp", "maxhp: " + Character.getMaxHP());
     }
 
     @Override

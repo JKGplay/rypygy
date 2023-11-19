@@ -6,14 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Enemy;
 import com.example.rypygy.models.Item;
 import com.example.rypygy.models.Rnd;
-import com.example.rypygy.models.enemies.FirstYear;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -46,7 +47,10 @@ public class FightActivity extends AppCompatActivity {
         btnAbility = findViewById(R.id.btnAbility);
         btnItem = findViewById(R.id.btnItem);
 
-        FirstYear monster = new FirstYear();
+//        FirstYear monster = new FirstYear();
+
+        Enemy monster = new Enemy(Enemy.Type.FIRST_YEAR);
+        Log.d("monster: ", "name = " + monster.getName());
 
 //        btnAbility.setVisibility(View.GONE);
 
@@ -54,7 +58,7 @@ public class FightActivity extends AppCompatActivity {
         tvEnemyInfo.setText("Prepare to attack!");
 
         tvName.setText(Character.getName());
-        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+        tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
 
         tvEnemyName.setText(monster.getName());
         tvEnemyHp.setText("HP: " + monster.getCurHP() + "/" + monster.getMaxHP());
@@ -85,10 +89,10 @@ public class FightActivity extends AppCompatActivity {
                 }
 
                 if (monster.getCurHP() == 0) {
-                    Character.setXp(Character.getXp() + 10);
+                    Character.setXp(Character.getXp() + monster.getXp());
                     new MaterialAlertDialogBuilder(FightActivity.this)
                             .setTitle("You won!")
-                            .setMessage("You get 10 xp")
+                            .setMessage("You get " + monster.getXp() + " xp")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
@@ -114,8 +118,8 @@ public class FightActivity extends AppCompatActivity {
                     if (monster.toHit(Character.getLevel(), ((Character.getArmor() != null && Character.getArmor().getAttributes().containsKey(Item.Attribute.MinAC) && Character.getArmor().getAttributes().containsKey(Item.Attribute.MaxAC)) ? Character.getAc() + Rnd.rnd(Character.getArmor().getAttributes().get(Item.Attribute.MinAC).intValue(), Character.getArmor().getAttributes().get(Item.Attribute.MaxAC).intValue()) : Character.getAc()))) {
                         int dmg = monster.damage();
                         tvEnemyInfo.setText(monster.getName() + " attacked you and dealt " + dmg + " damage!");
-                        Character.setCurhp(Character.getCurhp() - dmg);
-                        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+                        Character.setCurHP(Character.getCurHP() - dmg);
+                        tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
                     } else {
                         tvEnemyInfo.setText(monster.getName() + " attacked you and missed!");
                     }
@@ -163,14 +167,14 @@ public class FightActivity extends AppCompatActivity {
                                 }
 
                                 if (checkedItemCategory == Item.Category.POTION) {
-                                    if (Character.getCurhp() == Character.getMaxhp()) {
+                                    if (Character.getCurHP() == Character.getMaxHP()) {
                                         Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
 //                                        Toast.makeText(FightActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
                                         return;
                                     } else {
-                                        Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxhp() - Character.getCurhp(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()) + " HP", Snackbar.LENGTH_SHORT).show();
-                                        Character.setCurhp(Math.min(70, Character.getCurhp() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()));
-                                        tvHp.setText("HP: " + Character.getCurhp() + "/" + Character.getMaxhp());
+                                        Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()) + " HP", Snackbar.LENGTH_SHORT).show();
+                                        Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()));
+                                        tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
                                         Character.removeItem(Character.getIndexOf(itemNames.get(checkedItem)));
 //                                        Log.d("uzyto potki", itemNames.get(checkedItem));
                                     }

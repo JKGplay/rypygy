@@ -51,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tvItemName, tvItemAmount, tvItemDesc;
         private ImageButton btnDelete;
+        private Button btnAction;
 
         ItemViewHolder(View itemView) {
             super(itemView);
@@ -58,6 +59,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             tvItemAmount = itemView.findViewById(R.id.tvItemAmount);
             tvItemDesc = itemView.findViewById(R.id.tvItemDesc);
             btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnAction = itemView.findViewById(R.id.btnAction);
         }
 
         public void bind(Item item) {
@@ -67,17 +69,60 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             switch (item.getCategory()) {
                 case WEAPON:
                     tvItemDesc.setText("Damage: " + item.getAttributes().get(Item.Attribute.MinDMG).intValue() + "-" + item.getAttributes().get(Item.Attribute.MaxDMG).intValue());
+                    if (item.equals(Character.getWeapon())) {
+                        btnAction.setText("Equipped");
+                        btnAction.setEnabled(false);
+                    } else {
+                        btnAction.setText("Equip");
+                    }
                     break;
                 case ARMOR:
                     tvItemDesc.setText("Armor Class: " + item.getAttributes().get(Item.Attribute.MinAC).intValue() + "-" + item.getAttributes().get(Item.Attribute.MaxAC).intValue());
+                    btnAction.setText("Equip");
+                    if (item.equals(Character.getArmor())) {
+                        btnAction.setText("Equipped");
+                        btnAction.setEnabled(false);
+                    } else {
+                        btnAction.setText("Equip");
+                    }
                     break;
                 case POTION:
                     tvItemDesc.setText("Heal: " + item.heal() + "hp");
+                    btnAction.setText("Use");
                     break;
                 case SCROLL:
                     tvItemDesc.setText("Magic Scroll");
+                    btnAction.setVisibility(View.GONE);
                     break;
             }
+
+            btnAction.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (item.getCategory()) {
+                        case WEAPON:
+                            Character.setWeapon(item);
+                            break;
+                        case ARMOR:
+                            Character.setArmor(item);
+                            break;
+                        case POTION:
+                            Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.heal()) + " HP", Snackbar.LENGTH_SHORT).show();
+                            Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.heal()));
+                            List<Item> temp = new ArrayList<>(items);
+//                            Snackbar.make(view, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
+                            Character.removeItem(getAdapterPosition());
+
+                            if (temp.size() > items.size()) {
+                                notifyItemRemoved(getAdapterPosition());
+                                notifyItemRangeChanged(getAdapterPosition(), items.size());
+                            } else {
+                                tvItemAmount.setText("x" + item.getAmount());
+                            }
+                            break;
+                    }
+                }
+            });
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -108,4 +153,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             });
         }
     }
+
+
 }

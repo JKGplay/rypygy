@@ -42,7 +42,7 @@ public class Item {
     }
 
     public int heal() {
-        return (this.getAttributes().containsKey(Attribute.Size)) ? (int) Math.floor(Character.getMaxhp() * this.getAttributes().get(Attribute.Size)) : 0;
+        return (this.getAttributes().containsKey(Attribute.Size)) ? (int) Math.floor(Character.getMaxHP() * this.getAttributes().get(Attribute.Size)) : 0;
     }
 
     public String getName() {

@@ -52,10 +52,10 @@ public class LevelUpActivity extends AppCompatActivity implements View.OnClickLi
                     Character.setDexterity(curDex);
                     Character.setVitality(curVit);
                     Character.setLevel(Character.getLevel()+1);
+                    Character.setCurHP(Character.getMaxHP());
+                    Character.setXp(Math.max(Character.getXp() - 100, 0));
                     startActivity(new Intent(LevelUpActivity.this, SecondActivity.class));
                     finish();
-
-                    //hp sie nie odswieza przy zmianie vitality (najpewniej tak samo z strength i damage oraz dexterity i ac)
                 }
             }
         });
@@ -78,15 +78,12 @@ public class LevelUpActivity extends AppCompatActivity implements View.OnClickLi
             if (((ImageButton) view).equals(btnStr)) {
                 curStr++;
                 tvStrChange.setText(Character.getStrength() + " -> " + curStr);
-                Snackbar.make(view, "str", Snackbar.LENGTH_SHORT).show();
             } else if (((ImageButton) view).equals(btnDex)) {
                 curDex++;
                 tvDexChange.setText(Character.getDexterity() + " -> " + curDex);
-                Snackbar.make(view, "dex", Snackbar.LENGTH_SHORT).show();
             } else if (((ImageButton) view).equals(btnVit)) {
                 curVit++;
                 tvVitChange.setText(Character.getVitality() + " -> " + curVit);
-                Snackbar.make(view, "vit", Snackbar.LENGTH_SHORT).show();
             }
         }
     }

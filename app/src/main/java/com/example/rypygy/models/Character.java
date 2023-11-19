@@ -1,7 +1,6 @@
 package com.example.rypygy.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,10 +10,7 @@ public class Character {
     private static int strength = 30;
     private static int dexterity = 20;
     private static int vitality = 25;
-    private static int damage = Math.max(1, (int) Math.floor(strength * level / 100));
-    private static int ac = (int) Math.floor(dexterity / 5);
-    private static int maxhp = (vitality * 2) + (level * 2) + 18;
-    private static int curhp = maxhp;
+    private static int curHP = getMaxHP();
     private static int xp = 0;
     private static int money = 0;
     private static Item weapon = new Item("Short sword", Item.Category.WEAPON, 1, 50,
@@ -117,28 +113,19 @@ public class Character {
         Character.vitality = vitality;
     }
     public static int getDamage() {
-        return damage;
-    }
-    public static void setDamage(int damage) {
-        Character.damage = damage;
+        return Math.max(1, (int) Math.floor(strength * level / 100));
     }
     public static int getAc() {
-        return ac;
+        return (int) Math.floor(dexterity / 5);
     }
-    public static void setAc(int ac) {
-        Character.ac = ac;
+    public static int getMaxHP() {
+        return (vitality * 2) + (level * 2) + 18;
     }
-    public static int getMaxhp() {
-        return maxhp;
+    public static int getCurHP() {
+        return curHP;
     }
-    public static void setMaxhp(int maxhp) {
-        Character.maxhp = maxhp;
-    }
-    public static int getCurhp() {
-        return curhp;
-    }
-    public static void setCurhp(int curhp) {
-        Character.curhp = curhp;
+    public static void setCurHP(int curHP) {
+        Character.curHP = curHP;
     }
     public static int getXp() {
         return xp;
