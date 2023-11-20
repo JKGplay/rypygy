@@ -13,7 +13,7 @@ public class Character {
     private static int curHP = getMaxHP();
     private static int xp = 0;
     private static int money = 0;
-    private static Item weapon = new Item("Short sword", Item.Category.WEAPON, 1, 50,
+    private static Item weapon = new Item("Short Sword", Item.Category.WEAPON, 1, 50,
             new HashMap<Item.Attribute, Double>() {{
                 put(Item.Attribute.MinDMG, 2.0);
                 put(Item.Attribute.MaxDMG, 6.0);
@@ -28,6 +28,12 @@ public class Character {
     private static List<Item> inventory = new ArrayList<Item>() {{
         add(weapon);
         add(armor);
+        add(new Item("Long Sword", Item.Category.WEAPON, 1, 100,
+                new HashMap<Item.Attribute, Double>() {{
+                    put(Item.Attribute.MinDMG, 7.0);
+                    put(Item.Attribute.MaxDMG, 10.0);
+                }}
+        ));
         add(new Item("Small Potion", Item.Category.POTION, 3, 25,
                 new HashMap<Item.Attribute, Double>() {{
                     put(Item.Attribute.Size, 0.25);

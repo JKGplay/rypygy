@@ -74,6 +74,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                         btnAction.setEnabled(false);
                     } else {
                         btnAction.setText("Equip");
+                        btnAction.setEnabled(true);
                     }
                     break;
                 case ARMOR:
@@ -84,11 +85,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                         btnAction.setEnabled(false);
                     } else {
                         btnAction.setText("Equip");
+                        btnAction.setEnabled(true);
                     }
                     break;
                 case POTION:
                     tvItemDesc.setText("Heal: " + item.heal() + "hp");
                     btnAction.setText("Use");
+                    btnAction.setEnabled(true);
                     break;
                 case SCROLL:
                     tvItemDesc.setText("Magic Scroll");
@@ -101,26 +104,33 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 public void onClick(View view) {
                     switch (item.getCategory()) {
                         case WEAPON:
+                            Snackbar.make(view, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
                             Character.setWeapon(item);
                             break;
                         case ARMOR:
+                            Snackbar.make(view, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
                             Character.setArmor(item);
                             break;
                         case POTION:
-                            Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.heal()) + " HP", Snackbar.LENGTH_SHORT).show();
-                            Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.heal()));
-                            List<Item> temp = new ArrayList<>(items);
-//                            Snackbar.make(view, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
-                            Character.removeItem(getAdapterPosition());
-
-                            if (temp.size() > items.size()) {
-                                notifyItemRemoved(getAdapterPosition());
-                                notifyItemRangeChanged(getAdapterPosition(), items.size());
+                            if (Character.getCurHP() == Character.getMaxHP()) {
+                                Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
                             } else {
-                                tvItemAmount.setText("x" + item.getAmount());
+                                Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.heal()) + " HP", Snackbar.LENGTH_SHORT).show();
+                                Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.heal()));
+
+//                                List<Item> temp = new ArrayList<>(items);
+                                Character.removeItem(getAdapterPosition());
+
+//                                if (temp.size() > items.size()) {
+//                                    notifyItemRemoved(getAdapterPosition());
+//                                    notifyItemRangeChanged(getAdapterPosition(), items.size());
+//                                } else {
+//                                    tvItemAmount.setText("x" + item.getAmount());
+//                                }
                             }
                             break;
                     }
+                    notifyDataSetChanged();
                 }
             });
 
@@ -129,22 +139,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 public void onClick(View view) {
 
                     new MaterialAlertDialogBuilder(context)
-//                            .setTitle("Delete")
                             .setMessage("Are you sure you want to throw away " + item.getName() + "?")
                             .setCancelable(true)
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    List<Item> temp = new ArrayList<>(items);
+//                                    List<Item> temp = new ArrayList<>(items);
                                     Snackbar.make(view, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
-                                    Character.removeItem(getAdapterPosition());
-
-                                    if (temp.size() > items.size()) {
-                                        notifyItemRemoved(getAdapterPosition());
-                                        notifyItemRangeChanged(getAdapterPosition(), items.size());
-                                    } else {
-                                        tvItemAmount.setText("x" + item.getAmount());
+                                    if(item.equals(Character.getWeapon())) {
+                                        Character.setWeapon(null);
                                     }
+                                    if (item.equals(Character.getArmor())) {
+                                        Character.setArmor(null);
+                                    }
+                                    Character.removeItem(getAdapterPosition());
+                                    notifyDataSetChanged();
+//                                    if (temp.size() > items.size()) {
+//                                        notifyItemRemoved(getAdapterPosition());
+//                                        notifyItemRangeChanged(getAdapterPosition(), items.size());
+//                                    } else {
+//                                        tvItemAmount.setText("x" + item.getAmount());
+//                                    }
                                 }
                             })
                             .setNegativeButton("Cancel", null)

@@ -169,14 +169,11 @@ public class FightActivity extends AppCompatActivity {
                                 if (checkedItemCategory == Item.Category.POTION) {
                                     if (Character.getCurHP() == Character.getMaxHP()) {
                                         Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
-//                                        Toast.makeText(FightActivity.this, "You can't use potion at full HP", Toast.LENGTH_SHORT).show();
-                                        return;
                                     } else {
                                         Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()) + " HP", Snackbar.LENGTH_SHORT).show();
                                         Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()));
                                         tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
                                         Character.removeItem(Character.getIndexOf(itemNames.get(checkedItem)));
-//                                        Log.d("uzyto potki", itemNames.get(checkedItem));
                                     }
                                 }
                             }
