@@ -77,7 +77,7 @@ public class FightActivity extends AppCompatActivity {
                         If yes then dmg = Character.getDamage() + rnd(min, max);
                         If not then dmg = Character.getDamage();
                      */
-                    int dmg = (Character.getWeapon() != null && Character.getWeapon().getAttributes().containsKey(Item.Attribute.MinDMG) && Character.getWeapon().getAttributes().containsKey(Item.Attribute.MaxDMG)) ? Character.getDamage() + Rnd.rnd(Character.getWeapon().getAttributes().get(Item.Attribute.MinDMG).intValue(), Character.getWeapon().getAttributes().get(Item.Attribute.MaxDMG).intValue()) : Character.getDamage();
+                    int dmg = (Character.getWeapon() != null && Character.getWeapon().getAttributes().containsKey(Item.Attribute.MIN_DMG) && Character.getWeapon().getAttributes().containsKey(Item.Attribute.MAX_DMG)) ? Character.getDamage() + Rnd.rnd(Character.getWeapon().getAttributes().get(Item.Attribute.MIN_DMG).intValue(), Character.getWeapon().getAttributes().get(Item.Attribute.MAX_DMG).intValue()) : Character.getDamage();
                     tvPlayerInfo.setText("You attacked and dealt " + dmg + " damage!");
                     monster.setCurHP(monster.getCurHP() - dmg);
                     if (monster.getCurHP() < 0) {
@@ -115,7 +115,7 @@ public class FightActivity extends AppCompatActivity {
                         If yes then ac = Character.getAc() + rnd(min, max);
                         If not then ac = Character.getAc();
                      */
-                    if (monster.toHit(Character.getLevel(), ((Character.getArmor() != null && Character.getArmor().getAttributes().containsKey(Item.Attribute.MinAC) && Character.getArmor().getAttributes().containsKey(Item.Attribute.MaxAC)) ? Character.getAc() + Rnd.rnd(Character.getArmor().getAttributes().get(Item.Attribute.MinAC).intValue(), Character.getArmor().getAttributes().get(Item.Attribute.MaxAC).intValue()) : Character.getAc()))) {
+                    if (monster.toHit(Character.getLevel(), ((Character.getArmor() != null && Character.getArmor().getAttributes().containsKey(Item.Attribute.MIN_AC) && Character.getArmor().getAttributes().containsKey(Item.Attribute.MAX_AC)) ? Character.getAc() + Rnd.rnd(Character.getArmor().getAttributes().get(Item.Attribute.MIN_AC).intValue(), Character.getArmor().getAttributes().get(Item.Attribute.MAX_AC).intValue()) : Character.getAc()))) {
                         int dmg = monster.damage();
                         tvEnemyInfo.setText(monster.getName() + " attacked you and dealt " + dmg + " damage!");
                         Character.setCurHP(Character.getCurHP() - dmg);

@@ -2,7 +2,6 @@ package com.example.rypygy;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
             switch (item.getCategory()) {
                 case WEAPON:
-                    tvItemDesc.setText("Damage: " + item.getAttributes().get(Item.Attribute.MinDMG).intValue() + "-" + item.getAttributes().get(Item.Attribute.MaxDMG).intValue());
+                    tvItemDesc.setText("Damage: " + item.getAttributes().get(Item.Attribute.MIN_DMG).intValue() + "-" + item.getAttributes().get(Item.Attribute.MAX_DMG).intValue());
                     if (item.equals(Character.getWeapon())) {
                         btnAction.setText("Equipped");
                         btnAction.setEnabled(false);
@@ -78,7 +77,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     }
                     break;
                 case ARMOR:
-                    tvItemDesc.setText("Armor Class: " + item.getAttributes().get(Item.Attribute.MinAC).intValue() + "-" + item.getAttributes().get(Item.Attribute.MaxAC).intValue());
+                    tvItemDesc.setText("Armor Class: " + item.getAttributes().get(Item.Attribute.MIN_AC).intValue() + "-" + item.getAttributes().get(Item.Attribute.MAX_AC).intValue());
                     btnAction.setText("Equip");
                     if (item.equals(Character.getArmor())) {
                         btnAction.setText("Equipped");
@@ -106,10 +105,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                         case WEAPON:
                             Snackbar.make(view, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
                             Character.setWeapon(item);
+                            notifyDataSetChanged();
                             break;
                         case ARMOR:
                             Snackbar.make(view, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
                             Character.setArmor(item);
+                            notifyDataSetChanged();
                             break;
                         case POTION:
                             if (Character.getCurHP() == Character.getMaxHP()) {
@@ -118,19 +119,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                                 Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.heal()) + " HP", Snackbar.LENGTH_SHORT).show();
                                 Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.heal()));
 
-//                                List<Item> temp = new ArrayList<>(items);
+                                List<Item> temp = new ArrayList<>(items);
                                 Character.removeItem(getAdapterPosition());
 
-//                                if (temp.size() > items.size()) {
-//                                    notifyItemRemoved(getAdapterPosition());
-//                                    notifyItemRangeChanged(getAdapterPosition(), items.size());
-//                                } else {
-//                                    tvItemAmount.setText("x" + item.getAmount());
-//                                }
+                                if (temp.size() > items.size()) {
+                                    notifyItemRemoved(getAdapterPosition());
+                                    notifyItemRangeChanged(getAdapterPosition(), items.size());
+                                } else {
+                                    tvItemAmount.setText("x" + item.getAmount());
+                                }
                             }
                             break;
                     }
-                    notifyDataSetChanged();
+
                 }
             });
 
@@ -144,7 +145,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                             .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-//                                    List<Item> temp = new ArrayList<>(items);
+                                    List<Item> temp = new ArrayList<>(items);
                                     Snackbar.make(view, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
                                     if(item.equals(Character.getWeapon())) {
                                         Character.setWeapon(null);
@@ -153,13 +154,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                                         Character.setArmor(null);
                                     }
                                     Character.removeItem(getAdapterPosition());
-                                    notifyDataSetChanged();
-//                                    if (temp.size() > items.size()) {
-//                                        notifyItemRemoved(getAdapterPosition());
-//                                        notifyItemRangeChanged(getAdapterPosition(), items.size());
-//                                    } else {
-//                                        tvItemAmount.setText("x" + item.getAmount());
-//                                    }
+//                                    notifyDataSetChanged();
+                                    if (temp.size() > items.size()) {
+                                        notifyItemRemoved(getAdapterPosition());
+                                        notifyItemRangeChanged(getAdapterPosition(), items.size());
+                                    } else {
+                                        tvItemAmount.setText("x" + item.getAmount());
+                                    }
                                 }
                             })
                             .setNegativeButton("Cancel", null)

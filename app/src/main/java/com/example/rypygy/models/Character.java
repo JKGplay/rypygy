@@ -13,42 +13,15 @@ public class Character {
     private static int curHP = getMaxHP();
     private static int xp = 0;
     private static int money = 0;
-    private static Item weapon = new Item("Short Sword", Item.Category.WEAPON, 1, 50,
-            new HashMap<Item.Attribute, Double>() {{
-                put(Item.Attribute.MinDMG, 2.0);
-                put(Item.Attribute.MaxDMG, 6.0);
-            }}
-    );
-    private static Item armor = new Item("Rags", Item.Category.ARMOR, 1, 5,
-            new HashMap<Item.Attribute, Double>() {{
-                put(Item.Attribute.MinAC, 2.0);
-                put(Item.Attribute.MaxAC, 6.0);
-            }}
-    );
+    private static Item weapon = new Item(Item.PredefinedItems.SHORT_SWORD, 1);
+    private static Item armor = new Item(Item.PredefinedItems.RAGS, 1);
     private static List<Item> inventory = new ArrayList<Item>() {{
         add(weapon);
         add(armor);
-        add(new Item("Long Sword", Item.Category.WEAPON, 1, 100,
-                new HashMap<Item.Attribute, Double>() {{
-                    put(Item.Attribute.MinDMG, 7.0);
-                    put(Item.Attribute.MaxDMG, 10.0);
-                }}
-        ));
-        add(new Item("Small Potion", Item.Category.POTION, 3, 25,
-                new HashMap<Item.Attribute, Double>() {{
-                    put(Item.Attribute.Size, 0.25);
-                }}
-        ));
-        add(new Item("Medium Potion", Item.Category.POTION, 2, 50,
-                new HashMap<Item.Attribute, Double>() {{
-                    put(Item.Attribute.Size, 0.5);
-                }}
-        ));
-        add(new Item("Big Potion", Item.Category.POTION, 5, 75,
-                new HashMap<Item.Attribute, Double>() {{
-                    put(Item.Attribute.Size, 0.75);
-                }}
-        ));
+        add(new Item(Item.PredefinedItems.LONG_SWORD, 1));
+        add(new Item(Item.PredefinedItems.SMALL_POTION, 3));
+        add(new Item(Item.PredefinedItems.MEDIUM_POTION, 2));
+        add(new Item(Item.PredefinedItems.LARGE_POTION, 5));
     }};
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
@@ -59,7 +32,12 @@ public class Character {
     }
 
     public static void addItem(Item item) {
-        inventory.add(item);
+        if (isItemInInventory(item)) {
+            inventory.get(getIndexOf(item.getName())).addAmount();
+        } else {
+            inventory.add(item);
+        }
+
     }
 
     public static int getIndexOf(String name) {
@@ -82,7 +60,7 @@ public class Character {
 
     public static void removeItem(int i) {
         if (inventory.get(i).getAmount() > 1) {
-            inventory.get(i).setAmount(inventory.get(i).getAmount() - 1);
+            inventory.get(i).removeAmount();
         } else {
             inventory.remove(i);
         }
