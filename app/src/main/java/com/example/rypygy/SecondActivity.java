@@ -51,14 +51,16 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             finish();
         }
 
-        Log.d("vit", "vitality: " + Character.getVitality());
-        Log.d("hp", "maxhp: " + Character.getMaxHP());
+//        Log.d("vit", "vitality: " + Character.getVitality());
+//        Log.d("hp", "maxhp: " + Character.getMaxHP());
     }
 
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
     }
+
+    //TODO: zaimplementować mechanikę encounteru (za pomocą klasy Encounter)
 
     @Override
     public void onClick(@NonNull View view) {

@@ -47,7 +47,7 @@ public class Encounter {
 
     public static Type percentage(int[] percentages) {
         int rnd = Rnd.rnd(1, 100);
-        Log.d("rnd = ", "rnd = " + rnd);
+//        Log.d("rnd = ", "rnd = " + rnd);
         int i = 0;
         int value = percentages[i];
         Type ret = null;

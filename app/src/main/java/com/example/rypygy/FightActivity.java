@@ -63,6 +63,8 @@ public class FightActivity extends AppCompatActivity {
         tvEnemyName.setText(monster.getName());
         tvEnemyHp.setText("HP: " + monster.getCurHP() + "/" + monster.getMaxHP());
 
+        //TODO: wykrywać gdzie toczy się walka (w jakiej lokacji) oraz uporządkować system walki (osobne funkcje)
+
         btnAttack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
