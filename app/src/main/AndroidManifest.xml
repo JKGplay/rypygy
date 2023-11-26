@@ -21,6 +21,8 @@
             android:name=".LevelUpActivity"
             android:exported="false" />
         <activity
+            android:parentActivityName=".SecondActivity"
+            android:label="Wrath of Kunczka - Shop"
             android:name=".ShopActivity"
             android:exported="false" />
         <activity

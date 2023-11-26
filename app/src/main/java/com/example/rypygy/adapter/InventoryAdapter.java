@@ -1,4 +1,4 @@
-package com.example.rypygy;
+package com.example.rypygy.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rypygy.R;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Item;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -20,12 +21,12 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
+public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ItemViewHolder> {
 
     private List<Item> items;
     private Context context;
 
-    ItemAdapter(List<Item> items, Context context) {
+    public InventoryAdapter(List<Item> items, Context context) {
         this.items = items;
         this.context = context;
     }
@@ -47,7 +48,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         return items.size();
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tvItemName, tvItemAmount, tvItemDesc;
         private ImageButton btnDelete;
         private Button btnAction;
@@ -88,7 +89,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                     }
                     break;
                 case POTION:
-                    tvItemDesc.setText("Heal: " + item.heal() + "hp");
+                    tvItemDesc.setText("Heal: " + item.getAttributes().get(Item.Attribute.HEAL).intValue() + "hp");
                     btnAction.setText("Use");
                     btnAction.setEnabled(true);
                     break;
@@ -116,8 +117,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                             if (Character.getCurHP() == Character.getMaxHP()) {
                                 Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
                             } else {
-                                Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.heal()) + " HP", Snackbar.LENGTH_SHORT).show();
-                                Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.heal()));
+                                Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.getAttributes().get(Item.Attribute.HEAL).intValue()) + " HP", Snackbar.LENGTH_SHORT).show();
+                                Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.getAttributes().get(Item.Attribute.HEAL).intValue()));
 
                                 List<Item> temp = new ArrayList<>(items);
                                 Character.removeItem(getAdapterPosition());

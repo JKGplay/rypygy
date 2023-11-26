@@ -172,8 +172,8 @@ public class FightActivity extends AppCompatActivity {
                                     if (Character.getCurHP() == Character.getMaxHP()) {
                                         Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
                                     } else {
-                                        Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()) + " HP", Snackbar.LENGTH_SHORT).show();
-                                        Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).heal()));
+                                        Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).getAttributes().get(Item.Attribute.HEAL).intValue()) + " HP", Snackbar.LENGTH_SHORT).show();
+                                        Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).getAttributes().get(Item.Attribute.HEAL).intValue()));
                                         tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
                                         Character.removeItem(Character.getIndexOf(itemNames.get(checkedItem)));
                                     }

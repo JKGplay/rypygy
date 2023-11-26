@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.rypygy.adapter.InventoryAdapter;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Item;
 
@@ -16,7 +17,7 @@ public class InventoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<Item> items = Character.getInventory();
-    private ItemAdapter adapter;
+    private InventoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class InventoryActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(InventoryActivity.this));
-        adapter = new ItemAdapter(items, InventoryActivity.this);
+        adapter = new InventoryAdapter(items, InventoryActivity.this);
         recyclerView.setAdapter(adapter);
     }
 

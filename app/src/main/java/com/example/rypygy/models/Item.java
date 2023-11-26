@@ -38,7 +38,7 @@ public class Item {
         MAX_AC,
         MIN_DMG,
         MAX_DMG,
-        SIZE_OF_POTION
+        HEAL
     }
 
     private final String name;
@@ -165,19 +165,19 @@ public class Item {
                 name = "Small Potion";
                 category = Category.POTION;
                 price = 50;
-                attributes.put(Attribute.SIZE_OF_POTION, 0.25);
+                attributes.put(Attribute.HEAL, Math.floor(Character.getMaxHP() * 0.25));
                 break;
             case MEDIUM_POTION:
                 name = "Medium Potion";
                 category = Category.POTION;
                 price = 75;
-                attributes.put(Attribute.SIZE_OF_POTION, 0.5);
+                attributes.put(Attribute.HEAL, Math.floor(Character.getMaxHP() * 0.5));
                 break;
             case LARGE_POTION:
                 name = "Large Potion";
                 category = Category.POTION;
                 price = 100;
-                attributes.put(Attribute.SIZE_OF_POTION, 0.75);
+                attributes.put(Attribute.HEAL, Math.floor(Character.getMaxHP() * 0.75));
                 break;
             case SCROLL_OF_RETURN:
                 name = "Scroll of Return";
@@ -194,15 +194,22 @@ public class Item {
 
     }
 
-    public int heal() {
-        return (this.getAttributes().containsKey(Attribute.SIZE_OF_POTION)) ? (int) Math.floor(Character.getMaxHP() * this.getAttributes().get(Attribute.SIZE_OF_POTION)) : 0;
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", category=" + category +
+                ", amount=" + amount +
+                ", price=" + price +
+                ", attributes=" + attributes +
+                '}';
     }
 
-    public void addAmount() {
-        amount++;
+    public void addAmount(int i) {
+        amount += i;
     }
-    public void removeAmount() {
-        amount--;
+    public void removeAmount(int i) {
+        amount -= i;
     }
 
     public String getName() {

@@ -12,16 +12,16 @@ public class Character {
     private static int vitality = 25;
     private static int curHP = getMaxHP();
     private static int xp = 0;
-    private static int money = 0;
+    private static int money = 10000;
     private static Item weapon = new Item(Item.PredefinedItems.SHORT_SWORD, 1);
     private static Item armor = new Item(Item.PredefinedItems.RAGS, 1);
     private static List<Item> inventory = new ArrayList<Item>() {{
         add(weapon);
         add(armor);
-        add(new Item(Item.PredefinedItems.LONG_SWORD, 1));
-        add(new Item(Item.PredefinedItems.SMALL_POTION, 3));
-        add(new Item(Item.PredefinedItems.MEDIUM_POTION, 2));
-        add(new Item(Item.PredefinedItems.LARGE_POTION, 5));
+//        add(new Item(Item.PredefinedItems.LONG_SWORD, 1));
+//        add(new Item(Item.PredefinedItems.SMALL_POTION, 3));
+//        add(new Item(Item.PredefinedItems.MEDIUM_POTION, 2));
+//        add(new Item(Item.PredefinedItems.LARGE_POTION, 5));
     }};
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
@@ -33,9 +33,10 @@ public class Character {
         return Rnd.rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
     }
 
-    public static void addItem(Item item) {
+    public static void addItem(Item item, int amount) {
         if (isItemInInventory(item)) {
-            inventory.get(getIndexOf(item.getName())).addAmount();
+            //naprawic zeby dodawalo amount a nie 1
+            inventory.get(getIndexOf(item.getName())).addAmount(amount);
         } else {
             inventory.add(item);
         }
@@ -62,10 +63,18 @@ public class Character {
 
     public static void removeItem(int i) {
         if (inventory.get(i).getAmount() > 1) {
-            inventory.get(i).removeAmount();
+            inventory.get(i).removeAmount(1);
         } else {
             inventory.remove(i);
         }
+    }
+
+    public static void addMoney(int i) {
+        money += i;
+    }
+
+    public static void removeMoney(int i) {
+        money -= i;
     }
 
     public static String getName() {

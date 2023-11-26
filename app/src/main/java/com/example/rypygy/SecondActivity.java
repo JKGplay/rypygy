@@ -70,11 +70,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case "btnShop":
-                //tymczasowo przenosi do level upa
-                startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
+                startActivity(new Intent(SecondActivity.this, ShopActivity.class));
                 finish();
-//                Toast.makeText(this, "IN PROGRESS", Toast.LENGTH_SHORT).show();
-//                Log.d("test encounteru", String.valueOf(Encounter.outcome(Encounter.Location.FOREST)));
                 break;
             case "btnInventory":
                 startActivity(new Intent(SecondActivity.this, InventoryActivity.class));
