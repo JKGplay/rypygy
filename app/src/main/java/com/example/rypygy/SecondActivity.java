@@ -15,6 +15,7 @@ import com.example.rypygy.models.Character;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String SHOP_INVENTORY_KEY = "shop_inv";
     private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
     private Button btnForest, btnShop, btnInventory;
 
@@ -50,9 +51,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
             finish();
         }
-
-//        Log.d("vit", "vitality: " + Character.getVitality());
-//        Log.d("hp", "maxhp: " + Character.getMaxHP());
     }
 
     @Override
@@ -70,11 +68,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case "btnShop":
-                startActivity(new Intent(SecondActivity.this, ShopActivity.class));
+                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "shop"));
                 finish();
                 break;
             case "btnInventory":
-                startActivity(new Intent(SecondActivity.this, InventoryActivity.class));
+                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "inventory"));
                 finish();
                 break;
             default:

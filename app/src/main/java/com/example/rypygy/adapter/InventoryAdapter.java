@@ -62,7 +62,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
             btnAction = itemView.findViewById(R.id.btnAction);
         }
 
-        public void bind(Item item) {
+        public void bind(@NonNull Item item) {
             tvItemName.setText(item.getName());
             tvItemAmount.setText("x" + item.getAmount());
 
