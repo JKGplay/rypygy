@@ -2,6 +2,7 @@ package com.example.rypygy.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,7 +157,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                                     }
                                     Character.removeItem(getAdapterPosition());
 //                                    notifyDataSetChanged();
-                                    if (temp.size() > items.size()) {
+                                    if (temp.size() > Character.getInventory().size()) {
+                                        items.remove(getAdapterPosition());
                                         notifyItemRemoved(getAdapterPosition());
                                         notifyItemRangeChanged(getAdapterPosition(), items.size());
                                     } else {

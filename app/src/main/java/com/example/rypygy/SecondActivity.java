@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
+import com.google.android.material.snackbar.Snackbar;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,6 +57,20 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_app_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.itSave) {
+            Snackbar.make(findViewById(R.id.btnInventory), "Progress saved", Snackbar.LENGTH_SHORT).show();
+        }
+        return true;
+    }
+
+    @Override
     public void onBackPressed() {
 //        super.onBackPressed();
     }
@@ -63,7 +80,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(@NonNull View view) {
         switch (getResources().getResourceEntryName(view.getId())) {
-            case "btnForest":
+            case ("btnForest"):
                 startActivity(new Intent(SecondActivity.this, FightActivity.class));
                 finish();
                 break;
