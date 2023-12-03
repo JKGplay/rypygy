@@ -24,10 +24,10 @@ Przykładowe lokacje:
 - Plac przed Szkołą
 
 Rzeczy do zrobienia:
-- [ ] mechanika sklepu
+- [x] mechanika sklepu
 - [ ] przemodelowanie FightActivity na jedną dla każdego typu przeciwnika
 - [ ] dodanie statystyk dla reszty przeciwników 
-- [ ] dodanie predefiniowanych itemów
+- [x] dodanie predefiniowanych itemów
 - [ ] dodanie szansy na encountery po naciśnięciu przycisku
 - [ ] dodanie aktywności (lub czegoś innego) do encounteru znalezienia złota i przedmiotu 
 - [ ] dodanie kilku npctów - przynajmniej jeden na każdą lokację (nowa klasa npc, nowa aktywność) 
