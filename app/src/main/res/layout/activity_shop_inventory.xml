@@ -9,6 +9,8 @@
     android:background="@color/green_500"
     tools:context=".ShopInventoryActivity">
 
+    <!-- TODO: wyświetlanie kasy -->
+
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         app:chipSpacingHorizontal="8dp"

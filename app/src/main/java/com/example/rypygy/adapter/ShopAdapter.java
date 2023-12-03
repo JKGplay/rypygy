@@ -62,7 +62,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder
             btnBuy = itemView.findViewById(R.id.btnBuy);
         }
 
-        public void bind(Item item) {
+        public void bind(@NonNull Item item) {
             tvItemName.setText(item.getName());
             tvItemPrice.setText("Price: " + item.getPrice());
 
@@ -95,8 +95,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Snackbar.make(view, "You bought " + item.getName(), Snackbar.LENGTH_SHORT).show();
-                                        Log.d("amount", String.valueOf(item.getAmount()));
-                                        Log.d("item", item.toString());
+//                                        Log.d("amount", String.valueOf(item.getAmount()));
+//                                        Log.d("item", item.toString());
                                         Character.removeMoney(item.getPrice());
                                         Character.addItem(item, 1);
                                     }

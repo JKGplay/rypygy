@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Character {
     private static String name;
-    private static int level = 1;
+    private static int level = 9;
     private static int strength = 30;
     private static int dexterity = 20;
     private static int vitality = 25;
@@ -30,12 +30,11 @@ public class Character {
 
     public static boolean toHit(int ACmonster) {
         //min(max(toHit, 5), 95)
-        return Rnd.rnd(1, 100) <= Math.min(Math.max((int) Math.floor(70 + (double) dexterity / 2 + level - ACmonster), 5), 95);
+        return Rnd.rnd(1, 100) <= Math.min(Math.max(70 + dexterity / 2 + level - ACmonster, 5), 95);
     }
 
     public static void addItem(Item item, int amount) {
         if (isItemInInventory(item)) {
-            //naprawic zeby dodawalo amount a nie 1
             inventory.get(getIndexOf(item.getName())).addAmount(amount);
         } else {
             inventory.add(item);
@@ -108,10 +107,10 @@ public class Character {
         Character.vitality = vitality;
     }
     public static int getDamage() {
-        return Math.max(1, (int) Math.floor(strength * level / 100));
+        return Math.max(1, strength * level / 100);
     }
     public static int getAc() {
-        return (int) Math.floor(dexterity / 5);
+        return dexterity / 5;
     }
     public static int getMaxHP() {
         return (vitality * 2) + (level * 2) + 18;

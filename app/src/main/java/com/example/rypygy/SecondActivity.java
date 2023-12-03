@@ -14,18 +14,45 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Encounter;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SecondActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SHOP_INVENTORY_KEY = "shop_inv";
+    public static final String ENCOUNTER_LOCATION_KEY = "encounter_location";
+    public static final String ENCOUNTER_TYPE_KEY = "encounter_type";
     private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
     private Button btnForest, btnShop, btnInventory;
+    private List<Button> buttons = new ArrayList<>();
+    private enum ShopInv {
+        SHOP,
+        INVENTORY
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        buttons.add(findViewById(R.id.btnForest));
+        buttons.add(findViewById(R.id.btnGarages));
+        buttons.add(findViewById(R.id.btnToilets));
+        buttons.add(findViewById(R.id.btnComputerLab));
+        buttons.add(findViewById(R.id.btnDormitory));
+        buttons.add(findViewById(R.id.btnCourtyard));
+        buttons.add(findViewById(R.id.btnKaczyce));
+
+        for (int i = 0; i < buttons.size(); i++) {
+            if (i < Character.getLevel()) {
+                buttons.get(i).setOnClickListener(this);
+            } else {
+                buttons.get(i).setVisibility(View.GONE);
+            }
+        }
 
         tvName = findViewById(R.id.tvName);
         tvHp = findViewById(R.id.tvHp);
@@ -34,13 +61,15 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         tvAttack = findViewById(R.id.tvAttack);
         tvDefense = findViewById(R.id.tvDefense);
         tvMoney = findViewById(R.id.tvMoney);
-        btnForest = findViewById(R.id.btnForest);
         btnShop = findViewById(R.id.btnShop);
         btnInventory = findViewById(R.id.btnInventory);
 
-        btnForest.setOnClickListener(this);
-        btnShop.setOnClickListener(this);
-        btnInventory.setOnClickListener(this);
+        btnShop.setOnClickListener(view -> {
+            shopInv(ShopInv.SHOP);
+        });
+        btnInventory.setOnClickListener(view -> {
+            shopInv(ShopInv.INVENTORY);
+        });
 
         tvName.setText(Character.getName());
         tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
@@ -53,6 +82,31 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         if(Character.getXp() >= 100) {
             startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
             finish();
+        }
+    }
+
+    public void shopInv(@NonNull ShopInv shopInv) {
+        switch (shopInv) {
+            case SHOP:
+                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "shop"));
+                break;
+            case INVENTORY:
+                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "inventory"));
+                break;
+        }
+        finish();
+    }
+
+
+    //TODO: zaimplementować mechanikę encounteru (za pomocą klasy Encounter)
+
+    @Override
+    public void onClick(@NonNull View view) {
+        for (Button btn : buttons) {
+            if (btn.equals(view)) {
+                startActivity(new Intent(SecondActivity.this, EncounterActivity.class).putExtra(ENCOUNTER_LOCATION_KEY, btn.getText().toString().toLowerCase()));
+                finish();
+            }
         }
     }
 
@@ -73,28 +127,5 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-    }
-
-    //TODO: zaimplementować mechanikę encounteru (za pomocą klasy Encounter)
-
-    @Override
-    public void onClick(@NonNull View view) {
-        switch (getResources().getResourceEntryName(view.getId())) {
-            case ("btnForest"):
-                startActivity(new Intent(SecondActivity.this, FightActivity.class));
-                finish();
-                break;
-            case "btnShop":
-                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "shop"));
-                finish();
-                break;
-            case "btnInventory":
-                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "inventory"));
-                finish();
-                break;
-            default:
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 }

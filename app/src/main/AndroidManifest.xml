@@ -13,9 +13,12 @@
         android:theme="@style/Theme.Rypygy"
         tools:targetApi="31">
         <activity
-            android:parentActivityName=".SecondActivity"
-            android:name=".ShopInventoryActivity"
+            android:name=".EncounterActivity"
             android:exported="false" />
+        <activity
+            android:name=".ShopInventoryActivity"
+            android:exported="false"
+            android:parentActivityName=".SecondActivity" />
         <activity
             android:name=".LevelUpActivity"
             android:exported="false" />
