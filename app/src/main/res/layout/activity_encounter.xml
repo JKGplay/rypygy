@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvLocation">
 
         <Button
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnExplore"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:iconGravity="textStart" />
 
         <Button
-            android:id="@+id/btnReset"
+            android:id="@+id/btnLeave"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

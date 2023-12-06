@@ -25,17 +25,14 @@ public class MainActivity extends AppCompatActivity {
         etName = findViewById(R.id.etName);
         btnPlay = findViewById(R.id.btnPlay);
 
-        btnPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!String.valueOf(etName.getText()).trim().isEmpty()) {
-                    Character.setName(String.valueOf(etName.getText()).trim());
-                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(MainActivity.this, "Enter a name for your character", Toast.LENGTH_SHORT).show();
-                }
+        btnPlay.setOnClickListener(view -> {
+            if (!String.valueOf(etName.getText()).trim().isEmpty()) {
+                Character.setName(String.valueOf(etName.getText()).trim());
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(MainActivity.this, "Enter a name for your character", Toast.LENGTH_SHORT).show();
             }
         });
     }

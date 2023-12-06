@@ -3,6 +3,7 @@ package com.example.rypygy.models;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.stream.IntStream;
 
@@ -49,6 +50,7 @@ public class Encounter {
         return toReturn;
     }
 
+    @Nullable
     public static Type percentage(@NonNull int[] percentages) {
         int rnd = Rnd.rnd(1, 100);
 //        Log.d("rnd = ", "rnd = " + rnd);

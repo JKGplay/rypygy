@@ -17,6 +17,7 @@ import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ShopInventoryActivity extends AppCompatActivity implements ChipGroup.OnCheckedStateChangeListener {
 
@@ -36,7 +37,7 @@ public class ShopInventoryActivity extends AppCompatActivity implements ChipGrou
         recyclerView.setLayoutManager(new LinearLayoutManager(ShopInventoryActivity.this));
 
         if (getIntent().hasExtra(SecondActivity.SHOP_INVENTORY_KEY)) {
-            if (getIntent().getStringExtra(SecondActivity.SHOP_INVENTORY_KEY).equals("shop")) {
+            if (Objects.equals(getIntent().getSerializableExtra(SecondActivity.SHOP_INVENTORY_KEY), SecondActivity.ShopInv.SHOP)) {
                 for (Item.PredefinedItems pre : Item.PredefinedItems.values()) {
                     allItems.add(new Item(pre, 1));
                 }
@@ -44,7 +45,7 @@ public class ShopInventoryActivity extends AppCompatActivity implements ChipGrou
                 ShopAdapter shopAdapter = new ShopAdapter(showedItems, ShopInventoryActivity.this);
                 setTitle("Wrath of Kunczka - Shop");
                 recyclerView.setAdapter(shopAdapter);
-            } else if (getIntent().getStringExtra(SecondActivity.SHOP_INVENTORY_KEY).equals("inventory")) {
+            } else if (Objects.equals(getIntent().getSerializableExtra(SecondActivity.SHOP_INVENTORY_KEY), SecondActivity.ShopInv.INVENTORY)) {
                 allItems.addAll(Character.getInventory());
                 showedItems.addAll(Character.getInventory());
                 InventoryAdapter inventoryAdapter = new InventoryAdapter(showedItems, ShopInventoryActivity.this);
@@ -73,7 +74,7 @@ public class ShopInventoryActivity extends AppCompatActivity implements ChipGrou
 //        super.onBackPressed();
     }
 
-    private void refreshList(List<Integer> checkedIds) {
+    private void refreshList(@NonNull List<Integer> checkedIds) {
         showedItems.clear();
         if (checkedIds.contains(R.id.chipWeapon)) {
             for (Item item : allItems) {

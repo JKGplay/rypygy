@@ -42,30 +42,22 @@ public class LevelUpActivity extends AppCompatActivity implements View.OnClickLi
 
         setStats();
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (points != 0) {
-                    Snackbar.make(view, "You still have some points left", Snackbar.LENGTH_SHORT).show();
-                } else {
-                    Character.setStrength(curStr);
-                    Character.setDexterity(curDex);
-                    Character.setVitality(curVit);
-                    Character.setLevel(Character.getLevel()+1);
-                    Character.setCurHP(Character.getMaxHP());
-                    Character.setXp(Math.max(Character.getXp() - 100, 0));
-                    startActivity(new Intent(LevelUpActivity.this, SecondActivity.class));
-                    finish();
-                }
+        btnSubmit.setOnClickListener(view -> {
+            if (points != 0) {
+                Snackbar.make(view, "You still have some points left", Snackbar.LENGTH_SHORT).show();
+            } else {
+                Character.setStrength(curStr);
+                Character.setDexterity(curDex);
+                Character.setVitality(curVit);
+                Character.setLevel(Character.getLevel()+1);
+                Character.setCurHP(Character.getMaxHP());
+                Character.setXp(Math.max(Character.getXp() - 100, 0));
+                startActivity(new Intent(LevelUpActivity.this, SecondActivity.class));
+                finish();
             }
         });
 
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setStats();
-            }
-        });
+        btnReset.setOnClickListener(view -> setStats());
     }
 
     @Override

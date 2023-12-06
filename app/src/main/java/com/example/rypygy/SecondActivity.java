@@ -24,13 +24,21 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     public static final String SHOP_INVENTORY_KEY = "shop_inv";
     public static final String ENCOUNTER_LOCATION_KEY = "encounter_location";
-    public static final String ENCOUNTER_TYPE_KEY = "encounter_type";
     private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
-    private Button btnForest, btnShop, btnInventory;
+    private Button btnShop, btnInventory;
     private List<Button> buttons = new ArrayList<>();
-    private enum ShopInv {
+    public enum ShopInv {
         SHOP,
         INVENTORY
+    }
+    public enum Location {
+        FOREST,
+        GARAGES,
+        TOILETS,
+        COMPUTER_LAB,
+        DORMITORY,
+        COURTYARD,
+        KACZYCE
     }
 
     @Override
@@ -88,10 +96,10 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     public void shopInv(@NonNull ShopInv shopInv) {
         switch (shopInv) {
             case SHOP:
-                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "shop"));
+                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, ShopInv.SHOP));
                 break;
             case INVENTORY:
-                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, "inventory"));
+                startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, ShopInv.INVENTORY));
                 break;
         }
         finish();
@@ -102,11 +110,13 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(@NonNull View view) {
+        int i = 0;
         for (Button btn : buttons) {
             if (btn.equals(view)) {
-                startActivity(new Intent(SecondActivity.this, EncounterActivity.class).putExtra(ENCOUNTER_LOCATION_KEY, btn.getText().toString().toLowerCase()));
+                startActivity(new Intent(SecondActivity.this, EncounterActivity.class).putExtra(ENCOUNTER_LOCATION_KEY, Location.values()[i]));
                 finish();
             }
+            i++;
         }
     }
 
