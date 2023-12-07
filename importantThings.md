@@ -32,5 +32,6 @@ Rzeczy do zrobienia:
 - [ ] dodanie aktywności (lub czegoś innego) do encounteru znalezienia złota i przedmiotu 
 - [ ] dodanie kilku npctów - przynajmniej jeden na każdą lokację (nowa klasa npc, nowa aktywność) 
 - [ ] dodanie spotkania i walki z bossem - Kunczką
+- [ ] zapisywanie danych
 - [ ] napisy końcowe
 - [ ] testy aplikacji
