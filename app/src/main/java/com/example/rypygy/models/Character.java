@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Character {
     private static String name;
-    private static int level = 9;
+    private static int level = 1;
     private static int strength = 30;
     private static int dexterity = 20;
     private static int vitality = 25;
     private static int curHP = getMaxHP();
     private static int xp = 0;
-    private static int money = 10000;
+    private static int money = 0;
     private static Item weapon = new Item(Item.PredefinedItems.SHORT_SWORD, 1);
     private static Item armor = new Item(Item.PredefinedItems.RAGS, 1);
     private static List<Item> inventory = new ArrayList<Item>() {{

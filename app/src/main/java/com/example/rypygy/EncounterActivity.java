@@ -1,26 +1,22 @@
 package com.example.rypygy;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Html;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.rypygy.models.NpcData;
+import com.example.rypygy.data.NpcData;
 import com.example.rypygy.models.Rnd;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 public class EncounterActivity extends AppCompatActivity {
 
@@ -44,7 +40,7 @@ public class EncounterActivity extends AppCompatActivity {
         btnExplore = findViewById(R.id.btnExplore);
         btnLeave = findViewById(R.id.btnLeave);
 
-        chances.put(SecondActivity.Location.FOREST, new int[]{50, 15, 20, 15});
+        chances.put(SecondActivity.Location.FOREST, new int[]{0, 100, 0, 0});
         chances.put(SecondActivity.Location.GARAGES, new int[]{50, 15, 20, 15});
         chances.put(SecondActivity.Location.TOILETS, new int[]{50, 15, 20, 15});
         chances.put(SecondActivity.Location.COMPUTER_LAB, new int[]{50, 15, 20, 15});
@@ -117,11 +113,11 @@ public class EncounterActivity extends AppCompatActivity {
         NpcData npc = new NpcData(location);
         new MaterialAlertDialogBuilder(EncounterActivity.this)
                 .setTitle(npc.getName())
-                .setMessage(npc.getMessage())
+                .setMessage(Html.fromHtml(npc.getMessage()))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     npc.action();
                 })
-                .setCancelable(true)
+                .setCancelable(false)
                 .show();
     }
 

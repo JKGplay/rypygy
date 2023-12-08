@@ -17,6 +17,8 @@ public class Encounter {
         Możliwe jest określenie wartości procentowych na dany encounter; możliwa jest również wartość 0%
      */
 
+    //TODO: do usunięcia
+
     public enum Location {
         FOREST,
         GARAGES,

@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Wrath of Kunczka</string>
+    <!--
+        Zasady pisania stringów:
+            -apostrof (') trzeba poprzedzić backslashem (\)
+            -znaczniki html muszą zaczynać się od &lt;
+            -przejście do nowej linii &lt;br/>
+            -procent (%) trzeba poprzedzić procentem (%)
+            -parametry: %1$s dla stringów, %1$d dla intów
+    -->
+    <string name="app_name" translatable="false">Wrath of Kunczka</string>
     <string name="placeholder">Enter character\'s name</string>
     <string name="btn_play">Play</string>
     <string name="btn_forest">Forest</string>
@@ -9,4 +17,23 @@
     <string name="btn_ability">Ability</string>
     <string name="btn_use_item">Use item</string>
     <string name="btn_delete">delete</string>
+    <string name="npc_forest_unvisited_title">You wander into Forest…</string>
+    <string name="npc_forest_unvisited_message">
+        After a while of wandering, you realize that you don\'t see much. There is some kind of fog
+        floating in the air. Suddenly, you feel someone\'s gaze upon you. You nervously look around.
+        Eventually, you see a shady individual. He starts to walk towards you. You are preparing for
+        a fight, but luckily, you recognize him in time. His name\'s Fred. He\'s a friendly guy that
+        you know by sight (you spoke with him once or twice). As he approaches you, you see that
+        this weird fog is actually cigarette smoke that comes out of his mouth, nose, and, well,
+        his cigarette. He greets you:&lt;br/>
+        -Hello %1$s, I wouldn\'t guess I\'ll find you here.&lt;br/>
+        -Yeah… I\'m just wandering around.&lt;br/>
+        -By the way, I heard rumors that you want to fight Kunczka.&lt;br/>
+        -Yes, that\'s right.&lt;br/>
+        -In that case, I can share with you some useful information about the most common Forest
+        inhabitant - the First-Year. They\'re relatively easy to defeat - the secret lies in…&lt;br/>
+        And he continues talking for the rest of the day. With that new knowledge, you feel stronger
+        in fights against First-Years.&lt;br/>
+        &lt;b>You got 10%% damage boost against First-Years!&lt;/b>
+    </string>
 </resources>
