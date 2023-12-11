@@ -29,7 +29,7 @@ Rzeczy do zrobienia:
 - [ ] dodanie statystyk dla reszty przeciwników 
 - [x] dodanie predefiniowanych itemów
 - [ ] dodanie szansy na encountery po naciśnięciu przycisku
-- [ ] dodanie aktywności (lub czegoś innego) do encounteru znalezienia złota i przedmiotu 
+- [x] dodanie aktywności (lub czegoś innego) do encounteru znalezienia złota i przedmiotu 
 - [ ] dodanie kilku npctów - przynajmniej jeden na każdą lokację (nowa klasa npc, nowa aktywność) 
 - [ ] dodanie spotkania i walki z bossem - Kunczką
 - [ ] zapisywanie danych
