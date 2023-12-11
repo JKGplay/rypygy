@@ -1,18 +1,20 @@
 package com.example.rypygy.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Character {
     private static String name;
-    private static int level = 1;
+    private static int level = 9;
     private static int strength = 30;
     private static int dexterity = 20;
     private static int vitality = 25;
     private static int curHP = getMaxHP();
     private static int xp = 0;
-    private static int money = 0;
+    //TODO: zmiana money na gold (wszędzie)
+    private static int gold = 10000;
+    //TODO: zmiana systemu wyekwipowanych przedmiotów (pole equipped zamiast osobnych pól w Character)
+    //TODO: dodanie listy z modyfikacjami (10% damage boost przeciwko Pierwszakom, + do obrażeń bez broni itd.)
     private static Item weapon = new Item(Item.PredefinedItems.SHORT_SWORD, 1);
     private static Item armor = new Item(Item.PredefinedItems.RAGS, 1);
     private static List<Item> inventory = new ArrayList<Item>() {{
@@ -68,12 +70,12 @@ public class Character {
         }
     }
 
-    public static void addMoney(int i) {
-        money += i;
+    public static void addGold(int i) {
+        gold += i;
     }
 
-    public static void removeMoney(int i) {
-        money -= i;
+    public static void removeGold(int i) {
+        gold -= i;
     }
 
     public static String getName() {
@@ -127,11 +129,11 @@ public class Character {
     public static void setXp(int xp) {
         Character.xp = xp;
     }
-    public static int getMoney() {
-        return money;
+    public static int getGold() {
+        return gold;
     }
-    public static void setMoney(int money) {
-        Character.money = money;
+    public static void setGold(int gold) {
+        Character.gold = gold;
     }
     public static Item getWeapon() {
         return weapon;

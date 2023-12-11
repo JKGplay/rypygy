@@ -17,7 +17,8 @@
     <string name="btn_ability">Ability</string>
     <string name="btn_use_item">Use item</string>
     <string name="btn_delete">delete</string>
-    <string name="npc_forest_unvisited_title">You wander into Forest…</string>
+    <string name="gold_message">You found %1$d gold!</string>
+    <string name="location_title">You wander into %1$s…</string>
     <string name="npc_forest_unvisited_message">
         After a while of wandering, you realize that you don\'t see much. There is some kind of fog
         floating in the air. Suddenly, you feel someone\'s gaze upon you. You nervously look around.
@@ -35,5 +36,8 @@
         And he continues talking for the rest of the day. With that new knowledge, you feel stronger
         in fights against First-Years.&lt;br/>
         &lt;b>You got 10%% damage boost against First-Years!&lt;/b>
+    </string>
+    <string name="npc_forest_visited_message">
+        You meet Fred. He doesn\'t have anything more to say to help you with First-Years, but you talk all day anyway.
     </string>
 </resources>

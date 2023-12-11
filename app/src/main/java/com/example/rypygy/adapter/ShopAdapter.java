@@ -2,14 +2,11 @@ package com.example.rypygy.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +17,6 @@ import com.example.rypygy.models.Item;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder> {
@@ -85,7 +81,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder
                 @Override
                 public void onClick(View view) {
 
-                    if (Character.getMoney() < item.getPrice()) {
+                    if (Character.getGold() < item.getPrice()) {
                         Snackbar.make(view, "You don't have enough money", Snackbar.LENGTH_SHORT).show();
                     } else {
                         new MaterialAlertDialogBuilder(context)
@@ -97,7 +93,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder
                                         Snackbar.make(view, "You bought " + item.getName(), Snackbar.LENGTH_SHORT).show();
 //                                        Log.d("amount", String.valueOf(item.getAmount()));
 //                                        Log.d("item", item.toString());
-                                        Character.removeMoney(item.getPrice());
+                                        Character.removeGold(item.getPrice());
                                         Character.addItem(item, 1);
                                     }
                                 })

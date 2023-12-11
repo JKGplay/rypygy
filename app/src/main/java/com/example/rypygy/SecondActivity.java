@@ -5,16 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
-import com.example.rypygy.models.Encounter;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -30,15 +28,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     public enum ShopInv {
         SHOP,
         INVENTORY
-    }
-    public enum Location {
-        FOREST,
-        GARAGES,
-        TOILETS,
-        COMPUTER_LAB,
-        DORMITORY,
-        COURTYARD,
-        KACZYCE
     }
 
     @Override
@@ -85,7 +74,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         tvLevel.setText("Level: " + Character.getLevel());
         tvAttack.setText("Strength: " + Character.getStrength());
         tvDefense.setText("Dexterity: " + Character.getDexterity());
-        tvMoney.setText("Money: " + Character.getMoney());
+        tvMoney.setText("Money: " + Character.getGold());
 
         if(Character.getXp() >= 100) {
             startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));

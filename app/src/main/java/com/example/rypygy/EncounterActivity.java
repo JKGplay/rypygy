@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.rypygy.data.GoldData;
 import com.example.rypygy.data.NpcData;
+import com.example.rypygy.enums.Location;
+import com.example.rypygy.enums.EncounterType;
 import com.example.rypygy.models.Rnd;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -22,14 +26,9 @@ public class EncounterActivity extends AppCompatActivity {
 
     private TextView tvLocation;
     private Button btnExplore, btnLeave;
-    private SecondActivity.Location location;
-    private HashMap<SecondActivity.Location, int[]> chances = new HashMap<>();
-    private enum Type {
-        COMBAT,
-        NPC,
-        ITEM,
-        GOLD
-    }
+    private Location location;
+    //TODO: zagnieżdżony hashmap: HashMap<Location, HashMap<EncounterType, int[]>>
+    private HashMap<Location, int[]> chances = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +39,16 @@ public class EncounterActivity extends AppCompatActivity {
         btnExplore = findViewById(R.id.btnExplore);
         btnLeave = findViewById(R.id.btnLeave);
 
-        chances.put(SecondActivity.Location.FOREST, new int[]{0, 100, 0, 0});
-        chances.put(SecondActivity.Location.GARAGES, new int[]{50, 15, 20, 15});
-        chances.put(SecondActivity.Location.TOILETS, new int[]{50, 15, 20, 15});
-        chances.put(SecondActivity.Location.COMPUTER_LAB, new int[]{50, 15, 20, 15});
-        chances.put(SecondActivity.Location.DORMITORY, new int[]{50, 15, 20, 15});
-        chances.put(SecondActivity.Location.COURTYARD, new int[]{50, 15, 20, 15});
-        chances.put(SecondActivity.Location.KACZYCE, new int[]{50, 15, 20, 15});
+        chances.put(Location.FOREST, new int[]{40, 20, 0, 40});
+        chances.put(Location.GARAGES, new int[]{50, 15, 20, 15});
+        chances.put(Location.TOILETS, new int[]{50, 15, 20, 15});
+        chances.put(Location.COMPUTER_LAB, new int[]{50, 15, 20, 15});
+        chances.put(Location.DORMITORY, new int[]{50, 15, 20, 15});
+        chances.put(Location.COURTYARD, new int[]{50, 15, 20, 15});
+        chances.put(Location.KACZYCE, new int[]{50, 15, 20, 15});
 
         if (getIntent().hasExtra(SecondActivity.ENCOUNTER_LOCATION_KEY)) {
-            location = (SecondActivity.Location) getIntent().getSerializableExtra(SecondActivity.ENCOUNTER_LOCATION_KEY);
+            location = (Location) getIntent().getSerializableExtra(SecondActivity.ENCOUNTER_LOCATION_KEY);
             tvLocation.setText(StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
         } else {
             startActivity(new Intent(EncounterActivity.this, SecondActivity.class));
@@ -67,33 +66,30 @@ public class EncounterActivity extends AppCompatActivity {
     }
 
     private void explore() {
-                switch (draw(Objects.requireNonNull(chances.get(location)))) {
-                    case COMBAT:
-                        encounter_combat();
-//                        Log.d("Wylosowano", "Wylosowano walke");
-                        break;
-                    case NPC:
-                        encounter_npc();
-//                        Log.d("Wylosowano", "Wylosowano npc");
-                        break;
-                    case ITEM:
-                        encounter_item();
-//                        Log.d("Wylosowano", "Wylosowano item");
-                        break;
-                    case GOLD:
-                        encounter_gold();
-//                        Log.d("Wylosowano", "Wylosowano gold");
-                        break;
-                }
-//                Log.d(l.toString(), Arrays.toString(temp.get(l)));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(EncounterActivity.this);
+        switch (draw(Objects.requireNonNull(chances.get(location)))) {
+            case COMBAT:
+                encounter_combat(builder);
+                break;
+            case NPC:
+                encounter_npc(builder);
+                break;
+            case ITEM:
+                encounter_item(builder);
+                break;
+            case GOLD:
+                encounter_gold(builder);
+                break;
+        }
+        builder.show();
     }
 
-    private Type draw(@NonNull int[] n) {
+    private EncounterType draw(@NonNull int[] n) {
         int rnd = Rnd.rnd(1, 100);
         int i = 0;
         int value = n[i];
-        Type toReturn = null;
-        for (Type t : Type.values()) {
+        EncounterType toReturn = null;
+        for (EncounterType t : EncounterType.values()) {
             if (value >= rnd) {
                 toReturn = t;
                 break;
@@ -104,29 +100,35 @@ public class EncounterActivity extends AppCompatActivity {
         return toReturn;
     }
 
-    private void encounter_combat() {
+    private void encounter_combat(@NonNull MaterialAlertDialogBuilder builder) {
         startActivity(new Intent(EncounterActivity.this, FightActivity.class).putExtra(SecondActivity.ENCOUNTER_LOCATION_KEY, location));
         finish();
     }
 
-    private void encounter_npc() {
+    private void encounter_npc(@NonNull MaterialAlertDialogBuilder builder) {
         NpcData npc = new NpcData(location);
-        new MaterialAlertDialogBuilder(EncounterActivity.this)
+        builder
                 .setTitle(npc.getName())
                 .setMessage(Html.fromHtml(npc.getMessage()))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     npc.action();
                 })
-                .setCancelable(false)
-                .show();
+                .setCancelable(false);
     }
 
-    private void encounter_item() {
+    private void encounter_item(@NonNull MaterialAlertDialogBuilder builder) {
 
     }
 
-    private void encounter_gold() {
-
+    private void encounter_gold(@NonNull MaterialAlertDialogBuilder builder) {
+        GoldData gold = new GoldData(location);
+        builder
+                .setTitle(gold.getTitle())
+                .setMessage(Html.fromHtml(gold.getMessage()))
+                .setPositiveButton("OK", (dialogInterface, i) -> {
+                    gold.action();
+                })
+                .setCancelable(false);
     }
 
     @Override
@@ -137,9 +139,12 @@ public class EncounterActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        startActivity(new Intent(EncounterActivity.this, SecondActivity.class));
-        finish();
-//        super.onBackPressed();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            startActivity(new Intent(EncounterActivity.this, SecondActivity.class));
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
