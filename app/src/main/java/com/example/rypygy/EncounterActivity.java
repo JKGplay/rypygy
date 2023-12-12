@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.rypygy.data.GoldData;
+import com.example.rypygy.data.ItemData;
 import com.example.rypygy.data.NpcData;
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.enums.EncounterType;
@@ -28,7 +29,7 @@ public class EncounterActivity extends AppCompatActivity {
     private Button btnExplore, btnLeave;
     private Location location;
     //TODO: zagnieżdżony hashmap: HashMap<Location, HashMap<EncounterType, int[]>>
-    private HashMap<Location, int[]> chances = new HashMap<>();
+    private HashMap<Location, Integer[]> chances = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +40,13 @@ public class EncounterActivity extends AppCompatActivity {
         btnExplore = findViewById(R.id.btnExplore);
         btnLeave = findViewById(R.id.btnLeave);
 
-        chances.put(Location.FOREST, new int[]{40, 20, 0, 40});
-        chances.put(Location.GARAGES, new int[]{50, 15, 20, 15});
-        chances.put(Location.TOILETS, new int[]{50, 15, 20, 15});
-        chances.put(Location.COMPUTER_LAB, new int[]{50, 15, 20, 15});
-        chances.put(Location.DORMITORY, new int[]{50, 15, 20, 15});
-        chances.put(Location.COURTYARD, new int[]{50, 15, 20, 15});
-        chances.put(Location.KACZYCE, new int[]{50, 15, 20, 15});
+        chances.put(Location.FOREST, new Integer[]{50, 15, 20, 15});
+        chances.put(Location.GARAGES, new Integer[]{50, 15, 20, 15});
+        chances.put(Location.TOILETS, new Integer[]{50, 15, 20, 15});
+        chances.put(Location.COMPUTER_LAB, new Integer[]{50, 15, 20, 15});
+        chances.put(Location.DORMITORY, new Integer[]{50, 15, 20, 15});
+        chances.put(Location.COURTYARD, new Integer[]{50, 15, 20, 15});
+        chances.put(Location.KACZYCE, new Integer[]{50, 15, 20, 15});
 
         if (getIntent().hasExtra(SecondActivity.ENCOUNTER_LOCATION_KEY)) {
             location = (Location) getIntent().getSerializableExtra(SecondActivity.ENCOUNTER_LOCATION_KEY);
@@ -84,7 +85,7 @@ public class EncounterActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private EncounterType draw(@NonNull int[] n) {
+    private EncounterType draw(@NonNull Integer[] n) {
         int rnd = Rnd.rnd(1, 100);
         int i = 0;
         int value = n[i];
@@ -108,7 +109,7 @@ public class EncounterActivity extends AppCompatActivity {
     private void encounter_npc(@NonNull MaterialAlertDialogBuilder builder) {
         NpcData npc = new NpcData(location);
         builder
-                .setTitle(npc.getName())
+                .setTitle(npc.getTitle())
                 .setMessage(Html.fromHtml(npc.getMessage()))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     npc.action();
@@ -117,7 +118,14 @@ public class EncounterActivity extends AppCompatActivity {
     }
 
     private void encounter_item(@NonNull MaterialAlertDialogBuilder builder) {
-
+        ItemData item = new ItemData(location);
+        builder
+                .setTitle(item.getTitle())
+                .setMessage(Html.fromHtml(item.getMessage()))
+                .setPositiveButton("OK", (dialogInterface, i) -> {
+                    item.action();
+                })
+                .setCancelable(false);
     }
 
     private void encounter_gold(@NonNull MaterialAlertDialogBuilder builder) {

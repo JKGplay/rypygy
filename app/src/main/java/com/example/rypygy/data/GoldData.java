@@ -13,12 +13,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.HashMap;
 
 public class GoldData {
-
     private String title, message;
     private int amount;
-    private Location location;
 
-    private static HashMap<Location, Integer[]> data = new HashMap<Location, Integer[]>() {{
+    private static final HashMap<Location, Integer[]> DATA = new HashMap<Location, Integer[]>() {{
         put(Location.FOREST, new Integer[]{25, 100});
         put(Location.GARAGES, new Integer[]{25, 100});
         put(Location.TOILETS, new Integer[]{25, 100});
@@ -30,9 +28,8 @@ public class GoldData {
 
     public GoldData(@NonNull Location location) {
         title = App.getContext().getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
-        amount = Rnd.rnd(data.get(location)[0], data.get(location)[1]);
+        amount = Rnd.rnd(DATA.get(location)[0], DATA.get(location)[1]);
         message = App.getContext().getResources().getString(R.string.gold_message, amount);
-        this.location = location;
     }
 
     public void action() {

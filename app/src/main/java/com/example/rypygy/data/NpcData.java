@@ -78,7 +78,7 @@ public class NpcData {
         }
     }
 
-    public String getName() {
+    public String getTitle() {
         return title;
     }
     public String getMessage() {
