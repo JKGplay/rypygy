@@ -1,5 +1,7 @@
 package com.example.rypygy.data;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.example.rypygy.App;
@@ -24,29 +26,27 @@ public class NpcData {
         put(Location.KACZYCE, false);
     }};
 
-    public static HashMap<Location, String> unvisitedData = new HashMap<Location, String>() {{
-       put(Location.FOREST, App.getContext().getResources().getString(R.string.npc_forest_unvisited_message, Character.getName()));
-       put(Location.GARAGES, "");
-       put(Location.TOILETS, "");
-       put(Location.COMPUTER_LAB, "");
-       put(Location.DORMITORY, "");
-       put(Location.COURTYARD, "");
-       put(Location.KACZYCE, "");
-    }};
+    public static HashMap<Location, String> unvisitedData = new HashMap<>();
 
-    public static HashMap<Location, String> visitedData = new HashMap<Location, String>() {{
-        put(Location.FOREST, App.getContext().getResources().getString(R.string.npc_forest_visited_message));
-        put(Location.GARAGES, "");
-        put(Location.TOILETS, "");
-        put(Location.COMPUTER_LAB, "");
-        put(Location.DORMITORY, "");
-        put(Location.COURTYARD, "");
-        put(Location.KACZYCE, "");
-    }};
+    public static HashMap<Location, String> visitedData = new HashMap<>();
 
-    public NpcData(@NonNull Location location) {
+    public NpcData(@NonNull Location location, @NonNull Context context) {
+        unvisitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.npc_forest_unvisited_message, Character.getName()));
+        unvisitedData.putIfAbsent(Location.GARAGES, "");
+        unvisitedData.putIfAbsent(Location.TOILETS, "");
+        unvisitedData.putIfAbsent(Location.COMPUTER_LAB, "");
+        unvisitedData.putIfAbsent(Location.DORMITORY, "");
+        unvisitedData.putIfAbsent(Location.COURTYARD, "");
+        unvisitedData.putIfAbsent(Location.KACZYCE, "");
+        visitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.npc_forest_visited_message));
+        visitedData.putIfAbsent(Location.GARAGES, "");
+        visitedData.putIfAbsent(Location.TOILETS, "");
+        visitedData.putIfAbsent(Location.COMPUTER_LAB, "");
+        visitedData.putIfAbsent(Location.DORMITORY, "");
+        visitedData.putIfAbsent(Location.COURTYARD, "");
+        visitedData.putIfAbsent(Location.KACZYCE, "");
         this.location = location;
-        title = App.getContext().getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+        title = context.getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
         if (!isVisited.get(location)) {
             message = unvisitedData.get(location);
             isVisited.replace(location, true);

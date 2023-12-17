@@ -17,6 +17,10 @@
     <string name="btn_ability">Ability</string>
     <string name="btn_use_item">Use item</string>
     <string name="btn_delete">delete</string>
+    <string name="combat_message">
+        You encountered %1$s!&lt;br/>
+        Prepare to fight!
+    </string>
     <string name="gold_message">You found %1$d gold!</string>
     <string name="item_message">You found %1$s!</string>
     <string name="location_title">You wander into %1$s…</string>

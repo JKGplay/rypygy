@@ -1,16 +1,10 @@
 package com.example.rypygy.models;
 
+import com.example.rypygy.enums.EnemyType;
+
 import java.util.Objects;
 
 public class Enemy {
-
-    public enum Type {
-        FIRST_YEAR,
-        SMOKER,
-        GRAPHIC_DESIGNER,
-        FIFTH_YEAR,
-        MILITARY,
-    }
 
     private String name;
     private int maxHP;
@@ -30,7 +24,7 @@ public class Enemy {
         return Rnd.rnd(minDamage, maxDamage);
     }
 
-    public Enemy(Type type) {
+    public Enemy(EnemyType type) {
         switch (Objects.requireNonNull(type)) {
             case FIRST_YEAR:
                 this.name = "First-Year";

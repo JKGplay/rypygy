@@ -1,5 +1,6 @@
 package com.example.rypygy.data;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -53,11 +54,11 @@ public class ItemData {
 
     }};
 
-    public ItemData(@NonNull Location location) {
+    public ItemData(@NonNull Location location, @NonNull Context context) {
         this.location = location;
         drawnItem = draw();
-        title = App.getContext().getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
-        message = App.getContext().getResources().getString(R.string.item_message, drawnItem.getName());
+        title = context.getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+        message = context.getResources().getString(R.string.item_message, drawnItem.getName());
     }
 
     private Item draw() {

@@ -1,5 +1,7 @@
 package com.example.rypygy.data;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.example.rypygy.App;
@@ -26,10 +28,10 @@ public class GoldData {
         put(Location.KACZYCE, new Integer[]{25, 100});
     }};
 
-    public GoldData(@NonNull Location location) {
-        title = App.getContext().getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+    public GoldData(@NonNull Location location, @NonNull Context context) {
+        title = context.getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
         amount = Rnd.rnd(DATA.get(location)[0], DATA.get(location)[1]);
-        message = App.getContext().getResources().getString(R.string.gold_message, amount);
+        message = context.getResources().getString(R.string.gold_message, amount);
     }
 
     public void action() {

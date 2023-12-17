@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.rypygy.enums.EnemyType;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Enemy;
 import com.example.rypygy.models.Item;
@@ -49,7 +50,7 @@ public class FightActivity extends AppCompatActivity {
 
 //        FirstYear monster = new FirstYear();
 
-        Enemy monster = new Enemy(Enemy.Type.FIRST_YEAR);
+        Enemy monster = new Enemy(EnemyType.FIRST_YEAR);
         Log.d("monster: ", "name = " + monster.getName());
 
 //        btnAbility.setVisibility(View.GONE);
