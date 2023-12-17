@@ -4,13 +4,12 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.example.rypygy.App;
 import com.example.rypygy.R;
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Rnd;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
 
 import java.util.HashMap;
 
@@ -29,7 +28,7 @@ public class GoldData {
     }};
 
     public GoldData(@NonNull Location location, @NonNull Context context) {
-        title = context.getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         amount = Rnd.rnd(DATA.get(location)[0], DATA.get(location)[1]);
         message = context.getResources().getString(R.string.gold_message, amount);
     }

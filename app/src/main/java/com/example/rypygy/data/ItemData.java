@@ -1,21 +1,17 @@
 package com.example.rypygy.data;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.rypygy.App;
 import com.example.rypygy.R;
-import com.example.rypygy.enums.EncounterType;
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Item;
 import com.example.rypygy.models.Rnd;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class ItemData {
@@ -57,7 +53,7 @@ public class ItemData {
     public ItemData(@NonNull Location location, @NonNull Context context) {
         this.location = location;
         drawnItem = draw();
-        title = context.getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         message = context.getResources().getString(R.string.item_message, drawnItem.getName());
     }
 

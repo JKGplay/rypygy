@@ -4,12 +4,12 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import com.example.rypygy.App;
 import com.example.rypygy.R;
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
 
-import org.apache.commons.lang3.StringUtils;
+
+import org.apache.commons.text.WordUtils;
 
 import java.util.HashMap;
 
@@ -46,7 +46,7 @@ public class NpcData {
         visitedData.putIfAbsent(Location.COURTYARD, "");
         visitedData.putIfAbsent(Location.KACZYCE, "");
         this.location = location;
-        title = context.getResources().getString(R.string.location_title, StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         if (!isVisited.get(location)) {
             message = unvisitedData.get(location);
             isVisited.replace(location, true);

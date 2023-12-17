@@ -3,7 +3,6 @@ package com.example.rypygy;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -20,7 +19,7 @@ import com.example.rypygy.enums.EncounterType;
 import com.example.rypygy.models.Rnd;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.WordUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +47,7 @@ public class EncounterActivity extends AppCompatActivity {
 
         if (getIntent().hasExtra(SecondActivity.ENCOUNTER_LOCATION_KEY)) {
             location = (Location) getIntent().getSerializableExtra(SecondActivity.ENCOUNTER_LOCATION_KEY);
-            tvLocation.setText(StringUtils.capitalize(location.toString().replace('_', ' ').toLowerCase()));
+            tvLocation.setText(WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         } else {
             startActivity(new Intent(EncounterActivity.this, SecondActivity.class));
             finish();
@@ -85,7 +84,6 @@ public class EncounterActivity extends AppCompatActivity {
 
     private EncounterType draw(@NonNull HashMap<EncounterType, Integer> h) {
         int rnd = Rnd.rnd(1, 100);
-        rnd = 1;
         int i = 0;
         List<Integer> values = new ArrayList<>(h.values());
         int value = values.get(i);
@@ -105,7 +103,7 @@ public class EncounterActivity extends AppCompatActivity {
         CombatData combat = new CombatData(location, EncounterActivity.this);
         builder
                 .setTitle(combat.getTitle())
-                .setMessage(Html.fromHtml(combat.getMessage()))
+                .setMessage(Html.fromHtml(combat.getMessage(), Html.FROM_HTML_MODE_LEGACY))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     startActivity(new Intent(EncounterActivity.this, FightActivity.class).putExtra(SecondActivity.ENCOUNTER_LOCATION_KEY, location));
                     finish();
@@ -117,7 +115,7 @@ public class EncounterActivity extends AppCompatActivity {
         NpcData npc = new NpcData(location, EncounterActivity.this);
         builder
                 .setTitle(npc.getTitle())
-                .setMessage(Html.fromHtml(npc.getMessage()))
+                .setMessage(Html.fromHtml(npc.getMessage(), Html.FROM_HTML_MODE_LEGACY))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     npc.action();
                 })
@@ -128,7 +126,7 @@ public class EncounterActivity extends AppCompatActivity {
         ItemData item = new ItemData(location, EncounterActivity.this);
         builder
                 .setTitle(item.getTitle())
-                .setMessage(Html.fromHtml(item.getMessage()))
+                .setMessage(Html.fromHtml(item.getMessage(), Html.FROM_HTML_MODE_LEGACY))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     item.action();
                 })
@@ -139,7 +137,7 @@ public class EncounterActivity extends AppCompatActivity {
         GoldData gold = new GoldData(location, EncounterActivity.this);
         builder
                 .setTitle(gold.getTitle())
-                .setMessage(Html.fromHtml(gold.getMessage()))
+                .setMessage(Html.fromHtml(gold.getMessage(), Html.FROM_HTML_MODE_LEGACY))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
                     gold.action();
                 })
