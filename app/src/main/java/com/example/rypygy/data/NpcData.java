@@ -31,14 +31,14 @@ public class NpcData {
     public static HashMap<Location, String> visitedData = new HashMap<>();
 
     public NpcData(@NonNull Location location, @NonNull Context context) {
-        unvisitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.npc_forest_unvisited_message, Character.getName()));
+        unvisitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.encounter_npc_forest_unvisited_message, Character.getName()));
         unvisitedData.putIfAbsent(Location.GARAGES, "");
         unvisitedData.putIfAbsent(Location.TOILETS, "");
         unvisitedData.putIfAbsent(Location.COMPUTER_LAB, "");
         unvisitedData.putIfAbsent(Location.DORMITORY, "");
         unvisitedData.putIfAbsent(Location.COURTYARD, "");
         unvisitedData.putIfAbsent(Location.KACZYCE, "");
-        visitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.npc_forest_visited_message));
+        visitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.encounter_npc_forest_visited_message));
         visitedData.putIfAbsent(Location.GARAGES, "");
         visitedData.putIfAbsent(Location.TOILETS, "");
         visitedData.putIfAbsent(Location.COMPUTER_LAB, "");
@@ -46,7 +46,7 @@ public class NpcData {
         visitedData.putIfAbsent(Location.COURTYARD, "");
         visitedData.putIfAbsent(Location.KACZYCE, "");
         this.location = location;
-        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
+        title = context.getResources().getString(R.string.encounter_location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         if (!isVisited.get(location)) {
             message = unvisitedData.get(location);
             isVisited.replace(location, true);

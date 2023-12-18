@@ -53,8 +53,8 @@ public class ItemData {
     public ItemData(@NonNull Location location, @NonNull Context context) {
         this.location = location;
         drawnItem = draw();
-        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
-        message = context.getResources().getString(R.string.item_message, drawnItem.getName());
+        title = context.getResources().getString(R.string.encounter_location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
+        message = context.getResources().getString(R.string.encounter_item_message, drawnItem.getName());
     }
 
     private Item draw() {

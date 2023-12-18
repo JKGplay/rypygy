@@ -28,10 +28,10 @@ import java.util.Objects;
 
 public class EncounterActivity extends AppCompatActivity {
 
+    public static final String ENCOUNTER_COMBAT_ENEMY_TYPE_KEY = "encounter_combat_enemy_type";
     private TextView tvLocation;
     private Button btnExplore, btnLeave;
     private Location location;
-    //TODO: zagnieżdżony hashmap: HashMap<Location, HashMap<EncounterType, int[]>>
     private HashMap<Location, HashMap<EncounterType, Integer>> chances = new HashMap<>();
 
     @Override
@@ -84,6 +84,7 @@ public class EncounterActivity extends AppCompatActivity {
 
     private EncounterType draw(@NonNull HashMap<EncounterType, Integer> h) {
         int rnd = Rnd.rnd(1, 100);
+        rnd = 1;
         int i = 0;
         List<Integer> values = new ArrayList<>(h.values());
         int value = values.get(i);
@@ -105,7 +106,11 @@ public class EncounterActivity extends AppCompatActivity {
                 .setTitle(combat.getTitle())
                 .setMessage(Html.fromHtml(combat.getMessage(), Html.FROM_HTML_MODE_LEGACY))
                 .setPositiveButton("OK", (dialogInterface, i) -> {
-                    startActivity(new Intent(EncounterActivity.this, FightActivity.class).putExtra(SecondActivity.ENCOUNTER_LOCATION_KEY, location));
+                    startActivity(
+                            new Intent(EncounterActivity.this, CombatActivity.class)
+                                    .putExtra(SecondActivity.ENCOUNTER_LOCATION_KEY, location)
+                                    .putExtra(EncounterActivity.ENCOUNTER_COMBAT_ENEMY_TYPE_KEY, combat.getEnemyType())
+                    );
                     finish();
                 })
                 .setCancelable(false);

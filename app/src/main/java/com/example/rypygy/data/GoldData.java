@@ -28,9 +28,9 @@ public class GoldData {
     }};
 
     public GoldData(@NonNull Location location, @NonNull Context context) {
-        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
+        title = context.getResources().getString(R.string.encounter_location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         amount = Rnd.rnd(DATA.get(location)[0], DATA.get(location)[1]);
-        message = context.getResources().getString(R.string.gold_message, amount);
+        message = context.getResources().getString(R.string.encounter_gold_message, amount);
     }
 
     public void action() {

@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class CombatData {
     private String title, message;
     private Location location;
+    private EnemyType enemyType;
 
     private static final HashMap<Location, EnemyType> DATA = new HashMap<Location, EnemyType>() {{
         put(Location.FOREST, EnemyType.FIRST_YEAR);
@@ -28,12 +29,9 @@ public class CombatData {
 
     public CombatData(@NonNull Location location, @NonNull Context context) {
         this.location = location;
-        title = context.getResources().getString(R.string.location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
-        message = context.getResources().getString(R.string.combat_message, WordUtils.capitalizeFully(DATA.get(location).toString().replace('_', ' ')));
-    }
-
-    public void action() {
-
+        enemyType = DATA.get(location);
+        title = context.getResources().getString(R.string.encounter_location_title, WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
+        message = context.getResources().getString(R.string.encounter_combat_message, WordUtils.capitalizeFully(enemyType.toString().replace('_', ' ')));
     }
 
     public String getTitle() {
@@ -44,5 +42,8 @@ public class CombatData {
     }
     public Location getLocation() {
         return location;
+    }
+    public EnemyType getEnemyType() {
+        return enemyType;
     }
 }

@@ -118,6 +118,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itSave) {
+            //TODO: dodać delay min 1 sekunde
             Snackbar.make(findViewById(R.id.btnInventory), "Progress saved", Snackbar.LENGTH_SHORT).show();
         }
         return true;

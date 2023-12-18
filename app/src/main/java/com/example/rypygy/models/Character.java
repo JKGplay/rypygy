@@ -70,6 +70,9 @@ public class Character {
         }
     }
 
+    public static void addXp(int i) {
+        xp += i;
+    }
     public static void addGold(int i) {
         gold += i;
     }
