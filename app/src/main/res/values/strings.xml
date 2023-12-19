@@ -16,7 +16,9 @@
     <string name="btn_attack">Attack</string>
     <string name="btn_ability">Ability</string>
     <string name="btn_use_item">Use item</string>
-    <string name="btn_delete">delete</string>
+    <string name="btn_delete">Delete</string>
+    <string name="use">Use</string>
+    <string name="cancel">Cancel</string>
     <string name="combat_begin_infobox_1">You encounter a %1$s!</string>
     <string name="combat_begin_infobox_2">Prepare to attack!</string>
     <string name="combat_hp">HP: %1$d/%2$d</string>
@@ -29,6 +31,9 @@
     <string name="combat_lose_title">You lost…</string>
     <string name="combat_lose_message">You are not worthy of playing this game…</string>
     <string name="combat_lose_button">End your misery</string>
+    <string name="combat_use_nothing">You don\'t have any items to use</string>
+    <string name="combat_use_potion">You drank potion and healed %1$d HP</string>
+    <string name="combat_use_potion_full">You can\'t use potion at full HP</string>
     <string name="encounter_combat_message">
         You encountered %1$s!&lt;br/>
         Prepare to fight!

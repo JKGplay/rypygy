@@ -2,11 +2,9 @@ package com.example.rypygy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,8 +30,9 @@ public class CombatActivity extends AppCompatActivity {
     private Enemy enemy;
     private Location location;
     private EnemyType enemyType;
-    private List<String> itemNames = new ArrayList<>();
+    private List<Item> listOfUsableItems;
     private int checkedItem;
+    private boolean actionMade;
     private Item.Category checkedItemCategory;
     private enum Action {
         ATTACK,
@@ -69,65 +68,9 @@ public class CombatActivity extends AppCompatActivity {
 
         setCombat();
 
-        //TODO: wykrywać gdzie toczy się walka (w jakiej lokacji) oraz uporządkować system walki (osobne funkcje)
+        btnAttack.setOnClickListener(v -> characterAction(Action.ATTACK, v));
 
-        btnAttack.setOnClickListener(v -> characterAction(Action.ATTACK));
-
-        btnItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-                    return;
-                }
-                mLastClickTime = SystemClock.elapsedRealtime();
-                //TODO: zmienić warunek na nieposiadanie potion ani scroll
-                if (Character.getInventory().size() == 2) {
-//                    Toast.makeText(ForestActivity.this, "You don't have any items to use", Toast.LENGTH_SHORT).show();
-                    Snackbar.make(view, "You don't have any items to use", Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
-
-                checkedItem = -1;
-                checkedItemCategory = null;
-                itemNames.clear();
-                for (Item item: Character.getInventory()) {
-                    if (item.getCategory() == Item.Category.POTION || item.getCategory() == Item.Category.SCROLL) {
-                        itemNames.add(item.getName());
-                    }
-                }
-
-                new MaterialAlertDialogBuilder(CombatActivity.this)
-                        .setTitle("Inventory")
-                        .setSingleChoiceItems(itemNames.toArray(new String[0]), checkedItem, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                checkedItem = which;
-                                checkedItemCategory = Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).getCategory();
-                            }
-                        })
-                        .setPositiveButton("Use", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                if (checkedItem == -1) {
-                                    return;
-                                }
-
-                                if (checkedItemCategory == Item.Category.POTION) {
-                                    if (Character.getCurHP() == Character.getMaxHP()) {
-                                        Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
-                                    } else {
-                                        Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).getAttributes().get(Item.Attribute.HEAL).intValue()) + " HP", Snackbar.LENGTH_SHORT).show();
-                                        Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + Character.getInventory().get(Character.getIndexOf(itemNames.get(checkedItem))).getAttributes().get(Item.Attribute.HEAL).intValue()));
-                                        tvHp.setText("HP: " + Character.getCurHP() + "/" + Character.getMaxHP());
-                                        Character.removeItem(Character.getIndexOf(itemNames.get(checkedItem)));
-                                    }
-                                }
-                            }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
-            }
-        });
+        btnItem.setOnClickListener(v -> characterAction(Action.USE_ITEM, v));
     }
 
     private void setCombat() {
@@ -141,7 +84,7 @@ public class CombatActivity extends AppCompatActivity {
         tvEnemyHp.setText(getResources().getString(R.string.combat_hp, enemy.getCurHP(), enemy.getMaxHP()));
     }
 
-    private void characterAction(Action action) {
+    private void characterAction(Action action, View view) {
         if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
             return;
         }
@@ -151,15 +94,17 @@ public class CombatActivity extends AppCompatActivity {
                 characterAttack();
                 break;
             case USE_ITEM:
-                characterUseItem();
+                characterUseItem(view);
                 break;
         }
-        if (checkIfWon()) {
-            win();
-        }
-        enemyAttack();
-        if (checkIfLost()) {
-            lose();
+        if (actionMade) {
+            if (checkIfWon()) {
+                win();
+            }
+            enemyAttack();
+            if (checkIfLost()) {
+                lose();
+            }
         }
     }
 
@@ -178,10 +123,51 @@ public class CombatActivity extends AppCompatActivity {
         } else {
             tvPlayerInfo.setText(getResources().getString(R.string.combat_character_miss));
         }
+        actionMade = true;
     }
 
-    private void characterUseItem() {
-
+    private void characterUseItem(View view) {
+        actionMade = false;
+        checkedItemCategory = null;
+        checkedItem = -1;
+        listOfUsableItems.clear();
+        listOfUsableItems = Character.listOfUsableItems();
+        if (listOfUsableItems.size() == 0) {
+            Snackbar.make(view, getResources().getString(R.string.combat_use_nothing), Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        List<String> listOfNamesOfUsableItems = new ArrayList<>();
+        for (Item item : listOfUsableItems) {
+            listOfNamesOfUsableItems.add(item.getName());
+        }
+        new MaterialAlertDialogBuilder(CombatActivity.this)
+                .setTitle(getResources().getString(R.string.btn_inventory))
+                .setSingleChoiceItems(listOfNamesOfUsableItems.toArray(new String[0]), checkedItem, (dialogInterface, which) -> {
+                    checkedItemCategory = listOfUsableItems.get(which).getCategory();
+                    checkedItem = which;
+                })
+                .setPositiveButton(getResources().getString(R.string.use), (dialogInterface, i) -> {
+                    if (checkedItem == -1) {
+                        return;
+                    }
+                    if (checkedItemCategory == Item.Category.POTION) {
+                        if (Character.getCurHP() == Character.getMaxHP()) {
+                            Snackbar.make(view, getResources().getString(R.string.combat_use_potion_full), Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            actionMade = true;
+                            int heal = Math.min(
+                                    Character.getMaxHP() - Character.getCurHP(),
+                                    listOfUsableItems.get(checkedItem).getAttributes().get(Item.Attribute.HEAL).intValue()
+                            );
+                            Snackbar.make(view, getResources().getString(R.string.combat_use_potion, heal), Snackbar.LENGTH_SHORT).show();
+                            Character.setCurHP(Character.getCurHP() + heal);
+                            tvHp.setText(getResources().getString(R.string.combat_hp, Character.getCurHP(), Character.getMaxHP()));
+                            Character.removeItem(Character.getIndexOf(listOfNamesOfUsableItems.get(checkedItem)));
+                        }
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.cancel), null)
+                .show();
     }
 
     private void enemyAttack() {
@@ -196,7 +182,7 @@ public class CombatActivity extends AppCompatActivity {
             int dmg = enemy.damage();
             Character.setCurHP(Math.max(Character.getCurHP() - dmg, 0));
             tvEnemyInfo.setText(getResources().getString(R.string.combat_enemy_hit, enemy.getName(), dmg));
-            tvHp.setText(getResources().getString(R.string.combat_hp, enemy.getCurHP(), enemy.getMaxHP()));
+            tvHp.setText(getResources().getString(R.string.combat_hp, Character.getCurHP(), Character.getMaxHP()));
         } else {
             tvEnemyInfo.setText(getResources().getString(R.string.combat_enemy_miss, enemy.getName()));
         }

@@ -70,13 +70,22 @@ public class Character {
         }
     }
 
+    public static List<Item> listOfUsableItems() {
+        List<Item> toReturn = new ArrayList<>();
+        for (Item item : inventory) {
+            if (item.getCategory() == Item.Category.POTION || item.getCategory() == Item.Category.SCROLL) {
+                toReturn.add(item);
+            }
+        }
+        return toReturn;
+    }
+
     public static void addXp(int i) {
         xp += i;
     }
     public static void addGold(int i) {
         gold += i;
     }
-
     public static void removeGold(int i) {
         gold -= i;
     }
