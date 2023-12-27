@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.models.Item;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -28,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(view -> {
             if (!String.valueOf(etName.getText()).trim().isEmpty()) {
                 Character.setName(String.valueOf(etName.getText()).trim());
+                Item startingWeapon = new Item(Item.PredefinedItems.SHORT_SWORD, 1);
+                Item startingArmor = new Item(Item.PredefinedItems.RAGS, 1);
+                Inventory.addItem(startingWeapon);
+                Inventory.addItem(startingArmor);
+                Inventory.equipItem(startingWeapon);
+                Inventory.equipItem(startingArmor);
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
                 finish();

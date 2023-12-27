@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.rypygy.R;
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.models.Item;
 import com.example.rypygy.models.Rnd;
 
@@ -75,7 +76,8 @@ public class ItemData {
     }
 
     public void action() {
-        Character.addItem(drawnItem, 1);
+
+        Inventory.addItem(drawnItem);
     }
 
     public String getTitle() {

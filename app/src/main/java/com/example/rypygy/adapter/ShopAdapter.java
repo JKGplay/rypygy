@@ -2,6 +2,7 @@ package com.example.rypygy.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rypygy.R;
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.models.Item;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -61,7 +63,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder
         public void bind(@NonNull Item item) {
             tvItemName.setText(item.getName());
             tvItemPrice.setText("Price: " + item.getPrice());
-
             switch (item.getCategory()) {
                 case WEAPON:
                     tvItemDesc.setText("Damage: " + item.getAttributes().get(Item.Attribute.MIN_DMG).intValue() + " - " + item.getAttributes().get(Item.Attribute.MAX_DMG).intValue());
@@ -77,29 +78,20 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ItemViewHolder
                     break;
             }
 
-            btnBuy.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (Character.getGold() < item.getPrice()) {
-                        Snackbar.make(view, "You don't have enough money", Snackbar.LENGTH_SHORT).show();
-                    } else {
-                        new MaterialAlertDialogBuilder(context)
-                                .setMessage("Are you sure you want to buy " + item.getName() + "?")
-                                .setCancelable(true)
-                                .setPositiveButton("Buy", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Snackbar.make(view, "You bought " + item.getName(), Snackbar.LENGTH_SHORT).show();
-//                                        Log.d("amount", String.valueOf(item.getAmount()));
-//                                        Log.d("item", item.toString());
-                                        Character.removeGold(item.getPrice());
-                                        Character.addItem(item, 1);
-                                    }
-                                })
-                                .setNegativeButton("Cancel", null)
-                                .show();
-                    }
+            btnBuy.setOnClickListener(v -> {
+                if (Character.getGold() < item.getPrice()) {
+                    Snackbar.make(v, "You don't have enough money", Snackbar.LENGTH_SHORT).show();
+                } else {
+                    new MaterialAlertDialogBuilder(context)
+                            .setMessage("Are you sure you want to buy " + item.getName() + "?")
+                            .setCancelable(true)
+                            .setPositiveButton("Buy", (dialogInterface, i) -> {
+                                Snackbar.make(v, "You bought " + item.getName(), Snackbar.LENGTH_SHORT).show();
+                                Character.removeGold(item.getPrice());
+                                Inventory.addItem(item);
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .show();
                 }
             });
         }

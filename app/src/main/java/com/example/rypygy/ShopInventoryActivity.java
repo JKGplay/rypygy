@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.rypygy.adapter.InventoryAdapter;
 import com.example.rypygy.adapter.ShopAdapter;
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.models.Item;
 import com.google.android.material.chip.ChipGroup;
 
@@ -46,8 +46,8 @@ public class ShopInventoryActivity extends AppCompatActivity implements ChipGrou
                 setTitle("Wrath of Kunczka - Shop");
                 recyclerView.setAdapter(shopAdapter);
             } else if (Objects.equals(getIntent().getSerializableExtra(SecondActivity.SHOP_INVENTORY_KEY), SecondActivity.ShopInv.INVENTORY)) {
-                allItems.addAll(Character.getInventory());
-                showedItems.addAll(Character.getInventory());
+                allItems.addAll(Inventory.getInventory());
+                showedItems.addAll(Inventory.getInventory());
                 InventoryAdapter inventoryAdapter = new InventoryAdapter(showedItems, ShopInventoryActivity.this);
                 setTitle("Wrath of Kunczka - Inventory");
                 recyclerView.setAdapter(inventoryAdapter);

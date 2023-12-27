@@ -38,7 +38,8 @@ public class Item {
         MAX_AC,
         MIN_DMG,
         MAX_DMG,
-        HEAL
+        HEAL,
+        EQUIPPED,
     }
 
     private final String name;
@@ -47,28 +48,11 @@ public class Item {
     private final int price;
     private final HashMap<Attribute, Double> attributes;
 
-    public Item(String name, Category category, int amount, int price) {
-        this.name = name;
-        this.category = category;
-        this.amount = amount;
-        this.price = price;
-        this.attributes = null;
-    }
-
-    public Item(String name, Category category, int amount, int price, HashMap<Attribute, Double> attributes) {
-        this.name = name;
-        this.category = category;
-        this.amount = amount;
-        this.price = price;
-        this.attributes = attributes;
-    }
-
     public Item(@NonNull PredefinedItems predefinedItem, int amount) {
         String name = "";
         Category category = null;
         int price = 0;
         HashMap<Attribute, Double> attributes = new HashMap<>();
-
         switch (predefinedItem) {
             case SHORT_SWORD:
                 name = "Short Sword";
@@ -76,6 +60,7 @@ public class Item {
                 price = 120;
                 attributes.put(Attribute.MIN_DMG, 2.0);
                 attributes.put(Attribute.MAX_DMG, 6.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case LONG_SWORD:
                 name = "Long Sword";
@@ -83,6 +68,7 @@ public class Item {
                 price = 350;
                 attributes.put(Attribute.MIN_DMG, 2.0);
                 attributes.put(Attribute.MAX_DMG, 10.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case WAR_HAMMER:
                 name = "War Hammer";
@@ -90,6 +76,7 @@ public class Item {
                 price = 600;
                 attributes.put(Attribute.MIN_DMG, 5.0);
                 attributes.put(Attribute.MAX_DMG, 9.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case CLAYMORE:
                 name = "Claymore";
@@ -97,6 +84,7 @@ public class Item {
                 price = 450;
                 attributes.put(Attribute.MIN_DMG, 1.0);
                 attributes.put(Attribute.MAX_DMG, 12.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case GREAT_SWORD:
                 name = "Great Sword";
@@ -104,6 +92,7 @@ public class Item {
                 price = 3000;
                 attributes.put(Attribute.MIN_DMG, 15.0);//w diablo 10
                 attributes.put(Attribute.MAX_DMG, 25.0);//w diablo 20
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case BATTLE_AXE:
                 name = "Battle Axe";
@@ -111,6 +100,7 @@ public class Item {
                 price = 1500;
                 attributes.put(Attribute.MIN_DMG, 10.0);
                 attributes.put(Attribute.MAX_DMG, 25.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case GREAT_AXE:
                 name = "Great Axe";
@@ -118,6 +108,7 @@ public class Item {
                 price = 2500;
                 attributes.put(Attribute.MIN_DMG, 12.0);
                 attributes.put(Attribute.MAX_DMG, 30.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case RAGS:
                 name = "Rags";
@@ -125,6 +116,7 @@ public class Item {
                 price = 5;
                 attributes.put(Attribute.MIN_AC, 2.0);
                 attributes.put(Attribute.MAX_AC, 6.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case LEATHER_ARMOR:
                 name = "Leather Armor";
@@ -132,6 +124,7 @@ public class Item {
                 price = 300;
                 attributes.put(Attribute.MIN_AC, 10.0);
                 attributes.put(Attribute.MAX_AC, 13.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case STUDDED_LEATHER_ARMOR:
                 name = "Studded Leather Armor";
@@ -139,6 +132,7 @@ public class Item {
                 price = 700;
                 attributes.put(Attribute.MIN_AC, 15.0);
                 attributes.put(Attribute.MAX_AC, 17.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case CHAIN_MAIL:
                 name = "Chain Mail";
@@ -146,6 +140,7 @@ public class Item {
                 price = 1250;
                 attributes.put(Attribute.MIN_AC, 18.0);
                 attributes.put(Attribute.MAX_AC, 22.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case SCALE_MAIL:
                 name = "Scale Mail";
@@ -153,6 +148,7 @@ public class Item {
                 price = 2300;
                 attributes.put(Attribute.MIN_AC, 23.0);
                 attributes.put(Attribute.MAX_AC, 28.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case PLATE_MAIL:
                 name = "Plate Mail";
@@ -160,6 +156,7 @@ public class Item {
                 price = 4600;
                 attributes.put(Attribute.MIN_AC, 42.0);
                 attributes.put(Attribute.MAX_AC, 50.0);
+                attributes.put(Attribute.EQUIPPED, 0.0);
                 break;
             case SMALL_POTION:
                 name = "Small Potion";

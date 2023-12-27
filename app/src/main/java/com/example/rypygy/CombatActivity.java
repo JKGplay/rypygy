@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.example.rypygy.enums.EnemyType;
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
 import com.example.rypygy.models.Enemy;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.models.Item;
 import com.example.rypygy.models.Rnd;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -30,10 +32,8 @@ public class CombatActivity extends AppCompatActivity {
     private Enemy enemy;
     private Location location;
     private EnemyType enemyType;
-    private List<Item> listOfUsableItems;
-    private int checkedItem;
-    private boolean actionMade;
-    private Item.Category checkedItemCategory;
+    private List<Item> listOfUsableItems = new ArrayList<>();
+    private Item checkedItem;
     private enum Action {
         ATTACK,
         USE_ITEM,
@@ -97,24 +97,15 @@ public class CombatActivity extends AppCompatActivity {
                 characterUseItem(view);
                 break;
         }
-        if (actionMade) {
-            if (checkIfWon()) {
-                win();
-            }
-            enemyAttack();
-            if (checkIfLost()) {
-                lose();
-            }
-        }
     }
 
     private void characterAttack() {
         if (Character.toHit(enemy.getAc())) {
             int dmg = Character.getDamage();
-            if (Character.getWeapon() != null) {
+            if (Inventory.hasEquipped(Item.Category.WEAPON)) {
                 dmg += Rnd.rnd(
-                        Character.getWeapon().getAttributes().get(Item.Attribute.MIN_DMG).intValue(),
-                        Character.getWeapon().getAttributes().get(Item.Attribute.MAX_DMG).intValue()
+                        Inventory.getEquipped(Item.Category.WEAPON).getAttributes().get(Item.Attribute.MIN_DMG).intValue(),
+                        Inventory.getEquipped(Item.Category.WEAPON).getAttributes().get(Item.Attribute.MAX_DMG).intValue()
                 );
             }
             enemy.setCurHP(Math.max(enemy.getCurHP() - dmg, 0));
@@ -123,47 +114,41 @@ public class CombatActivity extends AppCompatActivity {
         } else {
             tvPlayerInfo.setText(getResources().getString(R.string.combat_character_miss));
         }
-        actionMade = true;
+        actionMade();
     }
 
     private void characterUseItem(View view) {
-        actionMade = false;
-        checkedItemCategory = null;
-        checkedItem = -1;
         listOfUsableItems.clear();
-        listOfUsableItems = Character.listOfUsableItems();
+        listOfUsableItems = Inventory.listOfUsableItems();
         if (listOfUsableItems.size() == 0) {
             Snackbar.make(view, getResources().getString(R.string.combat_use_nothing), Snackbar.LENGTH_SHORT).show();
             return;
         }
-        List<String> listOfNamesOfUsableItems = new ArrayList<>();
-        for (Item item : listOfUsableItems) {
-            listOfNamesOfUsableItems.add(item.getName());
-        }
+        List<String> listOfNamesOfUsableItems = Inventory.listOfNamesOfUsableItems();
+
         new MaterialAlertDialogBuilder(CombatActivity.this)
                 .setTitle(getResources().getString(R.string.btn_inventory))
-                .setSingleChoiceItems(listOfNamesOfUsableItems.toArray(new String[0]), checkedItem, (dialogInterface, which) -> {
-                    checkedItemCategory = listOfUsableItems.get(which).getCategory();
-                    checkedItem = which;
+                .setSingleChoiceItems(listOfNamesOfUsableItems.toArray(new String[0]), 0, (dialogInterface, which) -> {
+                    checkedItem = listOfUsableItems.get(which);
                 })
                 .setPositiveButton(getResources().getString(R.string.use), (dialogInterface, i) -> {
-                    if (checkedItem == -1) {
-                        return;
-                    }
-                    if (checkedItemCategory == Item.Category.POTION) {
+                    if (checkedItem.getCategory().equals(Item.Category.POTION)) {
                         if (Character.getCurHP() == Character.getMaxHP()) {
                             Snackbar.make(view, getResources().getString(R.string.combat_use_potion_full), Snackbar.LENGTH_SHORT).show();
                         } else {
-                            actionMade = true;
                             int heal = Math.min(
                                     Character.getMaxHP() - Character.getCurHP(),
-                                    listOfUsableItems.get(checkedItem).getAttributes().get(Item.Attribute.HEAL).intValue()
+                                    checkedItem.getAttributes().get(Item.Attribute.HEAL).intValue()
                             );
                             Snackbar.make(view, getResources().getString(R.string.combat_use_potion, heal), Snackbar.LENGTH_SHORT).show();
                             Character.setCurHP(Character.getCurHP() + heal);
                             tvHp.setText(getResources().getString(R.string.combat_hp, Character.getCurHP(), Character.getMaxHP()));
-                            Character.removeItem(Character.getIndexOf(listOfNamesOfUsableItems.get(checkedItem)));
+                            Inventory.removeItem(checkedItem);
+                            actionMade();
                         }
+                    } else if (checkedItem.getCategory().equals(Item.Category.SCROLL)) {
+                        //TODO: dodać obsługę scrolli
+                        return;
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel), null)
@@ -172,10 +157,10 @@ public class CombatActivity extends AppCompatActivity {
 
     private void enemyAttack() {
         int ac = Character.getAc();
-        if (Character.getArmor() != null) {
+        if (Inventory.hasEquipped(Item.Category.ARMOR)) {
             ac += Rnd.rnd(
-                    Character.getArmor().getAttributes().get(Item.Attribute.MIN_AC).intValue(),
-                    Character.getArmor().getAttributes().get(Item.Attribute.MAX_AC).intValue()
+                    Inventory.getEquipped(Item.Category.ARMOR).getAttributes().get(Item.Attribute.MIN_AC).intValue(),
+                    Inventory.getEquipped(Item.Category.ARMOR).getAttributes().get(Item.Attribute.MAX_AC).intValue()
             );
         }
         if (enemy.toHit(Character.getLevel(), ac)) {
@@ -185,6 +170,16 @@ public class CombatActivity extends AppCompatActivity {
             tvHp.setText(getResources().getString(R.string.combat_hp, Character.getCurHP(), Character.getMaxHP()));
         } else {
             tvEnemyInfo.setText(getResources().getString(R.string.combat_enemy_miss, enemy.getName()));
+        }
+    }
+
+    private void actionMade() {
+        if (checkIfWon()) {
+            win();
+        }
+        enemyAttack();
+        if (checkIfLost()) {
+            lose();
         }
     }
 

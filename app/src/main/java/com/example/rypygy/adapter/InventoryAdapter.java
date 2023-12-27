@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rypygy.R;
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.models.Item;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -70,7 +71,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
             switch (item.getCategory()) {
                 case WEAPON:
                     tvItemDesc.setText("Damage: " + item.getAttributes().get(Item.Attribute.MIN_DMG).intValue() + "-" + item.getAttributes().get(Item.Attribute.MAX_DMG).intValue());
-                    if (item.equals(Character.getWeapon())) {
+                    if (Inventory.isEquipped(item)) {
                         btnAction.setText("Equipped");
                         btnAction.setEnabled(false);
                     } else {
@@ -81,7 +82,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                 case ARMOR:
                     tvItemDesc.setText("Armor Class: " + item.getAttributes().get(Item.Attribute.MIN_AC).intValue() + "-" + item.getAttributes().get(Item.Attribute.MAX_AC).intValue());
                     btnAction.setText("Equip");
-                    if (item.equals(Character.getArmor())) {
+                    if (Inventory.isEquipped(item)) {
                         btnAction.setText("Equipped");
                         btnAction.setEnabled(false);
                     } else {
@@ -100,78 +101,57 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                     break;
             }
 
-            btnAction.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    switch (item.getCategory()) {
-                        case WEAPON:
-                            Snackbar.make(view, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
-                            Character.setWeapon(item);
-                            notifyDataSetChanged();
-                            break;
-                        case ARMOR:
-                            Snackbar.make(view, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
-                            Character.setArmor(item);
-                            notifyDataSetChanged();
-                            break;
-                        case POTION:
-                            if (Character.getCurHP() == Character.getMaxHP()) {
-                                Snackbar.make(view, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
+            btnAction.setOnClickListener(v -> {
+                switch (item.getCategory()) {
+                    case WEAPON:
+                    case ARMOR:
+                        Snackbar.make(v, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
+                        Inventory.equipItem(item);
+                        notifyDataSetChanged();
+                        break;
+                    case POTION:
+                        if (Character.getCurHP() == Character.getMaxHP()) {
+                            Snackbar.make(v, "You can't use potion at full HP", Snackbar.LENGTH_SHORT).show();
+                        } else {
+                            Snackbar.make(v, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.getAttributes().get(Item.Attribute.HEAL).intValue()) + " HP", Snackbar.LENGTH_SHORT).show();
+                            Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.getAttributes().get(Item.Attribute.HEAL).intValue()));
+
+                            List<Item> temp = new ArrayList<>(items);
+                            Inventory.removeItem(Inventory.getInventory().get(getAdapterPosition()));
+
+                            if (temp.size() > items.size()) {
+                                notifyItemRemoved(getAdapterPosition());
+                                notifyItemRangeChanged(getAdapterPosition(), items.size());
                             } else {
-                                Snackbar.make(view, "You drank potion and healed " + Math.min(Character.getMaxHP() - Character.getCurHP(), item.getAttributes().get(Item.Attribute.HEAL).intValue()) + " HP", Snackbar.LENGTH_SHORT).show();
-                                Character.setCurHP(Math.min(Character.getMaxHP(), Character.getCurHP() + item.getAttributes().get(Item.Attribute.HEAL).intValue()));
-
-                                List<Item> temp = new ArrayList<>(items);
-                                Character.removeItem(getAdapterPosition());
-
-                                if (temp.size() > items.size()) {
-                                    notifyItemRemoved(getAdapterPosition());
-                                    notifyItemRangeChanged(getAdapterPosition(), items.size());
-                                } else {
-                                    tvItemAmount.setText("x" + item.getAmount());
-                                }
+                                tvItemAmount.setText("x" + item.getAmount());
                             }
-                            break;
-                    }
-
+                        }
+                        break;
                 }
+
             });
 
-            btnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    new MaterialAlertDialogBuilder(context)
-                            .setMessage("Are you sure you want to throw away " + item.getName() + "?")
-                            .setCancelable(true)
-                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    List<Item> temp = new ArrayList<>(items);
-                                    Snackbar.make(view, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
-                                    if(item.equals(Character.getWeapon())) {
-                                        Character.setWeapon(null);
-                                    }
-                                    if (item.equals(Character.getArmor())) {
-                                        Character.setArmor(null);
-                                    }
-                                    Character.removeItem(getAdapterPosition());
+            btnDelete.setOnClickListener(v -> new MaterialAlertDialogBuilder(context)
+                    .setMessage("Are you sure you want to throw away " + item.getName() + "?")
+                    .setCancelable(true)
+                    .setPositiveButton("Delete", (dialogInterface, i) -> {
+                        List<Item> temp = new ArrayList<>(items);
+                        Snackbar.make(v, "You threw " + item.getName() + " away", Snackbar.LENGTH_SHORT).show();
+                        if (Inventory.isEquipped(item)) {
+                            Inventory.unEquipItem(item.getCategory());
+                        }
+                        Inventory.removeItem(Inventory.getInventory().get(getAdapterPosition()));
 //                                    notifyDataSetChanged();
-                                    if (temp.size() > Character.getInventory().size()) {
-                                        items.remove(getAdapterPosition());
-                                        notifyItemRemoved(getAdapterPosition());
-                                        notifyItemRangeChanged(getAdapterPosition(), items.size());
-                                    } else {
-                                        tvItemAmount.setText("x" + item.getAmount());
-                                    }
-                                }
-                            })
-                            .setNegativeButton("Cancel", null)
-                            .show();
-                }
-            });
+                        if (temp.size() > Inventory.getInventory().size()) {
+                            items.remove(getAdapterPosition());
+                            notifyItemRemoved(getAdapterPosition());
+                            notifyItemRangeChanged(getAdapterPosition(), items.size());
+                        } else {
+                            tvItemAmount.setText("x" + item.getAmount());
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show());
         }
     }
-
-
 }
