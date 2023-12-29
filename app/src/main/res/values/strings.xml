@@ -62,4 +62,5 @@
     <string name="encounter_npc_forest_visited_message">
         You meet Fred. He doesn\'t have anything more to say to help you with First-Years, but you talk all day anyway.
     </string>
+    <string name="btn_load">Or load existing save</string>
 </resources>

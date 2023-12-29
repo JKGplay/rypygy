@@ -84,7 +84,7 @@ public class EncounterActivity extends AppCompatActivity {
 
     private EncounterType draw(@NonNull HashMap<EncounterType, Integer> h) {
         int rnd = Rnd.rnd(1, 100);
-        rnd = 1;
+        rnd = 55;
         int i = 0;
         List<Integer> values = new ArrayList<>(h.values());
         int value = values.get(i);

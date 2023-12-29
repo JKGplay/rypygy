@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Inventory {
 
-    private static List<Item> inventory = new ArrayList<Item>();
+    private static List<Item> inventory = new ArrayList<>();
 
     public static void addItem(Item item) {
         if (inventory.contains(item)) {
@@ -55,25 +55,15 @@ public class Inventory {
 
     public static void equipItem(Item item) {
         if (inventory.contains(item)) {
-            if (item.getCategory().equals(Item.Category.WEAPON)) {
-                unEquipItem(Item.Category.WEAPON);
-            } else if (item.getCategory().equals(Item.Category.ARMOR)) {
-                unEquipItem(Item.Category.ARMOR);
+            if (Inventory.hasEquipped(item.getCategory())) {
+                unEquipItem(item.getCategory());
             }
             inventory.get(inventory.indexOf(item)).getAttributes().replace(Item.Attribute.EQUIPPED, 1.0);
         }
     }
 
     public static void unEquipItem(Item.Category category) {
-        if (category.equals(Item.Category.WEAPON) || category.equals(Item.Category.ARMOR)) {
-            for (Item item : inventory) {
-                if (item.getCategory().equals(category)) {
-                    if (item.getAttributes().get(Item.Attribute.EQUIPPED) == 1.0) {
-                        inventory.get(inventory.indexOf(item)).getAttributes().replace(Item.Attribute.EQUIPPED, 0.0);
-                    }
-                }
-            }
-        }
+        inventory.get(inventory.indexOf(getEquipped(category))).getAttributes().replace(Item.Attribute.EQUIPPED, 0.0);
     }
 
     public static List<Item> listOfUsableItems() {

@@ -15,8 +15,6 @@ public class Character {
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
 
-    //TODO: uporządkować metody dotyczące ekwipunku
-
     public static boolean toHit(int ACmonster) {
         //min(max(toHit, 5), 95)
         return Rnd.rnd(1, 100) <= Math.min(Math.max(70 + dexterity / 2 + level - ACmonster, 5), 95);

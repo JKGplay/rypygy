@@ -141,7 +141,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                             Inventory.unEquipItem(item.getCategory());
                         }
                         Inventory.removeItem(Inventory.getInventory().get(getAdapterPosition()));
-//                                    notifyDataSetChanged();
+//                        notifyDataSetChanged();
                         if (temp.size() > Inventory.getInventory().size()) {
                             items.remove(getAdapterPosition());
                             notifyItemRemoved(getAdapterPosition());

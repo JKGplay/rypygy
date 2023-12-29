@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +15,14 @@ import android.widget.TextView;
 
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
+import com.example.rypygy.save.Save;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,7 +126,25 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itSave) {
-            //TODO: dodać delay min 1 sekunde
+
+            Save save = new Save();
+            Gson gson = new Gson();
+
+            String myJson = gson.toJson(save);
+            String path = getFilesDir().getPath();
+            Log.d("save - object", save.toString());
+            Log.d("save - json", myJson);
+            Log.d("path", path);
+
+            try {
+                FileWriter writer = new FileWriter(getFilesDir().getPath() + "/data.json");
+                gson.toJson(save, writer);
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //TODO: dodać delay min 1 sekunde albo dialogbuilder
             Snackbar.make(findViewById(R.id.btnInventory), "Progress saved", Snackbar.LENGTH_SHORT).show();
         }
         return true;
