@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/release
+/hs_err_pid8980.log

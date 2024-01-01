@@ -13,7 +13,7 @@
         android:layout_height="182dp"
         android:layout_marginTop="32dp"
         android:background="@color/lime_500"
-        android:padding="24dp"
+        android:padding="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,7 +22,7 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kunczka"
+            tools:text="Kunczka"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
             android:id="@+id/tvHp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HP: 10/10"
+            tools:text="HP: 10/10"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvMoney"
@@ -45,7 +45,7 @@
             android:id="@+id/tvXp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XP: 0"
+            tools:text="XP: 0"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvDefense"
             app:layout_constraintEnd_toEndOf="@+id/tvDefense"
@@ -55,7 +55,7 @@
             android:id="@+id/tvLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level: 1"
+            tools:text="Level: 1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvAttack"
             app:layout_constraintStart_toStartOf="@+id/tvAttack"
@@ -65,7 +65,7 @@
             android:id="@+id/tvAttack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attack: 1"
+            tools:text="Strength: 1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvHp"
             app:layout_constraintStart_toStartOf="@+id/tvHp"
@@ -75,7 +75,7 @@
             android:id="@+id/tvDefense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Defense: 1"
+            tools:text="Dexterity: 1"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/tvMoney"
             app:layout_constraintEnd_toEndOf="@+id/tvMoney"
@@ -85,7 +85,7 @@
             android:id="@+id/tvMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Money: 10"
+            tools:text="Gold: 10"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -117,6 +117,66 @@
             app:iconGravity="textStart" />
 
         <Button
+            android:id="@+id/btnGarages"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="Garages"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart" />
+
+        <Button
+            android:id="@+id/btnToilets"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="Toilets"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart" />
+
+        <Button
+            android:id="@+id/btnComputerLab"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="Computer Lab"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart" />
+
+        <Button
+            android:id="@+id/btnDormitory"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="Dormitory"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart" />
+
+        <Button
+            android:id="@+id/btnCourtyard"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="Courtyard"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart" />
+
+        <Button
+            android:id="@+id/btnKaczyce"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="Kaczyce"
+            app:icon="@drawable/outline_forest_24"
+            app:iconGravity="textStart" />
+
+        <Button
             android:id="@+id/btnShop"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="match_parent"
@@ -124,6 +184,16 @@
             android:backgroundTint="@color/orange_500"
             android:text="@string/btn_shop"
             app:icon="@drawable/outline_shopping_cart_24"
+            app:iconGravity="textStart" />
+
+        <Button
+            android:id="@+id/btnInventory"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:text="@string/btn_inventory"
+            app:icon="@drawable/backpack_24"
             app:iconGravity="textStart" />
 
     </LinearLayout>
