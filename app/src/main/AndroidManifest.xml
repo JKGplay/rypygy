@@ -13,13 +13,18 @@
         android:theme="@style/Theme.Rypygy"
         tools:targetApi="31">
         <activity
+            android:name=".EncounterActivity"
+            android:exported="false"
+            android:parentActivityName=".SecondActivity" />
+        <activity
+            android:name=".ShopInventoryActivity"
+            android:exported="false"
+            android:parentActivityName=".SecondActivity" />
+        <activity
             android:name=".LevelUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ShopActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FightActivity"
+            android:name=".CombatActivity"
             android:exported="false" />
         <activity
             android:name=".SecondActivity"
