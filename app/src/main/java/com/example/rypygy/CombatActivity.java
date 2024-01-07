@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rypygy.enums.EnemyType;
@@ -27,6 +28,7 @@ public class CombatActivity extends AppCompatActivity {
 
     private TextView tvName, tvHp, tvPlayerInfo, tvEnemyInfo, tvEnemyName, tvEnemyHp;
     private Button btnAttack, btnAbility, btnItem;
+    private ImageView ivAbility;
     private long mLastClickTime = 0;
     private Enemy enemy;
     private Location location;
@@ -52,6 +54,7 @@ public class CombatActivity extends AppCompatActivity {
         btnAttack = findViewById(R.id.btnAttack);
         btnAbility = findViewById(R.id.btnAbility);
         btnItem = findViewById(R.id.btnItem);
+        ivAbility = findViewById(R.id.ivAbility);
 
         if (getIntent().hasExtra(SecondActivity.ENCOUNTER_LOCATION_KEY)) {
             location = (Location) getIntent().getSerializableExtra(SecondActivity.ENCOUNTER_LOCATION_KEY);
@@ -64,6 +67,7 @@ public class CombatActivity extends AppCompatActivity {
 
         //na razie nie ma żadnych abilitek
         btnAbility.setVisibility(View.GONE);
+        ivAbility.setVisibility(View.GONE);
 
         setCombat();
 

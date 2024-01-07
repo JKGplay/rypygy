@@ -133,6 +133,7 @@
             app:layout_constraintTop_toTopOf="@+id/vView" />
 
         <ImageView
+            android:id="@+id/ivAbility"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/button"

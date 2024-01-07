@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.rypygy.data.NpcData;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextInputEditText etName;
     private Button btnPlay, btnLoad;
+    private ImageView ivLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
         etName = findViewById(R.id.etName);
         btnPlay = findViewById(R.id.btnPlay);
         btnLoad = findViewById(R.id.btnLoad);
+        ivLoad = findViewById(R.id.ivLoad);
 
         File file = new File(getFilesDir().getPath() + "/data.json");
 
         if (!file.exists()) {
             btnLoad.setVisibility(View.GONE);
+            ivLoad.setVisibility(View.GONE);
         }
 
         btnPlay.setOnClickListener(view -> {

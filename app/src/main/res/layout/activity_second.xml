@@ -13,7 +13,7 @@
         android:layout_width="292dp"
         android:layout_height="182dp"
         android:layout_marginTop="32dp"
-        android:background="#00FFFFF"
+        android:background="#00FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -134,10 +134,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnForest"
-                app:layout_constraintBottom_toBottomOf="btnForest"
-                app:layout_constraintEnd_toEndOf="btnForest"
-                app:layout_constraintStart_toStartOf="btnForest"/>
+                app:layout_constraintTop_toTopOf="@+id/btnForest"
+                app:layout_constraintBottom_toBottomOf="@+id/btnForest"
+                app:layout_constraintEnd_toEndOf="@+id/btnForest"
+                app:layout_constraintStart_toStartOf="@+id/btnForest"/>
 
             <Button
                 android:id="@+id/btnForest"
@@ -168,10 +168,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnGarages"
-                app:layout_constraintBottom_toBottomOf="btnGarages"
-                app:layout_constraintEnd_toEndOf="btnGarages"
-                app:layout_constraintStart_toStartOf="btnGarages"/>
+                app:layout_constraintTop_toTopOf="@+id/btnGarages"
+                app:layout_constraintBottom_toBottomOf="@+id/btnGarages"
+                app:layout_constraintEnd_toEndOf="@+id/btnGarages"
+                app:layout_constraintStart_toStartOf="@+id/btnGarages"/>
             <Button
                 android:id="@+id/btnGarages"
                 style="@style/Widget.MaterialComponents.Button.Icon"
@@ -200,10 +200,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnToilets"
-                app:layout_constraintBottom_toBottomOf="btnToilets"
-                app:layout_constraintEnd_toEndOf="btnToilets"
-                app:layout_constraintStart_toStartOf="btnToilets"/>
+                app:layout_constraintTop_toTopOf="@+id/btnToilets"
+                app:layout_constraintBottom_toBottomOf="@+id/btnToilets"
+                app:layout_constraintEnd_toEndOf="@+id/btnToilets"
+                app:layout_constraintStart_toStartOf="@+id/btnToilets"/>
 
             <Button
                 android:id="@+id/btnToilets"
@@ -232,10 +232,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnComputerLab"
-                app:layout_constraintBottom_toBottomOf="btnComputerLab"
-                app:layout_constraintEnd_toEndOf="btnComputerLab"
-                app:layout_constraintStart_toStartOf="btnComputerLab"/>
+                app:layout_constraintTop_toTopOf="@+id/btnComputerLab"
+                app:layout_constraintBottom_toBottomOf="@+id/btnComputerLab"
+                app:layout_constraintEnd_toEndOf="@+id/btnComputerLab"
+                app:layout_constraintStart_toStartOf="@+id/btnComputerLab"/>
 
             <Button
                 android:id="@+id/btnComputerLab"
@@ -264,10 +264,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnComputerLab"
-                app:layout_constraintBottom_toBottomOf="btnComputerLab"
-                app:layout_constraintEnd_toEndOf="btnComputerLab"
-                app:layout_constraintStart_toStartOf="btnComputerLab"/>
+                app:layout_constraintTop_toTopOf="@+id/btnDormitory"
+                app:layout_constraintBottom_toBottomOf="@+id/btnDormitory"
+                app:layout_constraintEnd_toEndOf="@+id/btnDormitory"
+                app:layout_constraintStart_toStartOf="@+id/btnDormitory"/>
 
             <Button
                 android:id="@+id/btnDormitory"
@@ -297,10 +297,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnCourtyard"
-                app:layout_constraintBottom_toBottomOf="btnCourtyard"
-                app:layout_constraintEnd_toEndOf="btnCourtyard"
-                app:layout_constraintStart_toStartOf="btnCourtyard"/>
+                app:layout_constraintTop_toTopOf="@+id/btnCourtyard"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCourtyard"
+                app:layout_constraintEnd_toEndOf="@+id/btnCourtyard"
+                app:layout_constraintStart_toStartOf="@+id/btnCourtyard"/>
 
             <Button
                 android:id="@+id/btnCourtyard"
@@ -330,10 +330,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnKaczyce"
-                app:layout_constraintBottom_toBottomOf="btnKaczyce"
-                app:layout_constraintEnd_toEndOf="btnKaczyce"
-                app:layout_constraintStart_toStartOf="btnKaczyce"/>
+                app:layout_constraintTop_toTopOf="@+id/btnKaczyce"
+                app:layout_constraintBottom_toBottomOf="@+id/btnKaczyce"
+                app:layout_constraintEnd_toEndOf="@+id/btnKaczyce"
+                app:layout_constraintStart_toStartOf="@+id/btnKaczyce"/>
 
             <Button
                 android:id="@+id/btnKaczyce"
@@ -364,10 +364,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnShop"
-                app:layout_constraintBottom_toBottomOf="btnShop"
-                app:layout_constraintEnd_toEndOf="btnShop"
-                app:layout_constraintStart_toStartOf="btnShop"/>
+                app:layout_constraintTop_toTopOf="@+id/btnShop"
+                app:layout_constraintBottom_toBottomOf="@+id/btnShop"
+                app:layout_constraintEnd_toEndOf="@+id/btnShop"
+                app:layout_constraintStart_toStartOf="@+id/btnShop"/>
 
             <Button
                 android:id="@+id/btnShop"
@@ -396,10 +396,10 @@
                 android:layout_height="50dp"
                 android:src="@drawable/button"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="btnInventory"
-                app:layout_constraintBottom_toBottomOf="btnInventory"
-                app:layout_constraintEnd_toEndOf="btnInventory"
-                app:layout_constraintStart_toStartOf="btnInventory"/>
+                app:layout_constraintTop_toTopOf="@+id/btnInventory"
+                app:layout_constraintBottom_toBottomOf="@+id/btnInventory"
+                app:layout_constraintEnd_toEndOf="@+id/btnInventory"
+                app:layout_constraintStart_toStartOf="@+id/btnInventory"/>
 
             <Button
                 android:id="@+id/btnInventory"
