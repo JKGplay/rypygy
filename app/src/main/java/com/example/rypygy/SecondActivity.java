@@ -65,7 +65,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         tvLevel = findViewById(R.id.tvLevel);
         tvAttack = findViewById(R.id.tvAttack);
         tvDefense = findViewById(R.id.tvDefense);
-        tvMoney = findViewById(R.id.tvMoney);
+        tvMoney = findViewById(R.id.tvGold);
         btnShop = findViewById(R.id.btnShop);
         btnInventory = findViewById(R.id.btnInventory);
 
@@ -152,6 +152,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+        //super.onBackPressed();
     }
 }
