@@ -4,69 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/morshu"
     android:gravity="center_horizontal"
-    android:background="@color/green_500"
+    android:orientation="vertical"
     tools:context=".ShopInventoryActivity">
 
     <!-- TODO: wyświetlanie kasy -->
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
-        app:chipSpacingHorizontal="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:paddingVertical="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:chipSpacingHorizontal="8dp">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipWeapon"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Weapon"
             android:textSize="24sp"
-            app:chipBackgroundColor="@color/lime_500"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:text="Weapon"/>
+            app:chipBackgroundColor="@color/color5Variant1" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipArmor"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Armor"
             android:textSize="24sp"
-            app:chipBackgroundColor="@color/lime_500"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:text="Armor"/>
+            app:chipBackgroundColor="@color/color5Variant1" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipPotion"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Potion"
             android:textSize="24sp"
-            app:chipBackgroundColor="@color/lime_500"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:text="Potion"/>
+            app:chipBackgroundColor="@color/color5Variant1" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chipScroll"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Scroll"
             android:textSize="24sp"
-            app:chipBackgroundColor="@color/lime_500"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:text="Scroll"/>
+            app:chipBackgroundColor="@color/color5Variant1" />
 
     </com.google.android.material.chip.ChipGroup>
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        app:dividerColor="@color/black"/>
+        app:dividerColor="@color/color5Variant2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
-        tools:listitem="@layout/shop_item"/>
+        tools:listitem="@layout/shop_item" />
+
 
 </LinearLayout>

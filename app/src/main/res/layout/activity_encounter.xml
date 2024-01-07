@@ -4,10 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_500"
+    android:background="@drawable/forest"
     tools:context=".EncounterActivity">
 
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="1100dp"
+        android:layout_height="0dp"
+        android:src="@drawable/forest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:textColor="@color/white"
         android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,25 +45,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLocation">
 
-        <Button
-            android:id="@+id/btnExplore"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
-            android:text="Explore"
-            app:icon="@drawable/outline_explore_24"
-            app:iconGravity="textStart" />
+            android:background="@drawable/button"
+            android:padding="8dp">
 
-        <Button
-            android:id="@+id/btnLeave"
-            style="@style/Widget.MaterialComponents.Button.Icon"
+            <Button
+                android:id="@+id/btnExplore"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00ffffff"
+                android:text="Explore"
+                android:textColor="@color/white"
+                app:icon="@drawable/outline_explore_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
-            android:text="Leave"
-            app:icon="@drawable/baseline_arrow_back_24"
-            app:iconGravity="textStart" />
+            android:background="@drawable/button"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/btnLeave"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00ffffff"
+                android:text="Leave"
+                android:textColor="@color/white"
+                app:icon="@drawable/baseline_arrow_back_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     </LinearLayout>
 
