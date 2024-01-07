@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FightActivity">
+    tools:context=".CombatActivity">
 
     <ImageView
         android:layout_width="1100dp"
@@ -72,7 +72,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/InfoBox"
+            android:background="@drawable/infobox"
             app:layout_constraintBottom_toTopOf="@+id/vView"
             app:layout_constraintEnd_toEndOf="@+id/tvPlayerInfo"
             app:layout_constraintStart_toStartOf="@+id/tvPlayerInfo"
@@ -190,7 +190,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/InfoBox"
+            android:background="@drawable/infobox"
             app:layout_constraintBottom_toBottomOf="@+id/tvEnemyInfo"
             app:layout_constraintEnd_toEndOf="@+id/tvEnemyInfo"
             app:layout_constraintStart_toStartOf="@+id/tvEnemyInfo"

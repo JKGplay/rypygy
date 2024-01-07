@@ -5,8 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_500"
-    tools:context=".LevelUpActivity">
+    android:background="#00ffffff"
+    tools:context=".LevelUpActivity"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/stolik"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,6 +30,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/tvInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,6 +40,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:textColor="@color/white"
             android:id="@+id/tvPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_margin="24dp"
-        android:background="@color/lime_500"
+        android:background="#CC414141"
         android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,10 +84,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvDex"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dexterity:"
@@ -90,6 +105,7 @@
                 android:id="@+id/tvVit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:text="Vitality:"
                 android:textSize="32sp"
                 android:textStyle="bold"
@@ -115,37 +131,40 @@
                 android:id="@+id/tvStrChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="30 -> 30"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvDexChange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="30 -> 30"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvDexChange"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="20 -> 20"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvVitChange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvStrChange" />
+                app:layout_constraintTop_toBottomOf="@+id/tvStrChange"
+                tools:text="20 -> 20" />
 
             <TextView
                 android:id="@+id/tvVitChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="25 -> 25"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDexChange" />
+                app:layout_constraintTop_toBottomOf="@+id/tvDexChange"
+                tools:text="25 -> 25" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -164,9 +183,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/img_btn_round"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:padding="6dp"
                 android:src="@drawable/baseline_add_30"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintBottom_toTopOf="@+id/btnDex"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -178,9 +197,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/img_btn_round"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:padding="6dp"
                 android:src="@drawable/baseline_add_30"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintBottom_toTopOf="@+id/btnVit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -192,9 +211,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/img_btn_round"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:padding="6dp"
                 android:src="@drawable/baseline_add_30"
-                android:foreground="?android:attr/selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -215,25 +234,79 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
 
-        <Button
-            android:id="@+id/btnSubmit"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
-            android:text="Submit"
-            app:icon="@drawable/outline_check_circle_24"
-            app:iconGravity="textStart" />
 
-        <Button
-            android:id="@+id/btnReset"
-            style="@style/Widget.MaterialComponents.Button.Icon"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
-            android:text="Reset"
-            app:icon="@drawable/baseline_reset_24"
-            app:iconGravity="textStart" />
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/button"
+                app:layout_constraintTop_toTopOf="@+id/btnSubmit"
+                app:layout_constraintBottom_toBottomOf="@+id/btnSubmit"
+                app:layout_constraintEnd_toEndOf="@+id/btnSubmit"
+                app:layout_constraintStart_toStartOf="@+id/btnSubmit"
+                />
+
+            <Button
+                android:id="@+id/btnSubmit"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00ffffff"
+                android:text="Submit"
+                android:textColor="@color/white"
+                app:icon="@drawable/outline_check_circle_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/button"
+                app:layout_constraintTop_toTopOf="@+id/btnReset"
+                app:layout_constraintBottom_toBottomOf="@+id/btnReset"
+                app:layout_constraintEnd_toEndOf="@+id/btnReset"
+                app:layout_constraintStart_toStartOf="@+id/btnReset"
+                />
+
+            <Button
+                android:id="@+id/btnReset"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00ffffff"
+                android:text="Reset"
+                android:textColor="@color/white"
+                app:icon="@drawable/baseline_reset_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
     </LinearLayout>
 
