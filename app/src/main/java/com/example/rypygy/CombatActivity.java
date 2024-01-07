@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -147,8 +146,15 @@ public class CombatActivity extends AppCompatActivity {
                             actionMade();
                         }
                     } else if (checkedItem.getCategory().equals(Item.Category.SCROLL)) {
-                        //TODO: dodać obsługę scrolli
-                        return;
+                        new MaterialAlertDialogBuilder(CombatActivity.this)
+                                .setTitle(getResources().getString(R.string.combat_use_scroll_title))
+                                .setMessage(getResources().getString(R.string.combat_use_scroll_message))
+                                .setCancelable(false)
+                                .setPositiveButton("OK", (dialog, which) -> {
+                                    startActivity(new Intent(CombatActivity.this, SecondActivity.class));
+                                    finish();
+                                })
+                                .show();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel), null)

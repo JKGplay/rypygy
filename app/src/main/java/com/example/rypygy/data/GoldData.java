@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class GoldData {
     private String title, message;
     private int amount;
-
+    //TODO: dodać różne widełki złota
     private static final HashMap<Location, Integer[]> DATA = new HashMap<Location, Integer[]>() {{
         put(Location.FOREST, new Integer[]{25, 100});
         put(Location.GARAGES, new Integer[]{25, 100});

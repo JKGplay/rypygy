@@ -29,7 +29,7 @@ public class NpcData {
     public static HashMap<Location, String> unvisitedData = new HashMap<>();
 
     public static HashMap<Location, String> visitedData = new HashMap<>();
-
+    //TODO: dodać dane npctów (i bonusy)
     public NpcData(@NonNull Location location, @NonNull Context context) {
         unvisitedData.putIfAbsent(Location.FOREST, context.getResources().getString(R.string.encounter_npc_forest_unvisited_message, Character.getName()));
         unvisitedData.putIfAbsent(Location.GARAGES, "");

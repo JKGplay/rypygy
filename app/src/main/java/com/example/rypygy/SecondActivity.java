@@ -3,9 +3,9 @@ package com.example.rypygy;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +20,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     public static final String SHOP_INVENTORY_KEY = "shop_inv";
     public static final String ENCOUNTER_LOCATION_KEY = "encounter_location";
-    private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvMoney;
+    private TextView tvName, tvHp, tvXp, tvLevel, tvAttack, tvDefense, tvGold;
     private Button btnShop, btnInventory;
     private List<Button> buttons = new ArrayList<>();
     public enum ShopInv {
@@ -65,7 +64,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         tvLevel = findViewById(R.id.tvLevel);
         tvAttack = findViewById(R.id.tvAttack);
         tvDefense = findViewById(R.id.tvDefense);
-        tvMoney = findViewById(R.id.tvMoney);
+        tvGold = findViewById(R.id.tvGold);
         btnShop = findViewById(R.id.btnShop);
         btnInventory = findViewById(R.id.btnInventory);
 
@@ -82,7 +81,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         tvLevel.setText("Level: " + Character.getLevel());
         tvAttack.setText("Strength: " + Character.getStrength());
         tvDefense.setText("Dexterity: " + Character.getDexterity());
-        tvMoney.setText("Money: " + Character.getGold());
+        tvGold.setText("Money: " + Character.getGold());
 
         if(Character.getXp() >= 100) {
             startActivity(new Intent(SecondActivity.this, LevelUpActivity.class));
@@ -101,9 +100,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         }
         finish();
     }
-
-
-    //TODO: zaimplementować mechanikę encounteru (za pomocą klasy Encounter)
 
     @Override
     public void onClick(@NonNull View view) {
@@ -126,26 +122,24 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.itSave) {
-
-            Save save = new Save();
-            Gson gson = new Gson();
-
-            String myJson = gson.toJson(save);
-            String path = getFilesDir().getPath();
-            Log.d("save - object", save.toString());
-            Log.d("save - json", myJson);
-            Log.d("path", path);
-
-            try {
-                FileWriter writer = new FileWriter(getFilesDir().getPath() + "/data.json");
-                gson.toJson(save, writer);
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //TODO: dodać delay min 1 sekunde albo dialogbuilder
-            Snackbar.make(findViewById(R.id.btnInventory), "Progress saved", Snackbar.LENGTH_SHORT).show();
+            new MaterialAlertDialogBuilder(SecondActivity.this)
+                    .setTitle("Save progress")
+                    .setMessage("Do you want to save the progress?")
+                    .setCancelable(true)
+                    .setPositiveButton("OK", (dialog, which) -> {
+                        Save save = new Save();
+                        Gson gson = new Gson();
+                        try {
+                            FileWriter writer = new FileWriter(getFilesDir().getPath() + "/data.json");
+                            gson.toJson(save, writer);
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Snackbar.make(findViewById(R.id.btnInventory), "Progress saved", Snackbar.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton(getResources().getString(R.string.cancel), null)
+                    .show();
         }
         return true;
     }

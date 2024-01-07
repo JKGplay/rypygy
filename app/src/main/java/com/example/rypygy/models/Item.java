@@ -42,7 +42,7 @@ public class Item {
         EQUIPPED,
     }
 
-    private PredefinedItems id;
+    private final PredefinedItems id;
     private final String name;
     private final Category category;
     private int amount;

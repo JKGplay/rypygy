@@ -23,7 +23,7 @@ public class Enemy {
     public int damage() {
         return Rnd.rnd(minDamage, maxDamage);
     }
-
+    //TODO: dodać statystyki przeciwników (może jeszcze jakiś loot)
     public Enemy(EnemyType type) {
         switch (Objects.requireNonNull(type)) {
             case FIRST_YEAR:

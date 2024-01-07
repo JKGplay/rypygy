@@ -19,7 +19,7 @@ public class ItemData {
     private String title, message;
     private Item drawnItem;
     private Location location;
-
+    //TODO: dodać itemy do znalezienia
     private static final HashMap<Location, HashMap<Item, Integer>> CHANCES = new HashMap<Location, HashMap<Item, Integer>>() {{
         put(Location.FOREST, new HashMap<Item, Integer>() {{
             put(new Item(Item.PredefinedItems.LONG_SWORD, 1), 15);
