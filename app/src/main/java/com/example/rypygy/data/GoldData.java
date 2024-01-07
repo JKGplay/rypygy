@@ -16,15 +16,14 @@ import java.util.HashMap;
 public class GoldData {
     private String title, message;
     private int amount;
-    //TODO: dodać różne widełki złota
     private static final HashMap<Location, Integer[]> DATA = new HashMap<Location, Integer[]>() {{
         put(Location.FOREST, new Integer[]{25, 100});
-        put(Location.GARAGES, new Integer[]{25, 100});
-        put(Location.TOILETS, new Integer[]{25, 100});
-        put(Location.COMPUTER_LAB, new Integer[]{25, 100});
-        put(Location.DORMITORY, new Integer[]{25, 100});
-        put(Location.COURTYARD, new Integer[]{25, 100});
-        put(Location.KACZYCE, new Integer[]{25, 100});
+        put(Location.GARAGES, new Integer[]{100, 175});
+        put(Location.TOILETS, new Integer[]{175, 250});
+        put(Location.COMPUTER_LAB, new Integer[]{250, 325});
+        put(Location.DORMITORY, new Integer[]{325, 400});
+        put(Location.COURTYARD, new Integer[]{400, 475});
+        put(Location.KACZYCE, new Integer[]{475, 550});
     }};
 
     public GoldData(@NonNull Location location, @NonNull Context context) {

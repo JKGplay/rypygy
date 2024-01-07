@@ -24,29 +24,44 @@ public class ItemData {
         put(Location.FOREST, new HashMap<Item, Integer>() {{
             put(new Item(Item.PredefinedItems.LONG_SWORD, 1), 15);
             put(new Item(Item.PredefinedItems.CLAYMORE, 1), 10);
-            put(new Item(Item.PredefinedItems.LEATHER_ARMOR, 1), 10);
             put(new Item(Item.PredefinedItems.WAR_HAMMER, 1), 15);
+            put(new Item(Item.PredefinedItems.LEATHER_ARMOR, 1), 10);
             put(new Item(Item.PredefinedItems.SMALL_POTION, 1), 20);
             put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 15);
             put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
         put(Location.GARAGES, new HashMap<Item, Integer>() {{
-            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 100);
+            put(new Item(Item.PredefinedItems.SMALL_POTION, 1), 15);
+            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 20);
+            put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
         put(Location.TOILETS, new HashMap<Item, Integer>() {{
-            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 100);
+            put(new Item(Item.PredefinedItems.SMALL_POTION, 1), 10);
+            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 20);
+            put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
         put(Location.COMPUTER_LAB, new HashMap<Item, Integer>() {{
-            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 100);
+            put(new Item(Item.PredefinedItems.SMALL_POTION, 1), 10);
+            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 15);
+            put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
         put(Location.DORMITORY, new HashMap<Item, Integer>() {{
-            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 100);
+            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 15);
+            put(new Item(Item.PredefinedItems.LARGE_POTION, 1), 10);
+            put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
         put(Location.COURTYARD, new HashMap<Item, Integer>() {{
-            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 100);
+            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 10);
+            put(new Item(Item.PredefinedItems.LARGE_POTION, 1), 15);
+            put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
         put(Location.KACZYCE, new HashMap<Item, Integer>() {{
-            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 100);
+            put(new Item(Item.PredefinedItems.GREAT_SWORD, 1), 15);
+            put(new Item(Item.PredefinedItems.BATTLE_AXE, 1), 15);
+            put(new Item(Item.PredefinedItems.GREAT_AXE, 1), 15);
+            put(new Item(Item.PredefinedItems.MEDIUM_POTION, 1), 10);
+            put(new Item(Item.PredefinedItems.LARGE_POTION, 1), 15);
+            put(new Item(Item.PredefinedItems.SCROLL_OF_RETURN, 1), 15);
         }});
 
     }};
