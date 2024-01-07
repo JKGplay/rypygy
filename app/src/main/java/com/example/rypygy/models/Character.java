@@ -8,9 +8,7 @@ public class Character {
     private static int vitality = 25;
     private static int curHP = getMaxHP();
     private static int xp = 0;
-    //TODO: zmiana money na gold (wszędzie)
     private static int gold = 10000;
-    //TODO: zmiana systemu wyekwipowanych przedmiotów (atrybut equipped zamiast osobnych pól w Character)
     //TODO: dodanie listy z modyfikacjami (10% damage boost przeciwko Pierwszakom, + do obrażeń bez broni itd.)
 
     //https://www.lurkerlounge.com/diablo/jarulf/jarulf162.pdf
@@ -28,6 +26,15 @@ public class Character {
     }
     public static void removeGold(int i) {
         gold -= i;
+    }
+    public static int getDamage() {
+        return Math.max(1, strength * level / 100);
+    }
+    public static int getAc() {
+        return dexterity / 5;
+    }
+    public static int getMaxHP() {
+        return (vitality * 2) + (level * 2) + 18;
     }
 
     public static String getName() {
@@ -59,15 +66,6 @@ public class Character {
     }
     public static void setVitality(int vitality) {
         Character.vitality = vitality;
-    }
-    public static int getDamage() {
-        return Math.max(1, strength * level / 100);
-    }
-    public static int getAc() {
-        return dexterity / 5;
-    }
-    public static int getMaxHP() {
-        return (vitality * 2) + (level * 2) + 18;
     }
     public static int getCurHP() {
         return curHP;

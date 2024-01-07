@@ -7,20 +7,38 @@ public class Inventory {
 
     private static List<Item> inventory = new ArrayList<>();
 
+    private static boolean isInInv(Item item) {
+        for (Item current : inventory) {
+            if (item.getId().equals(current.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void addItem(Item item) {
-        if (inventory.contains(item)) {
-            inventory.get(inventory.indexOf(item)).addAmount(item.getAmount());
+        if (isInInv(item)) {
+            for (Item current : inventory) {
+                if (item.getId().equals(current.getId())) {
+                    inventory.get(inventory.indexOf(current)).addAmount(item.getAmount());
+                    return;
+                }
+            }
         } else {
             inventory.add(item);
         }
     }
 
     public static void removeItem(Item item) {
-        if (inventory.contains(item)) {
-            int index = inventory.indexOf(item);
-            inventory.get(index).removeAmount(item.getAmount());
-            if (inventory.get(index).getAmount() <= 0) {
-                inventory.remove(index);
+        if (isInInv(item)) {
+            for (Item current : inventory) {
+                if (item.getId().equals(current.getId())) {
+                    inventory.get(inventory.indexOf(current)).removeAmount(item.getAmount());
+                    if (inventory.get(inventory.indexOf(current)).getAmount() <= 0) {
+                        inventory.remove(current);
+                    }
+                    return;
+                }
             }
         }
     }

@@ -34,6 +34,8 @@
     <string name="combat_use_nothing">You don\'t have any items to use</string>
     <string name="combat_use_potion">You drank potion and healed %1$d HP</string>
     <string name="combat_use_potion_full">You can\'t use potion at full HP</string>
+    <string name="combat_use_scroll_title">You are using Scroll of Return</string>
+    <string name="combat_use_scroll_message">You retreat from a fight!</string>
     <string name="encounter_combat_message">
         You encountered %1$s!&lt;br/>
         Prepare to fight!
