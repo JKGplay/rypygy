@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -105,11 +106,15 @@ public class CombatActivity extends AppCompatActivity {
     private void characterAttack() {
         if (Character.toHit(enemy.getAc())) {
             int dmg = Character.getDamage();
+            Log.d("atak", Inventory.getInventory().toString());
             if (Inventory.hasEquipped(Item.Category.WEAPON)) {
+                Log.d("ma cos equipnete", Inventory.getEquipped(Item.Category.WEAPON).toString());
                 dmg += Rnd.rnd(
                         Inventory.getEquipped(Item.Category.WEAPON).getAttributes().get(Item.Attribute.MIN_DMG).intValue(),
                         Inventory.getEquipped(Item.Category.WEAPON).getAttributes().get(Item.Attribute.MAX_DMG).intValue()
                 );
+            } else {
+                Log.d("ni ma cos equipnete", Inventory.getEquipped(Item.Category.WEAPON).toString());
             }
             enemy.setCurHP(Math.max(enemy.getCurHP() - dmg, 0));
             tvPlayerInfo.setText(getResources().getString(R.string.combat_character_hit, dmg));
@@ -128,7 +133,7 @@ public class CombatActivity extends AppCompatActivity {
             return;
         }
         List<String> listOfNamesOfUsableItems = Inventory.listOfNamesOfUsableItems();
-
+        checkedItem = listOfUsableItems.get(0);
         new MaterialAlertDialogBuilder(CombatActivity.this)
                 .setTitle(getResources().getString(R.string.btn_inventory))
                 .setSingleChoiceItems(listOfNamesOfUsableItems.toArray(new String[0]), 0, (dialogInterface, which) -> {
@@ -211,7 +216,10 @@ public class CombatActivity extends AppCompatActivity {
                 .setTitle(getResources().getString(R.string.combat_lose_title))
                 .setMessage(getResources().getString(R.string.combat_lose_message))
                 .setCancelable(false)
-                .setPositiveButton(getResources().getString(R.string.combat_lose_button), (dialogInterface, i) -> finish())
+                .setPositiveButton(getResources().getString(R.string.combat_lose_button), (dialogInterface, i) -> {
+                    startActivity(new Intent(CombatActivity.this, MainActivity.class));
+                    finish();
+                })
                 .show();
     }
 

@@ -5,5 +5,7 @@ public enum EnemyType {
     SMOKER,
     GRAPHIC_DESIGNER,
     FIFTH_YEAR,
+    JANITOR,
     MILITARY,
+    KUNCZKA,
 }

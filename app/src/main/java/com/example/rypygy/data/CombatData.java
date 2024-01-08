@@ -22,9 +22,9 @@ public class CombatData {
         put(Location.GARAGES, EnemyType.SMOKER);
         put(Location.TOILETS, EnemyType.GRAPHIC_DESIGNER);
         put(Location.COMPUTER_LAB, EnemyType.FIFTH_YEAR);
-        put(Location.DORMITORY, EnemyType.FIRST_YEAR);
+        put(Location.DORMITORY, EnemyType.JANITOR);
         put(Location.COURTYARD, EnemyType.MILITARY);
-        put(Location.KACZYCE, EnemyType.FIRST_YEAR);
+        put(Location.KACZYCE, EnemyType.KUNCZKA);
     }};
 
     public CombatData(@NonNull Location location, @NonNull Context context) {

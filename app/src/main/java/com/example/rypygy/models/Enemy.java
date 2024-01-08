@@ -28,28 +28,80 @@ public class Enemy {
         switch (Objects.requireNonNull(type)) {
             case FIRST_YEAR:
                 this.name = "First-Year";
-                maxHP = Rnd.rnd(17, 35);
+                maxHP = Rnd.rnd(7, 12);
                 curHP = maxHP;
                 level = 1;
+                minDamage = 3;
+                maxDamage = 10;
+                ac = 15;
+                toHitBase = 25;
+                xp = 35;
+                break;
+            case SMOKER:
+                name = "Smoker";
+                maxHP = Rnd.rnd(12, 20);
+                curHP = maxHP;
+                level = 2;
+                minDamage = 4;
+                maxDamage = 12;
+                ac = 20;
+                toHitBase = 30;
+                xp = 35;
+                break;
+            case GRAPHIC_DESIGNER:
+                name = "Graphic Designer";
+                maxHP = Rnd.rnd(17, 25);
+                curHP = maxHP;
+                level = 3;
                 minDamage = 5;
                 maxDamage = 14;
                 ac = 30;
                 toHitBase = 40;
                 xp = 35;
                 break;
-            case SMOKER:
-            case MILITARY:
-            case GRAPHIC_DESIGNER:
             case FIFTH_YEAR:
-                name = "";
-                maxHP = 0;
+                name = "Fifth-Year";
+                maxHP = Rnd.rnd(20, 30);
                 curHP = maxHP;
-                level = 0;
-                minDamage = 0;
-                maxDamage = 0;
-                ac = 0;
-                toHitBase = 0;
-                xp = 0;
+                level = 4;
+                minDamage = 8;
+                maxDamage = 16;
+                ac = 30;
+                toHitBase = 40;
+                xp = 35;
+                break;
+            case JANITOR:
+                name = "Janitor";
+                maxHP = Rnd.rnd(25, 32);
+                curHP = maxHP;
+                level = 5;
+                minDamage = 10;
+                maxDamage = 20;
+                ac = 40;
+                toHitBase = 50;
+                xp = 35;
+                break;
+            case MILITARY:
+                name = "Military Man";
+                maxHP = Rnd.rnd(30, 40);
+                curHP = maxHP;
+                level = 6;
+                minDamage = 12;
+                maxDamage = 24;
+                ac = 50;
+                toHitBase = 55;
+                xp = 35;
+                break;
+            case KUNCZKA:
+                name = "Kunczka, the Dark Lord";
+                maxHP = 110;
+                curHP = maxHP;
+                level = 7;
+                minDamage = 8;
+                maxDamage = 16;
+                ac = 70;
+                toHitBase = 70;
+                xp = 1;
                 break;
         }
     }
@@ -65,9 +117,6 @@ public class Enemy {
     }
     public void setCurHP(int curHP) {
         this.curHP = curHP;
-    }
-    public int getLevel() {
-        return level;
     }
     public int getAc() {
         return ac;

@@ -1,5 +1,7 @@
 package com.example.rypygy.models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,9 @@ public class Inventory {
     public static boolean hasEquipped(Item.Category category) {
         for (Item item : inventory) {
             if (item.getCategory().equals(category)) {
-                return item.getAttributes().get(Item.Attribute.EQUIPPED) == 1.0;
+                if (item.getAttributes().get(Item.Attribute.EQUIPPED) == 1.0) {
+                    return true;
+                }
             }
         }
         return false;
@@ -73,9 +77,12 @@ public class Inventory {
 
     public static void equipItem(Item item) {
         if (inventory.contains(item)) {
+            Log.d("CHANGE", "wywolanie funkcji");
             if (Inventory.hasEquipped(item.getCategory())) {
+                Log.d("CHANGE", "unequip starego");
                 unEquipItem(item.getCategory());
             }
+            Log.d("CHANGE", "equip nowego");
             inventory.get(inventory.indexOf(item)).getAttributes().replace(Item.Attribute.EQUIPPED, 1.0);
         }
     }

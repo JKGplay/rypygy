@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rypygy.data.CombatData;
@@ -29,24 +30,36 @@ import java.util.Objects;
 public class EncounterActivity extends AppCompatActivity {
 
     public static final String ENCOUNTER_COMBAT_ENEMY_TYPE_KEY = "encounter_combat_enemy_type";
+    private ImageView ivBackground;
     private TextView tvLocation;
     private Button btnExplore, btnLeave;
     private Location location;
     private HashMap<Location, HashMap<EncounterType, Integer>> chances = new HashMap<>();
+    private HashMap<Location, Integer> backgrounds = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encounter);
 
+        ivBackground = findViewById(R.id.ivBackground);
         tvLocation = findViewById(R.id.tvLocation);
         btnExplore = findViewById(R.id.btnExplore);
         btnLeave = findViewById(R.id.btnLeave);
+
+        backgrounds.put(Location.FOREST, R.drawable.forest);
+        backgrounds.put(Location.GARAGES, R.drawable.garages);
+        backgrounds.put(Location.TOILETS, R.drawable.toilets);
+        backgrounds.put(Location.COMPUTER_LAB, R.drawable.computer_lab);
+        backgrounds.put(Location.DORMITORY, R.drawable.dormitory);
+        backgrounds.put(Location.COURTYARD, R.drawable.courtyard);
+        backgrounds.put(Location.KACZYCE, R.drawable.kaczyce);
 
         fillChances();
 
         if (getIntent().hasExtra(SecondActivity.ENCOUNTER_LOCATION_KEY)) {
             location = (Location) getIntent().getSerializableExtra(SecondActivity.ENCOUNTER_LOCATION_KEY);
+            ivBackground.setImageResource(backgrounds.get(location));
             tvLocation.setText(WordUtils.capitalizeFully(location.toString().replace('_', ' ')));
         } else {
             startActivity(new Intent(EncounterActivity.this, SecondActivity.class));

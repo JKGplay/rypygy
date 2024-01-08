@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.rypygy.enums.Location;
 import com.example.rypygy.models.Character;
+import com.example.rypygy.models.Inventory;
 import com.example.rypygy.save.Save;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -95,6 +96,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, ShopInv.SHOP));
                 break;
             case INVENTORY:
+                Log.d("inventory", Inventory.getInventory().toString());
                 startActivity(new Intent(SecondActivity.this, ShopInventoryActivity.class).putExtra(SHOP_INVENTORY_KEY, ShopInv.INVENTORY));
                 break;
         }

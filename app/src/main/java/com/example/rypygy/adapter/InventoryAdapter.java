@@ -52,7 +52,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
 
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView tvItemName, tvItemAmount, tvItemDesc;
-        private ImageButton btnDelete;
+        private ImageButton btnDelete, ibAction;
         private Button btnAction;
 
         ItemViewHolder(View itemView) {
@@ -62,6 +62,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
             tvItemDesc = itemView.findViewById(R.id.tvItemDesc);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnAction = itemView.findViewById(R.id.btnAction);
+            ibAction = itemView.findViewById(R.id.ibAction);
         }
 
         public void bind(@NonNull Item item) {
@@ -73,10 +74,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                     tvItemDesc.setText("Damage: " + item.getAttributes().get(Item.Attribute.MIN_DMG).intValue() + "-" + item.getAttributes().get(Item.Attribute.MAX_DMG).intValue());
                     if (Inventory.isEquipped(item)) {
                         btnAction.setText("Equipped");
-                        btnAction.setEnabled(false);
                     } else {
                         btnAction.setText("Equip");
-                        btnAction.setEnabled(true);
                     }
                     break;
                 case ARMOR:
@@ -84,10 +83,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                     btnAction.setText("Equip");
                     if (Inventory.isEquipped(item)) {
                         btnAction.setText("Equipped");
-                        btnAction.setEnabled(false);
                     } else {
                         btnAction.setText("Equip");
-                        btnAction.setEnabled(true);
                     }
                     break;
                 case POTION:
@@ -98,6 +95,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                 case SCROLL:
                     tvItemDesc.setText("Magic Scroll");
                     btnAction.setVisibility(View.GONE);
+                    ibAction.setVisibility(View.GONE);
                     break;
             }
 
@@ -105,8 +103,16 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Item
                 switch (item.getCategory()) {
                     case WEAPON:
                     case ARMOR:
-                        Snackbar.make(v, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
-                        Inventory.equipItem(item);
+                        if (!Inventory.isEquipped(item)) {
+                            Snackbar.make(v, item.getName() + " equipped", Snackbar.LENGTH_SHORT).show();
+                            Log.d("---", "---");
+                            Log.d("inventory - before change", Inventory.getInventory().toString());
+                            Inventory.equipItem(item);
+                            Log.d("inventory - after change", Inventory.getInventory().toString());
+                        } else {
+                            Snackbar.make(v, item.getName() + " unequipped", Snackbar.LENGTH_SHORT).show();
+                            Inventory.unEquipItem(item.getCategory());
+                        }
                         notifyDataSetChanged();
                         break;
                     case POTION:
